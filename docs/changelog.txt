@@ -1,0 +1,10 @@
+2.0 Alpha 1         (NOT RELEASED)
+---------------------------------------
+- Converted to XOOPS 2.5.7 Admin GUI (mamba)
+- conversion of hard coded text into language variables (mamba)
+- adding some code from 7mogjl (mamba)
+- work in progress, but not sure if it will ever work...
+
+1.0                     2010-07-13
+---------------------------------------
+- released by Martin (china.codehome@gmail.com)
