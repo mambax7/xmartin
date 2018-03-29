@@ -1,4 +1,9 @@
 <?php
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 require_once __DIR__ . '/admin_header.php';
 /*
  * 处理
@@ -124,10 +129,10 @@ switch ($action) {
             '<div style="background-color:#FF0000">' . _AM_MARTIN_DRAFT . '</div>',
             '<div style="background-color:#00FF00">' . _AM_MARTIN_PUBLISHED . '</div>'
         ];
-        $AuctionObjs = $auctionHandler->getAuctions($xoopsModuleConfig['perpage'], $start, 0);
+        $AuctionObjs = $auctionHandler->getAuctions($helper->getConfig('perpage'), $start, 0);
         $Cout        = $auctionHandler->getCount();
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-        $pagenav = new XoopsPageNav($Cout, $xoopsModuleConfig['perpage'], $start, 'start');
+        $pagenav = new \XoopsPageNav($Cout, $helper->getConfig('perpage'), $start, 'start');
         $pavStr  = '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
 
         // Creating the objects for top categories

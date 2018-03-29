@@ -7,6 +7,11 @@
  * @author    Martin <china.codehome@gmail.com>
  * */
 //构造对象
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 $searchHandler = xoops_getModuleHandler('search', 'martin');
 $orderHandler  = xoops_getModuleHandler('order', 'martin');
 $memberHandler = xoops_getModuleHandler('member', 'martin');
@@ -30,7 +35,7 @@ if ('order' !== $action) {
 //echo $orderHandler->order_status;
 
 $Count     = $orderHandler->getCount();
-$OrderObjs = $Count > 0 ? $orderHandler->getOrders([], $xoopsModuleConfig['front_perpage'], $start, 0) : null;
+$OrderObjs = $Count > 0 ? $orderHandler->getOrders([], $helper->getConfig('front_perpage'), $start, 0) : null;
 
 $order_ids = array_keys($OrderObjs);
 
@@ -39,7 +44,7 @@ $hotelAlias = $searchHandler->GetCityAlias();
 
 //分页
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-$pagenav = new XoopsPageNav($Count, $xoopsModuleConfig['front_perpage'], $start, 'start', '');
+$pagenav = new \XoopsPageNav($Count, $helper->getConfig('front_perpage'), $start, 'start', '');
 
 //var_dump($OrderType);
 //处理
@@ -52,7 +57,7 @@ if (is_array($OrderObjs)) {
         }
         $orderArr['hotel_name']       = $hotels[$key]['hotel_name'];
         $orderArr['room_type_info']   = $hotels[$key]['room_type_info'];
-        $orderArr['hotel_url']        = XOOPS_URL . '/hotel/' . $hotelAlias[$hotels[$key]['hotel_city']] . '/' . $hotels[$key]['hotel_alias'] . $xoopsModuleConfig['hotel_static_prefix'];
+        $orderArr['hotel_url']        = XOOPS_URL . '/hotel/' . $hotelAlias[$hotels[$key]['hotel_city']] . '/' . $hotels[$key]['hotel_alias'] . $helper->getConfig('hotel_static_prefix');
         $orderArr['order_type']       = $OrderType[$orderArr['order_type']];
         $orderArr['order_mode']       = $OrderMode[$orderArr['order_mode']];
         $orderArr['order_status_int'] = $orderArr['order_status'];

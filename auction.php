@@ -1,4 +1,9 @@
 <?php
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 include __DIR__ . '/../../mainfile.php';
 include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 
@@ -36,7 +41,7 @@ if ('save' === $action) {
         'bid_status'     => 1,
     ];
     if ($auctionHandler->AddUserAuction($AuctionData)) {
-        redirect_header(XOOPS_URL . '/modules/martin/auction.php/auction-' . $auction_id . $xoopsModuleConfig['hotel_static_prefix'], 2, '提交成功.');
+        redirect_header(XOOPS_URL . '/modules/martin/auction.php/auction-' . $auction_id . $helper->getConfig('hotel_static_prefix'), 2, '提交成功.');
     } else {
         redirect_header('javascript:history.go(-1);', 2, '提交失败.');
     }
@@ -102,6 +107,6 @@ $xoopsTpl->assign('AuctionStatus', $AuctionStatus);
 $xoopsTpl->assign('user', $user);
 $xoopsTpl->assign('alias', $CityAlias);
 $xoopsTpl->assign('bids', $auctionHandler->getAuctionBidList($auction_id));
-$xoopsTpl->assign('hotel_static_prefix', $xoopsModuleConfig['hotel_static_prefix']);
+$xoopsTpl->assign('hotel_static_prefix', $helper->getConfig('hotel_static_prefix'));
 
 include XOOPS_ROOT_PATH . '/footer.php';

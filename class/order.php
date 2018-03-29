@@ -5,7 +5,7 @@
  * Licence: GNU
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 
@@ -268,9 +268,9 @@ class MartinOrderHandler extends XoopsObjectHandler
             return false;
         }
 
-        $criteria = new CriteriaCompo(new Criteria('order_id', $id));
+        $criteria = new \CriteriaCompo(new \Criteria('order_id', $id));
         $criteria->setLimit(1);
-        $obj_array = $this->getObjects('', $criteria);
+        $obj_array =& $this->getObjects('', $criteria);
 
         if (1 != count($obj_array)) {
             $obj = $this->create();
@@ -304,7 +304,7 @@ class MartinOrderHandler extends XoopsObjectHandler
      */
     public function &getOrders($Data, $limit = 0, $start = 0, $sort = 'order_id', $order = 'ASC', $id_as_key = true)
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
 
         $criteria->setSort($sort);
         $criteria->setOrder($order);
@@ -323,7 +323,7 @@ class MartinOrderHandler extends XoopsObjectHandler
      * @param  bool              $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $order, $force = false)
+    public function insert(\XoopsObject $order, $force = false)
     {
         if ('martinorder' !== strtolower(get_class($order))) {
             return false;
@@ -410,7 +410,7 @@ class MartinOrderHandler extends XoopsObjectHandler
      * @param  bool              $force
      * @return bool|void
      */
-    public function delete(XoopsObject $order, $force = false)
+    public function delete(\XoopsObject $order, $force = false)
     {
         if ('martinorder' !== strtolower(get_class($order))) {
             return false;
@@ -545,7 +545,7 @@ class MartinOrderHandler extends XoopsObjectHandler
 
         $theObjects = [];
 
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $order = new MartinOrder();
             $order->assignVars($myrow);
             $theObjects[$myrow['order_id']] =& $order;
@@ -597,7 +597,7 @@ class MartinOrderHandler extends XoopsObjectHandler
         //echo '<pre>'.$sql;exit;
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $rows[] = $row;
         }
 
@@ -634,7 +634,7 @@ class MartinOrderHandler extends XoopsObjectHandler
         //echo '<pre>'.$sql;exit;
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $rows[] = $row;
         }
 
@@ -653,7 +653,7 @@ class MartinOrderHandler extends XoopsObjectHandler
         $sql    = 'SELECT * FROM ' . $this->db->prefix('martin_order');
         $result = $this->db->query($sql);
         $rows   = [];
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $rows[$row['order_id']] = $row;
         }
 
@@ -678,7 +678,7 @@ class MartinOrderHandler extends XoopsObjectHandler
         $sql      .= $hotel_star > 0 ? " and hotel_star = $hotel_star " : ' ';
         $result   = $xoopsDB->query($sql);
         $hotelArr = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $hotelArr[$row['hotel_id']] = $row['hotel_name'];
         }
 

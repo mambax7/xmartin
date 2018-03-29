@@ -7,6 +7,11 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 class MartinMember extends XoopsObject
 {
 }
@@ -50,7 +55,7 @@ class MartinMemberHandler extends XoopsObjectHandler
         global $xoopsDB;
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             if (is_null($key)) {
                 $rows[] = $row;
             } else {
@@ -93,7 +98,10 @@ class MartinMemberHandler extends XoopsObjectHandler
     public function getHotelList($start, $isLived = false)
     {
         $rows = [];
-        global $xoopsUser, $xoopsDB, $xoopsModuleConfig, $searchHandler, $hotelHandler;
+        global $xoopsUser, $xoopsDB,  $searchHandler, $hotelHandler;
+        /** @var Xmartin\Helper $helper */
+        $helper = Xmartin\Helper::getInstance();
+
         $uid = $xoopsUser->uid();
         if ($isLived) {
             $order_table = $xoopsDB->prefix('martin_order');
@@ -119,7 +127,7 @@ class MartinMemberHandler extends XoopsObjectHandler
         $sql = "SELECT h.hotel_id,h.hotel_alias,h.hotel_city,h.hotel_name,h.hotel_city_id
                 FROM {$xoopsDB->prefix('martin_hotel')} h WHERE h.hotel_id IN (%s) ";
         $sql .= 'GROUP BY hotel_id ORDER BY h.hotel_rank ASC ';
-        $sql .= "LIMIT $start,{$xoopsModuleConfig['front_perpage']}";
+        $sql .= "LIMIT $start,{$helper->getConfig('front_perpage')}";
         $sql = sprintf($sql, $sql_str);
         //echo $sql;
         $hotels     = $this->getRows($sql, 'hotel_id');
@@ -133,7 +141,7 @@ class MartinMemberHandler extends XoopsObjectHandler
                 }
                 $value['hotel_city_id']    = implode('、', $city_name);
                 $value['hotel_city_alias'] = XOOPS_URL . '/hotel/' . $hotelAlias[$value['hotel_city']];
-                $value['url']              = XOOPS_URL . '/hotel/' . $hotelAlias[$value['hotel_city']] . '/' . $value['hotel_alias'] . $xoopsModuleConfig['hotel_static_prefix'];
+                $value['url']              = XOOPS_URL . '/hotel/' . $hotelAlias[$value['hotel_city']] . '/' . $value['hotel_alias'] . $helper->getConfig('hotel_static_prefix');
                 $value['hotel_city']       = $cityList[$value['hotel_city']];
                 $rows[]                    = $value;
                 unset($value, $city_name);
@@ -157,7 +165,10 @@ class MartinMemberHandler extends XoopsObjectHandler
     public function getCouponList($start)
     {
         $rows = [];
-        global $xoopsUser, $xoopsDB, $xoopsModuleConfig, $searchHandler, $hotelHandler;
+        global $xoopsUser, $xoopsDB,  $searchHandler, $hotelHandler;
+        /** @var Xmartin\Helper $helper */
+        $helper = Xmartin\Helper::getInstance();
+
         $table = $xoopsDB->prefix('martin_user_coupon');
         $uid   = $xoopsUser->uid();
         $sql   = "SELECT count(*) as count FROM $table WHERE uid = $uid";
@@ -171,7 +182,7 @@ class MartinMemberHandler extends XoopsObjectHandler
              ";
         $sql  .= " WHERE o.order_uid = $uid AND c.coupon_type = 1 ";
         $sql  .= "UNION SELECT ob.*,'注册' FROM $table ob WHERE ob.coupon_type = 2 AND ob.uid = $uid ";
-        $sql  .= "LIMIT $start,{$xoopsModuleConfig['front_perpage']}";
+        $sql  .= "LIMIT $start,{$helper->getConfig('front_perpage')}";
         $rows = $this->getRows($sql);
 
         return $rows;

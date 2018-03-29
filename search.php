@@ -1,4 +1,9 @@
 <?php
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 if (file_exists('../../mainfile.php')) {
     require_once __DIR__ . '/../../mainfile.php';
 }
@@ -29,7 +34,7 @@ $order         = isset($_GET['Order']) ? trim($_GET['Order']) : null;
 $by            = isset($_GET['By']) ? strtoupper(trim($_GET['By'])) : null;
 $by            = in_array($by, ['ASC', 'DESC']) ? $by : '';
 //paramerters
-//$xoopsModuleConfig['perpage'] = 2;
+//$helper->getConfig('perpage') = 2;
 $Data      = [
     'city_id'       => $city_id,
     'check_date'    => $check_date,
@@ -37,7 +42,7 @@ $Data      = [
     'hotel_address' => $hotel_address,
     'hotel_name'    => $hotel_name,
     'hotel_star'    => $hotel_star,
-    'start'         => $p * $xoopsModuleConfig['perpage'],
+    'start'         => $p * $helper->getConfig('perpage'),
     'order'         => $order,
     'by'            => $by
 ];
@@ -62,7 +67,7 @@ $this_url = str_replace('&By=' . strtolower($by), '', $this_url);
 $this_url = str_replace('&p=' . strtolower($p), '', $this_url);
 
 //分页处理
-$total_p  = ceil($HotelData['count'] / $xoopsModuleConfig['perpage']);
+$total_p  = ceil($HotelData['count'] / $helper->getConfig('perpage'));
 $prev_url = $p - 1;
 $prev_url = $prev_url < 0 ? -1 : $prev_url;
 $prev_url = $prev_url < 0 ? 0 : $this_url . '&amp;p=' . $prev_url;
@@ -79,7 +84,7 @@ $xoopsOption['xoops_pagetitle'] = $select_title . ' - 酒店搜索预定';// - '
 
 $xoopsTpl->assign('check_in_date_count', (int)(($check_date[1] - $check_date[0]) / (3600 * 24)));
 $xoopsTpl->assign('xoops_pagetitle', $xoopsOption['xoops_pagetitle']);
-$xoopsTpl->assign('hotel_static_prefix', $xoopsModuleConfig['hotel_static_prefix']);
+$xoopsTpl->assign('hotel_static_prefix', $helper->getConfig('hotel_static_prefix'));
 $xoopsTpl->assign('check_date', isset($_GET['CheckDate']) ? $_GET['CheckDate'] : '');
 $xoopsTpl->assign('check_in_date', strtotime(isset($_GET['CheckDate']) ? $_GET['CheckDate'][0] : ''));
 $xoopsTpl->assign('check_out_date', strtotime(isset($_GET['CheckDate']) ? $_GET['CheckDate'][1] : ''));
@@ -98,9 +103,9 @@ $xoopsTpl->assign('by', $by);
 $xoopsTpl->assign('order', $order);
 $xoopsTpl->assign('this_by', 'DESC' === $by ? 'asc' : 'desc');
 $xoopsTpl->assign('check_date_str', "?check_in_date={$check_date[0]}&amp;check_out_date={$check_date[1]}");
-$xoopsTpl->assign('googleApi', $xoopsModuleConfig['google_api']);
-$xoopsTpl->assign('google_w_h', array_filter(explode('|', $xoopsModuleConfig['google_width_height'])));
-$xoopsTpl->assign('module_config', $xoopsModuleConfig);
+$xoopsTpl->assign('googleApi', $helper->getConfig('google_api'));
+$xoopsTpl->assign('google_w_h', array_filter(explode('|', $helper->getConfig('google_width_height'))));
+$xoopsTpl->assign('module_config', $xoopsModuleConfig); //TODO
 $xoopsTpl->assign('isModule', 1);
 
 include XOOPS_ROOT_PATH . '/footer.php';

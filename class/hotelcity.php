@@ -5,7 +5,7 @@
  * Licence: GNU
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 
@@ -103,9 +103,9 @@ class MartinHotelCityHandler extends XoopsObjectHandler
             return false;
         }
 
-        $criteria = new CriteriaCompo(new Criteria('city_id', $id));
+        $criteria = new \CriteriaCompo(new \Criteria('city_id', $id));
         $criteria->setLimit(1);
-        $obj_array = $this->getObjects($criteria);
+        $obj_array =& $this->getObjects($criteria);
         if (1 != count($obj_array)) {
             $obj = $this->create();
 
@@ -138,13 +138,13 @@ class MartinHotelCityHandler extends XoopsObjectHandler
         $order = 'ASC',
         $id_as_key = true
     ) {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
 
         $criteria->setSort($sort);
         $criteria->setOrder($order);
 
-        if ($city_parentid != -1) {
-            $criteria->add(new Criteria('city_parentid', $city_parentid));
+        if (-1 != $city_parentid) {
+            $criteria->add(new \Criteria('city_parentid', $city_parentid));
         }
 
         $criteria->setStart($start);
@@ -156,12 +156,12 @@ class MartinHotelCityHandler extends XoopsObjectHandler
     /**
      * insert a new hotelcity in the database
      *
-     * @param object|XoopsObject $hotelcity reference to the {@link HotelCity}
+     * @param object|\XoopsObject $hotelcity reference to the {@link HotelCity}
      *                                      object
      * @param  bool              $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $hotelcity, $force = false)
+    public function insert(\XoopsObject $hotelcity, $force = false)
     {
         if ('martinhotelcity' !== strtolower(get_class($hotelcity))) {
             return false;
@@ -228,7 +228,7 @@ class MartinHotelCityHandler extends XoopsObjectHandler
      * @param  bool              $force
      * @return bool|void
      */
-    public function delete(XoopsObject $hotelcity, $force = false)
+    public function delete(\XoopsObject $hotelcity, $force = false)
     {
         if ('martinhotelcity' !== strtolower(get_class($hotelcity))) {
             return false;
@@ -271,7 +271,7 @@ class MartinHotelCityHandler extends XoopsObjectHandler
         //echo $sql;exit;
 
         $result = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $cities[] = (int)$row['city_id'];
         }
         $cities = array_unique($cities);
@@ -358,7 +358,7 @@ class MartinHotelCityHandler extends XoopsObjectHandler
 
         $theObjects = [];
 
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $hotelcity = new MartinHotelcity();
             $hotelcity->assignVars($myrow);
             $theObjects[$myrow['city_id']] =& $hotelcity;
@@ -392,7 +392,7 @@ class MartinHotelCityHandler extends XoopsObjectHandler
      */
     public function &getTree($name, $city_id, $prefix = '--')
     {
-        $mytree = new XoopsTree($this->db->prefix('martin_hotel_city'), 'city_id', 'city_parentid');
+        $mytree = new \XoopsTree($this->db->prefix('martin_hotel_city'), 'city_id', 'city_parentid');
         // Parent Category
         ob_start();
         $mytree->makeMySelBox('city_name', '', $city_id, 1, $name);

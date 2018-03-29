@@ -35,7 +35,7 @@ class MartinHotelNewsHandler extends XoopsObjectHandler
         global $xoopsDB;
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             if (is_null($key)) {
                 $rows[] = $row;
             } else {
@@ -69,7 +69,7 @@ class MartinHotelNewsHandler extends XoopsObjectHandler
         $sql    = 'SELECT art_id,cat_alias,art_title,art_pages FROM ' . $xoopsDB->prefix('news_article') . "    WHERE art_id IN ($artids) ORDER BY art_time_publish DESC";
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $text_id              = unserialize($row['art_pages']);
             $text_id              = $text_id[0];
             $url                  = $text_rows[$text_id]['alias'];

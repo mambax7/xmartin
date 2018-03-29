@@ -5,7 +5,7 @@
  * Licence: GNU
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 
@@ -205,9 +205,9 @@ class MartinRoomHandler extends XoopsObjectHandler
             return false;
         }
 
-        $criteria = new CriteriaCompo(new Criteria('room_id', $id));
+        $criteria = new \CriteriaCompo(new \Criteria('room_id', $id));
         $criteria->setLimit(1);
-        $obj_array = $this->getObjects($criteria);
+        $obj_array =& $this->getObjects($criteria);
         if (1 != count($obj_array)) {
             $obj = $this->create();
 
@@ -232,7 +232,7 @@ class MartinRoomHandler extends XoopsObjectHandler
         global $xoopsDB;
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             if (is_null($key)) {
                 $rows[] = $row;
             } else {
@@ -259,7 +259,7 @@ class MartinRoomHandler extends XoopsObjectHandler
      */
     public function &getRooms($limit = 0, $start = 0, $sort = 'room_id', $order = 'ASC', $id_as_key = true)
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
 
         $criteria->setSort($sort);
         $criteria->setOrder($order);
@@ -278,7 +278,7 @@ class MartinRoomHandler extends XoopsObjectHandler
      * @param  bool              $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $room, $force = false)
+    public function insert(\XoopsObject $room, $force = false)
     {
         if ('martinroom' !== strtolower(get_class($room))) {
             return false;
@@ -405,7 +405,7 @@ class MartinRoomHandler extends XoopsObjectHandler
      * @param  bool              $force
      * @return bool|void
      */
-    public function delete(XoopsObject $room, $force = false)
+    public function delete(\XoopsObject $room, $force = false)
     {
         if ('martinroom' !== strtolower(get_class($room))) {
             return false;
@@ -481,7 +481,7 @@ class MartinRoomHandler extends XoopsObjectHandler
 
         $theObjects = [];
 
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $room = new MartinRoom();
             $room->assignVars($myrow);
             $theObjects[$myrow['room_id']] =& $room;
@@ -517,7 +517,7 @@ class MartinRoomHandler extends XoopsObjectHandler
         $sql    = 'SELECT * FROM ' . $this->db->prefix('martin_room_type');
         $sql    .= $room_type_id > 0 ? " WHERE room_type_id = $room_type_id" : '';
         $result = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $rows[$row['room_type_id']] = $row['room_type_info'];
         }
 
@@ -539,7 +539,7 @@ class MartinRoomHandler extends XoopsObjectHandler
         $sql    = 'SELECT room_id,room_name FROM ' . $this->db->prefix('martin_room');
         $sql    .= $room_id > 0 ? " WHERE room_id = $room_id" : '';
         $result = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $rows[$row['room_id']] = $row['room_name'];
         }
 
@@ -614,7 +614,7 @@ class MartinRoomHandler extends XoopsObjectHandler
         $sql       .= $room_date > 0 ? 'and room_date = ' . strtotime($room_date) . ' ' : ' and room_date BETWEEN ' . $Today . ' AND ' . $NextMouth;
         $sql       .= ' order by room_id , room_date desc ';
         $result    = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             if ($room_date > 0) {
                 return $row;
             }
@@ -643,7 +643,7 @@ class MartinRoomHandler extends XoopsObjectHandler
         $sql    .= ' order by room_id , room_date desc ';
         $sql    .= " limit $start,$limit ";
         $result = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $row['room_date'] = date('Y-m-d', $row['room_date']);
             $rows[]           = $row;
         }
@@ -842,7 +842,7 @@ class MartinRoomHandler extends XoopsObjectHandler
         //echo $sql;
         $rows   = [];
         $result = $xoopsDB->query($sql);
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $room_dates                 = [];
             $room_all_price             = 0;
             $room_all_sended_coupon     = 0;

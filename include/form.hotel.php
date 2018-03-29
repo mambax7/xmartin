@@ -6,7 +6,10 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+
+use XoopsModules\Xmartin;
+
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -42,20 +45,22 @@ class form_hotel extends XoopsThemeForm
      * */
     public function createElements()
     {
-        global $hotelHandler, $xoopsDB, $xoopsModuleConfig;
+        global $hotelHandler, $xoopsDB;
+        /** @var Xmartin\Helper $helper */
+        $helper = Xmartin\Helper::getInstance();
 
         //编辑器
         require_once XOOPS_ROOT_PATH . '/modules/martin/class/xoopsformloader.php';
         require_once MARTIN_ROOT_PATH . '/include/formdatetime.php';
 
-        $this->google_api = $xoopsModuleConfig['google_api'];
+        $this->google_api = $helper->getConfig('google_api');
 
         /*$this->City = $hotelHandler->GetCityList('WHERE city_parentid = 0');
-        $CityElement = new XoopsFormSelect(_AM_MARTIN_HOTEL_CITY, 'hotel_city', $this->Obj->hotel_city() , 1 );
+        $CityElement = new \XoopsFormSelect(_AM_MARTIN_HOTEL_CITY, 'hotel_city', $this->Obj->hotel_city() , 1 );
         $CityElement->addOptionArray($this->City);
         $this->addElement($CityElement , true);*/
 
-        $mytree = new XoopsTree($xoopsDB->prefix('martin_hotel_city'), 'city_id', 'city_parentid');
+        $mytree = new \XoopsTree($xoopsDB->prefix('martin_hotel_city'), 'city_id', 'city_parentid');
         // Parent Category
         //multiple
 
@@ -71,7 +76,7 @@ class form_hotel extends XoopsThemeForm
         ob_start();
         $mytree->makeMySelBox('city_name', '', $this->Obj->hotel_city(), 1, 'hotel_city');
         //makeMySelBox($title,$order="",$preset_id=0, $none=0, $sel_name="", $onchange="")
-        $this->addElement(new XoopsFormLabel($js . _AM_MARTIN_ADMIN_AREA . '<br>' . _AM_MARTIN_SELECT_2ND_LEVEL, ob_get_contents()));
+        $this->addElement(new \XoopsFormLabel($js . _AM_MARTIN_ADMIN_AREA . '<br>' . _AM_MARTIN_SELECT_2ND_LEVEL, ob_get_contents()));
         ob_end_clean();
 
         // Parent Category
@@ -82,34 +87,34 @@ class form_hotel extends XoopsThemeForm
         ob_start();
         $mytree->makeMySelBox('city_name', '', $hotel_city_id, 1, 'hotel_city_id[]');
         //makeMySelBox($title,$order="",$preset_id=0, $none=0, $sel_name="", $onchange="");
-        $this->addElement(new XoopsFormLabel(_AM_MARTIN_CIRCLE . '<br>' . _AM_MARTIN_SELECT_3RD_LEVEL, ob_get_contents()));
+        $this->addElement(new \XoopsFormLabel(_AM_MARTIN_CIRCLE . '<br>' . _AM_MARTIN_SELECT_3RD_LEVEL, ob_get_contents()));
         ob_end_clean();
         // City Name
-        //$this->addElement( new XoopsFormText(_AM_MARTIN_ADMIN_CITY_AREA, 'hotel_environment', 50, 255, $this->Obj->hotel_environment()), true);
+        //$this->addElement( new \XoopsFormText(_AM_MARTIN_ADMIN_CITY_AREA, 'hotel_environment', 50, 255, $this->Obj->hotel_environment()), true);
 
-        $this->addElement(new XoopsFormText(_AM_MARTIN_HOTEL_RANK, 'hotel_rank', 11, 11, $this->Obj->hotel_rank()), true);
-        $this->addElement(new XoopsFormText(_AM_MARTIN_HOTEL_NAME, 'hotel_name', 50, 255, $this->Obj->hotel_name()), true);
-        $this->addElement(new XoopsFormText(_AM_MARTIN_HOTEL_NAME_ENGLISH, 'hotel_enname', 50, 255, $this->Obj->hotel_enname()), true);
-        $this->addElement(new XoopsFormText(_AM_MARTIN_HOTEL_WEBSITE . '<br>' . _AM_MARTIN_NO_HTML, 'hotel_alias', 50, 255, $this->Obj->hotel_alias()), true);
-        $this->addElement(new XoopsFormText(_AM_MARTIN_HOTEL_KEYWORDS_SEO, 'hotel_keywords', 50, 255, $this->Obj->hotel_keywords()), true);
-        $this->addElement(new XoopsFormTextArea(_AM_MARTIN_HOTEL_DESC_SEO, 'hotel_description', $this->Obj->hotel_description()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_HOTEL_RANK, 'hotel_rank', 11, 11, $this->Obj->hotel_rank()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_HOTEL_NAME, 'hotel_name', 50, 255, $this->Obj->hotel_name()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_HOTEL_NAME_ENGLISH, 'hotel_enname', 50, 255, $this->Obj->hotel_enname()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_HOTEL_WEBSITE . '<br>' . _AM_MARTIN_NO_HTML, 'hotel_alias', 50, 255, $this->Obj->hotel_alias()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_HOTEL_KEYWORDS_SEO, 'hotel_keywords', 50, 255, $this->Obj->hotel_keywords()), true);
+        $this->addElement(new \XoopsFormTextArea(_AM_MARTIN_HOTEL_DESC_SEO, 'hotel_description', $this->Obj->hotel_description()), true);
         //hotel tags
-        $this->addElement(new XoopsFormText(_AM_MARTIN_HOTELS_TAGS . '<br>' . _AM_MARTIN_USE_SPACE_AS_SEPARATOR, 'hotel_tags', 50, 255, $this->Obj->hotel_tags()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_HOTELS_TAGS . '<br>' . _AM_MARTIN_USE_SPACE_AS_SEPARATOR, 'hotel_tags', 50, 255, $this->Obj->hotel_tags()), true);
 
         //hotel star
-        $rankElement = new XoopsFormSelect(_AM_MARTIN_RANK, 'hotel_star', $this->Obj->hotel_star(), 1);
+        $rankElement = new \XoopsFormSelect(_AM_MARTIN_RANK, 'hotel_star', $this->Obj->hotel_star(), 1);
         $rankElement->addOptionArray($this->Ranks);
         $this->addElement($rankElement, true);
 
-        $this->addElement(new XoopsFormText(_AM_MARTIN_HOTEL_ADDRESS, 'hotel_address', 50, 255, $this->Obj->hotel_address()), true);
-        $this->addElement(new XoopsFormText(_AM_MARTIN_HOTEL_PHONE, 'hotel_telephone', 50, 255, $this->Obj->hotel_telephone()), true);
-        $this->addElement(new XoopsFormText(_AM_MARTIN_HOTEL_FAX, 'hotel_fax', 50, 255, $this->Obj->hotel_fax()), true);
-        $this->addElement(new XoopsFormText(_AM_MARTIN_HOTEL_FEATURES, 'hotel_characteristic', 50, 255, $this->Obj->hotel_characteristic()), true);
-        $this->addElement(new XoopsFormText(_AM_MARTIN_THE_NUMBER_OF_ROOMS, 'hotel_room_count', 11, 11, $this->Obj->hotel_room_count()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_HOTEL_ADDRESS, 'hotel_address', 50, 255, $this->Obj->hotel_address()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_HOTEL_PHONE, 'hotel_telephone', 50, 255, $this->Obj->hotel_telephone()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_HOTEL_FAX, 'hotel_fax', 50, 255, $this->Obj->hotel_fax()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_HOTEL_FEATURES, 'hotel_characteristic', 50, 255, $this->Obj->hotel_characteristic()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_THE_NUMBER_OF_ROOMS, 'hotel_room_count', 11, 11, $this->Obj->hotel_room_count()), true);
         $open_time = $this->Obj->hotel_open_time();
-        $this->addElement(new XoopsFormText(_AM_MARTIN_HOTEL_OPENED, 'hotel_open_time', 50, 255, date('Y', $open_time > 0 ? $open_time : time())), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_HOTEL_OPENED, 'hotel_open_time', 50, 255, date('Y', $open_time > 0 ? $open_time : time())), true);
 
-        //        $this->addElement( new XoopsFormText(_AM_MARTIN_HOTEL_ROOM_PHOTOS, 'hotel_image', 50, 255, $this->Obj->hotel_image()), true);
+        //        $this->addElement( new \XoopsFormText(_AM_MARTIN_HOTEL_ROOM_PHOTOS, 'hotel_image', 50, 255, $this->Obj->hotel_image()), true);
 
         list($width, $height) = getimagesize('../images/hotelicon/' . $this->Obj->hotel_icon());
         $hotel_icon = '<script type="text/javascript">
@@ -121,49 +126,49 @@ class form_hotel extends XoopsThemeForm
         //Hotel Logo
         $hotel_icon .= '<a href = "javascript:void(0);" onclick = "showbox(\'../images/hotelicon/' . $this->Obj->hotel_icon() . '\')"><img src = "../images/hotelicon/' . $this->Obj->hotel_icon() . '" width = 100 height = 100 class="showicon" ></a><br > ';
 
-        $hotelIcon = new XoopsFormElementTray(_AM_MARTIN_HOTEL_LOGO_IMAGE);
-        $hotelIcon->addElement(new XoopsFormFile('' . $hotel_icon, 'hotel_icon', ''), false);
+        $hotelIcon = new \XoopsFormElementTray(_AM_MARTIN_HOTEL_LOGO_IMAGE);
+        $hotelIcon->addElement(new \XoopsFormFile('' . $hotel_icon, 'hotel_icon', ''), false);
         $this->addElement($hotelIcon, false);
 
         //特殊处理
         //酒店地图
         $Coordinate = $this->Obj->hotel_google();
-        $google     = new XoopsFormElementTray(_AM_MARTIN_GOOGLE_MAP);
-        $google->addElement(new XoopsFormText(_AM_MARTIN_LATITTUDE, 'GmapLatitude', 25, 25, $Coordinate[0]), true);
-        $google->addElement(new XoopsFormText(_AM_MARTIN_LONGITUDE, 'GmapLongitude', 25, 25, $Coordinate[1]), true);
-        $google->addElement(new XoopsFormLabel("<br><br><font style='background - color:#2F5376;color:#FFFFFF;padding:2px;vertical-align:middle;'>google map:</font><br>", $this->googleMap($Coordinate)));
+        $google     = new \XoopsFormElementTray(_AM_MARTIN_GOOGLE_MAP);
+        $google->addElement(new \XoopsFormText(_AM_MARTIN_LATITTUDE, 'GmapLatitude', 25, 25, $Coordinate[0]), true);
+        $google->addElement(new \XoopsFormText(_AM_MARTIN_LONGITUDE, 'GmapLongitude', 25, 25, $Coordinate[1]), true);
+        $google->addElement(new \XoopsFormLabel("<br><br><font style='background - color:#2F5376;color:#FFFFFF;padding:2px;vertical-align:middle;'>google map:</font><br>", $this->googleMap($Coordinate)));
 
         //酒店图片
-        $Img = new XoopsFormElementTray(_AM_MARTIN_HOTEL_PHOTOS);
-        $Img->addElement(new XoopsFormLabel('', $this->Swfupload()));
+        $Img = new \XoopsFormElementTray(_AM_MARTIN_HOTEL_PHOTOS);
+        $Img->addElement(new \XoopsFormLabel('', $this->Swfupload()));
 
         $this->addElement($Img);
         $this->addElement($google, true);
         //特殊处理
 
         //编辑器 酒店详细信息
-        $this->addElement(new XoopsFormTextArea(_AM_MARTIN_HOTELS_NOTES, 'hotel_reminded', $this->Obj->hotel_reminded()), true);
+        $this->addElement(new \XoopsFormTextArea(_AM_MARTIN_HOTELS_NOTES, 'hotel_reminded', $this->Obj->hotel_reminded()), true);
         //hotel Facility
-        $this->addElement(new XoopsFormTextArea(_AM_MARTIN_FACILITIES_SERVICES, 'hotel_facility', $this->Obj->hotel_facility()), true);
+        $this->addElement(new \XoopsFormTextArea(_AM_MARTIN_FACILITIES_SERVICES, 'hotel_facility', $this->Obj->hotel_facility()), true);
 
         $editor                   = 'tinymce';
         $hotel_info               = $this->Obj->hotel_info();
         $editor_configs           = [];
         $editor_configs['name']   = 'hotel_info';
         $editor_configs['value']  = $hotel_info;
-        $editor_configs['rows']   = empty($xoopsModuleConfig['editor_rows']) ? 35 : $xoopsModuleConfig['editor_rows'];
-        $editor_configs['cols']   = empty($xoopsModuleConfig['editor_cols']) ? 60 : $xoopsModuleConfig['editor_cols'];
-        $editor_configs['width']  = empty($xoopsModuleConfig['editor_width']) ? '100%' : $xoopsModuleConfig['editor_width'];
-        $editor_configs['height'] = empty($xoopsModuleConfig['editor_height']) ? '400px' : $xoopsModuleConfig['editor_height'];
+        $editor_configs['rows']   = empty($helper->getConfig('editor_rows')) ? 35 : $helper->getConfig('editor_rows');
+        $editor_configs['cols']   = empty($helper->getConfig('editor_cols')) ? 60 : $helper->getConfig('editor_cols');
+        $editor_configs['width']  = empty($helper->getConfig('editor_width')) ? '100%' : $helper->getConfig('editor_width');
+        $editor_configs['height'] = empty($helper->getConfig('editor_height')) ? '400px' : $helper->getConfig('editor_height');
 
-        $this->addElement(new XoopsFormEditor(_AM_MARTIN_HOTEL_DETALS, $editor, $editor_configs, false, $onfailure = null), false);
-        //$this->addElement(new XoopsFormHidden("hotel_info", $hotel_info) , true );
+        $this->addElement(new \XoopsFormEditor(_AM_MARTIN_HOTEL_DETALS, $editor, $editor_configs, false, $onfailure = null), false);
+        //$this->addElement(new \XoopsFormHidden("hotel_info", $hotel_info) , true );
 
-        $this->addElement(new XoopsFormRadioYN(_AM_MARTIN_HOTEL_EDIT_STATUS, 'hotel_status', $this->Obj->hotel_status(), _AM_MARTIN_PUBLISHED, _AM_MARTIN_DRAFT), true);
+        $this->addElement(new \XoopsFormRadioYN(_AM_MARTIN_HOTEL_EDIT_STATUS, 'hotel_status', $this->Obj->hotel_status(), _AM_MARTIN_PUBLISHED, _AM_MARTIN_DRAFT), true);
         //$this->addElement( new MartinFormDateTime("酒店发布时间", 'hotel_open_time', $size = 15, $this->Obj->hotel_open_time() ) ,true);
 
-        $this->addElement(new XoopsFormHidden('hotel_icon_old', $this->Obj->hotel_icon()));
-        $this->addElement(new XoopsFormHidden('id', $this->Obj->hotel_id()));
+        $this->addElement(new \XoopsFormHidden('hotel_icon_old', $this->Obj->hotel_icon()));
+        $this->addElement(new \XoopsFormHidden('id', $this->Obj->hotel_id()));
     }
 
     /**
@@ -175,31 +180,31 @@ class form_hotel extends XoopsThemeForm
      * */
     public function createButtons()
     {
-        $button_tray = new XoopsFormElementTray('', '');
+        $button_tray = new \XoopsFormElementTray('', '');
         // No ID for category -- then it's new category, button says 'Create'
         if (!$this->CityObj->city_id()) {
-            $butt_create = new XoopsFormButton('', '', _SUBMIT, 'submit');
+            $butt_create = new \XoopsFormButton('', '', _SUBMIT, 'submit');
             $butt_create->setExtra('onclick="this.form.elements.op.value=\'addcategory\'"');
             $button_tray->addElement($butt_create);
 
-            $butt_clear = new XoopsFormButton('', '', _RESET, 'reset');
+            $butt_clear = new \XoopsFormButton('', '', _RESET, 'reset');
             $button_tray->addElement($butt_clear);
 
-            $butt_cancel = new XoopsFormButton('', '', _CANCEL, 'button');
+            $butt_cancel = new \XoopsFormButton('', '', _CANCEL, 'button');
             $butt_cancel->setExtra('onclick="history.go(-1)"');
             $button_tray->addElement($butt_cancel);
 
             $this->addElement($button_tray);
         } else {
             // button says 'Update'
-            $butt_create = new XoopsFormButton('', '', _EDIT, 'submit');
+            $butt_create = new \XoopsFormButton('', '', _EDIT, 'submit');
             $butt_create->setExtra('onclick="this.form.elements.op.value=\'addcategory\'"');
             $button_tray->addElement($butt_create);
 
-            $butt_clear = new XoopsFormButton('', '', _RESET, 'reset');
+            $butt_clear = new \XoopsFormButton('', '', _RESET, 'reset');
             $button_tray->addElement($butt_clear);
 
-            $butt_cancel = new XoopsFormButton('', '', _CANCEL, 'button');
+            $butt_cancel = new \XoopsFormButton('', '', _CANCEL, 'button');
             $butt_cancel->setExtra('onclick="history.go(-1)"');
             $button_tray->addElement($butt_cancel);
 
@@ -289,7 +294,8 @@ class form_hotel extends XoopsThemeForm
     {
         session_start();
         $_SESSION['file_info'] = [];
-        global $xoopsModuleConfig;
+        /** @var Xmartin\Helper $helper */
+        $helper = Xmartin\Helper::getInstance();
 
         $hotel_image = $this->Obj->hotel_image();
 
@@ -357,8 +363,8 @@ class form_hotel extends XoopsThemeForm
                 flash9_url : "../javascript/swfupload/swfupload_FP9.swf",
 
                 custom_settings : {
-                    thumbnail_width : ' . $xoopsModuleConfig['thumbnail_width'] . ',
-                    thumbnail_height : ' . $xoopsModuleConfig['thumbnail_height'] . ',
+                    thumbnail_width : ' . $helper->getConfig('thumbnail_width') . ',
+                    thumbnail_height : ' . $helper->getConfig('thumbnail_height') . ',
                     thumbnail_quality : 100,
                     upload_target : "divFileProgressContainer",
                     upload_show   : "ShowTmp"

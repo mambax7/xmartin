@@ -5,7 +5,7 @@
  * Licence: GNU
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 
@@ -165,9 +165,9 @@ class MartinGroupHandler extends XoopsObjectHandler
             return false;
         }
 
-        $criteria = new CriteriaCompo(new Criteria('group_id', $id));
+        $criteria = new \CriteriaCompo(new \Criteria('group_id', $id));
         $criteria->setLimit(1);
-        $obj_array = $this->getObjects($criteria);
+        $obj_array =& $this->getObjects($criteria);
         if (1 != count($obj_array)) {
             $obj = $this->create();
 
@@ -192,7 +192,7 @@ class MartinGroupHandler extends XoopsObjectHandler
         global $xoopsDB;
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             if (is_null($key)) {
                 $rows[] = $row;
             } else {
@@ -219,7 +219,7 @@ class MartinGroupHandler extends XoopsObjectHandler
      */
     public function &getGroups($limit = 0, $start = 0, $sort = 'group_add_time', $order = 'DESC', $id_as_key = true)
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
 
         $criteria->setSort($sort);
         $criteria->setOrder($order);
@@ -233,12 +233,12 @@ class MartinGroupHandler extends XoopsObjectHandler
     /**
      * insert a new group in the database
      *
-     * @param object|XoopsObject $group reference to the {@link group}
+     * @param object|\XoopsObject $group reference to the {@link group}
      *                                  object
      * @param  bool              $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $group, $force = false)
+    public function insert(\XoopsObject $group, $force = false)
     {
         if ('martingroup' !== strtolower(get_class($group))) {
             return false;
@@ -329,11 +329,11 @@ class MartinGroupHandler extends XoopsObjectHandler
      * @created   :2010年05月21日 20时40分
      * @copyright 1997-2010 The Martin Group
      * @author    Martin <china.codehome@gmail.com>
-     * @param object|XoopsObject $group
+     * @param object|\XoopsObject $group
      * @param  bool              $force
      * @return bool|void
      */
-    public function delete(XoopsObject $group, $force = false)
+    public function delete(\XoopsObject $group, $force = false)
     {
         if ('martingroup' !== strtolower(get_class($group))) {
             return false;
@@ -435,7 +435,7 @@ class MartinGroupHandler extends XoopsObjectHandler
 
         $theObjects = [];
 
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $group = new MartinGroup();
             $group->assignVars($myrow);
             $theObjects[$myrow['group_id']] =& $group;
@@ -476,7 +476,7 @@ class MartinGroupHandler extends XoopsObjectHandler
             WHERE group_id = ' . $group_id;
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $rows[] = $row;
         }
 
@@ -532,7 +532,7 @@ class MartinGroupHandler extends XoopsObjectHandler
         $sql    .= $hotel_id > 0 ? ' WHERE hotel_id = ' . $hotel_id : ' ';
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $rows[$row['room_id']] = $row['room_name'];
         }
 

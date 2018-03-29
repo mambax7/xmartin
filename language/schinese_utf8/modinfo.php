@@ -7,7 +7,7 @@
  * @author    Martin <china.codehome@gmail.com>
  * */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 define('MARTIN_MODULES_DESCRIPTION', '订房模块');
 
 define('MARTIN_GOOGLE_API_TITLE', 'google api');

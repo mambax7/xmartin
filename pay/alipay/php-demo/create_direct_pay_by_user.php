@@ -50,6 +50,3 @@ print <<<EOT
 <b>
 <a href= $link  target ="_blank">submit</a>
 EOT;
-
-
-

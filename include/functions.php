@@ -9,7 +9,11 @@
  * @package        module::article
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * @用于头部
@@ -30,20 +34,18 @@ if (!function_exists('martin_adminMenu')) {
 
         // global $xoopsDB, $xoopsModule, $xoopsConfig, $xoopsModuleConfig;
         global $xoopsModule, $xoopsConfig;
+        /** @var Xmartin\Helper $helper */
+        $helper = Xmartin\Helper::getInstance();
 
-        if (file_exists(MARTIN_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-            require_once MARTIN_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/modinfo.php';
-        } else {
-            require_once MARTIN_ROOT_PATH . 'language/english/modinfo.php';
-        }
-        if (file_exists(MARTIN_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/admin.php')) {
-            require_once MARTIN_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/admin.php';
-        } else {
-            require_once MARTIN_ROOT_PATH . 'language/english/admin.php';
-        }
+
+        /** @var Xmartin\Helper $helper */
+        $helper = Xmartin\Helper::getInstance();
+        $helper->loadLanguage('admin');
+        $helper->loadLanguage('modinfo');
+
         include MARTIN_ROOT_PATH . 'admin/menu.php';
 
-        $tpl = new XoopsTpl();
+        $tpl = new \XoopsTpl();
         $tpl->assign([
                          'headermenu'      => $headermenu,
                          'adminmenu'       => $adminObject,
@@ -216,9 +218,9 @@ if (!function_exists('GetRanks')) {
      * @param $xoopsModuleConfig
      * @return mixed
      */
-    function getRanks($xoopsModuleConfig)
+    function getRanks($xoopsModuleConfig) //TODO
     {
-        $HotelRanks = $xoopsModuleConfig['hotelrank'];
+        $HotelRanks = $helper->getConfig('hotelrank');
         $HotelRanks = array_filter(explode(chr(13), $HotelRanks));
         if (is_array($HotelRanks)) {
             foreach ($HotelRanks as $hotelrank) {

@@ -6,7 +6,12 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -46,25 +51,25 @@ class form_hotel_promotion extends XoopsThemeForm
         $js          = '<script type=\'text/javascript\'>
             jQuery.noConflict();
             </script>';
-        $RoomElement = new XoopsFormSelect($js . _AM_MARTIN_PROMO_HOTELS, 'hotel_id', $this->HotelList, 0, false);
+        $RoomElement = new \XoopsFormSelect($js . _AM_MARTIN_PROMO_HOTELS, 'hotel_id', $this->HotelList, 0, false);
         $RoomElement->addOptionArray($this->HotelList);
         $this->addElement($RoomElement, false);
 
-        $this->addElement(new XoopsFormTextDateSelect(_AM_MARTIN_PROMO_START, 'promotion_start_date', $size = 15, $this->Obj->promotion_start_date(), false), true);
+        $this->addElement(new \XoopsFormTextDateSelect(_AM_MARTIN_PROMO_START, 'promotion_start_date', $size = 15, $this->Obj->promotion_start_date(), false), true);
 
-        $this->addElement(new XoopsFormTextDateSelect(_AM_MARTIN_PROMO_END, 'promotion_end_date', $size = 15, $this->Obj->promotion_end_date(), false), true);
+        $this->addElement(new \XoopsFormTextDateSelect(_AM_MARTIN_PROMO_END, 'promotion_end_date', $size = 15, $this->Obj->promotion_end_date(), false), true);
 
         $editor                   = 'tinymce';
         $editor_configs           = [];
         $editor_configs['name']   = 'promotion_description';
         $editor_configs['value']  = $this->Obj->promotion_description();
-        $editor_configs['rows']   = empty($xoopsModuleConfig['editor_rows']) ? 35 : $xoopsModuleConfig['editor_rows'];
-        $editor_configs['cols']   = empty($xoopsModuleConfig['editor_cols']) ? 60 : $xoopsModuleConfig['editor_cols'];
-        $editor_configs['width']  = empty($xoopsModuleConfig['editor_width']) ? '100%' : $xoopsModuleConfig['editor_width'];
-        $editor_configs['height'] = empty($xoopsModuleConfig['editor_height']) ? '400px' : $xoopsModuleConfig['editor_height'];
-        $this->addElement(new XoopsFormEditor(_AM_MARTIN_PROMOTION_DETAILS, $editor, $editor_configs, false, $onfailure = null), false);
+        $editor_configs['rows']   = empty($helper->getConfig('editor_rows')) ? 35 : $helper->getConfig('editor_rows');
+        $editor_configs['cols']   = empty($helper->getConfig('editor_cols')) ? 60 : $helper->getConfig('editor_cols');
+        $editor_configs['width']  = empty($helper->getConfig('editor_width')) ? '100%' : $helper->getConfig('editor_width');
+        $editor_configs['height'] = empty($helper->getConfig('editor_height')) ? '400px' : $helper->getConfig('editor_height');
+        $this->addElement(new \XoopsFormEditor(_AM_MARTIN_PROMOTION_DETAILS, $editor, $editor_configs, false, $onfailure = null), false);
 
-        $this->addElement(new XoopsFormHidden('id', $this->Obj->promotion_id()));
+        $this->addElement(new \XoopsFormHidden('id', $this->Obj->promotion_id()));
     }
 
     /**
@@ -76,31 +81,31 @@ class form_hotel_promotion extends XoopsThemeForm
      * */
     public function createButtons()
     {
-        $button_tray = new XoopsFormElementTray('', '');
+        $button_tray = new \XoopsFormElementTray('', '');
         // No ID for category -- then it's new category, button says 'Create'
         if (!$this->Obj->promotion_id()) {
-            $butt_create = new XoopsFormButton('', '', _SUBMIT, 'submit');
+            $butt_create = new \XoopsFormButton('', '', _SUBMIT, 'submit');
             $butt_create->setExtra('onclick="this.form.elements.op.value=\'addcategory\'"');
             $button_tray->addElement($butt_create);
 
-            $butt_clear = new XoopsFormButton('', '', _RESET, 'reset');
+            $butt_clear = new \XoopsFormButton('', '', _RESET, 'reset');
             $button_tray->addElement($butt_clear);
 
-            $butt_cancel = new XoopsFormButton('', '', _CANCEL, 'button');
+            $butt_cancel = new \XoopsFormButton('', '', _CANCEL, 'button');
             $butt_cancel->setExtra('onclick="history.go(-1)"');
             $button_tray->addElement($butt_cancel);
 
             $this->addElement($button_tray);
         } else {
             // button says 'Update'
-            $butt_create = new XoopsFormButton('', '', _EDIT, 'submit');
+            $butt_create = new \XoopsFormButton('', '', _EDIT, 'submit');
             $butt_create->setExtra('onclick="this.form.elements.op.value=\'addcategory\'"');
             $button_tray->addElement($butt_create);
 
-            $butt_clear = new XoopsFormButton('', '', _RESET, 'reset');
+            $butt_clear = new \XoopsFormButton('', '', _RESET, 'reset');
             $button_tray->addElement($butt_clear);
 
-            $butt_cancel = new XoopsFormButton('', '', _CANCEL, 'button');
+            $butt_cancel = new \XoopsFormButton('', '', _CANCEL, 'button');
             $butt_cancel->setExtra('onclick="history.go(-1)"');
             $button_tray->addElement($butt_cancel);
 

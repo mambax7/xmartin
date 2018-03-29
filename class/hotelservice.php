@@ -5,7 +5,7 @@
  * Licence: GNU
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 
@@ -112,9 +112,9 @@ class MartinHotelServiceHandler extends XoopsObjectHandler
             return false;
         }
 
-        $criteria = new CriteriaCompo(new Criteria('service_id', $id));
+        $criteria = new \CriteriaCompo(new \Criteria('service_id', $id));
         $criteria->setLimit(1);
-        $obj_array = $this->getObjects($criteria);
+        $obj_array =& $this->getObjects($criteria);
         if (1 != count($obj_array)) {
             $obj = $this->create();
 
@@ -140,7 +140,7 @@ class MartinHotelServiceHandler extends XoopsObjectHandler
      */
     public function &getHotelServices($limit = 0, $start = 0, $sort = 'service_id', $order = 'ASC', $id_as_key = true)
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
 
         $criteria->setSort($sort);
         $criteria->setOrder($order);
@@ -159,7 +159,7 @@ class MartinHotelServiceHandler extends XoopsObjectHandler
      * @param  bool              $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $hotelservice, $force = false)
+    public function insert(\XoopsObject $hotelservice, $force = false)
     {
         if ('martinhotelservice' !== strtolower(get_class($hotelservice))) {
             return false;
@@ -226,7 +226,7 @@ class MartinHotelServiceHandler extends XoopsObjectHandler
      * @param  bool              $force
      * @return bool|void
      */
-    public function delete(XoopsObject $hotelservice, $force = false)
+    public function delete(\XoopsObject $hotelservice, $force = false)
     {
         if ('martinhotelservice' !== strtolower(get_class($hotelservice))) {
             return false;
@@ -319,7 +319,7 @@ class MartinHotelServiceHandler extends XoopsObjectHandler
 
         $theObjects = [];
 
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $hotelservice = new MartinHotelService();
             $hotelservice->assignVars($myrow);
             $theObjects[$myrow['service_id']] =& $hotelservice;
@@ -358,7 +358,7 @@ class MartinHotelServiceHandler extends XoopsObjectHandler
             left join ' . $this->db->prefix('martin_hotel') . " h ON (sr.hotel_id = h.hotel_id) order BY hotel_id DESC
             limit $Limit,$pageSize";
         $result = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $rows[] = $row;
         }
 
@@ -477,7 +477,7 @@ class MartinHotelServiceHandler extends XoopsObjectHandler
         $sql    .= $hotel_id > 0 ? " WHERE hotel_id = $hotel_id" : '';
         $sql    .= ' order BY hotel_rank ,hotel_id DESC ';
         $result = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $rows[$row['hotel_id']] = $row['hotel_name'];
         }
 
@@ -499,7 +499,7 @@ class MartinHotelServiceHandler extends XoopsObjectHandler
         $sql    = 'SELECT service_id ,service_name FROM ' . $this->db->prefix('martin_hotel_service');
         $sql    .= $hotel_id > 0 ? " WHERE service_id = $service_id" : '';
         $result = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $rows[$row['service_id']] = $row['service_name'];
         }
 
@@ -548,7 +548,7 @@ class MartinHotelServiceHandler extends XoopsObjectHandler
         //echo $sql;
         $rows   = [];
         $result = $xoopsDB->query($sql);
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             //$row['service_extra_price'] = round($row['service_extra_price'],2);
             $rows[] = $row;
         }

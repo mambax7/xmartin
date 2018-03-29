@@ -6,7 +6,7 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -40,8 +40,8 @@ class form_room_type extends XoopsThemeForm
     {
         global $xoopsDB;
         $RoomType =& $this->Obj;
-        $this->addElement(new XoopsFormText(_AM_MARTIN_ROOM_CATEGORY_NAME, 'room_type_info', 45, 45, $RoomType['room_type_info']), true);
-        $this->addElement(new XoopsFormHidden('typeid', $RoomType['room_type_id']));
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_ROOM_CATEGORY_NAME, 'room_type_info', 45, 45, $RoomType['room_type_info']), true);
+        $this->addElement(new \XoopsFormHidden('typeid', $RoomType['room_type_id']));
     }
 
     /**
@@ -53,31 +53,31 @@ class form_room_type extends XoopsThemeForm
      * */
     public function createButtons()
     {
-        $button_tray = new XoopsFormElementTray('', '');
+        $button_tray = new \XoopsFormElementTray('', '');
         // No ID for category -- then it's new category, button says 'Create'
         if (empty($this->Obj)) {
-            $butt_create = new XoopsFormButton('', '', _SUBMIT, 'submit');
+            $butt_create = new \XoopsFormButton('', '', _SUBMIT, 'submit');
             $butt_create->setExtra('onclick="this.form.elements.op.value=\'addcategory\'"');
             $button_tray->addElement($butt_create);
 
-            $butt_clear = new XoopsFormButton('', '', _RESET, 'reset');
+            $butt_clear = new \XoopsFormButton('', '', _RESET, 'reset');
             $button_tray->addElement($butt_clear);
 
-            $butt_cancel = new XoopsFormButton('', '', _CANCEL, 'button');
+            $butt_cancel = new \XoopsFormButton('', '', _CANCEL, 'button');
             $butt_cancel->setExtra('onclick="history.go(-1)"');
             $button_tray->addElement($butt_cancel);
 
             $this->addElement($button_tray);
         } else {
             // button says 'Update'
-            $butt_create = new XoopsFormButton('', '', _EDIT, 'submit');
+            $butt_create = new \XoopsFormButton('', '', _EDIT, 'submit');
             $butt_create->setExtra('onclick="this.form.elements.op.value=\'addcategory\'"');
             $button_tray->addElement($butt_create);
 
-            $butt_clear = new XoopsFormButton('', '', _RESET, 'reset');
+            $butt_clear = new \XoopsFormButton('', '', _RESET, 'reset');
             $button_tray->addElement($butt_clear);
 
-            $butt_cancel = new XoopsFormButton('', '', _CANCEL, 'button');
+            $butt_cancel = new \XoopsFormButton('', '', _CANCEL, 'button');
             $butt_cancel->setExtra('onclick="history.go(-1)"');
             $button_tray->addElement($butt_cancel);
 

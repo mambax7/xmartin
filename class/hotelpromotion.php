@@ -5,7 +5,7 @@
  * Licence: GNU
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 
@@ -119,9 +119,9 @@ class MartinHotelPromotionHandler extends XoopsObjectHandler
             return false;
         }
 
-        $criteria = new CriteriaCompo(new Criteria('promotion_id', $id));
+        $criteria = new \CriteriaCompo(new \Criteria('promotion_id', $id));
         $criteria->setLimit(1);
-        $obj_array = $this->getObjects($criteria);
+        $obj_array =& $this->getObjects($criteria);
         if (1 != count($obj_array)) {
             $obj = $this->create();
 
@@ -152,7 +152,7 @@ class MartinHotelPromotionHandler extends XoopsObjectHandler
         $order = 'DESC',
         $id_as_key = true
     ) {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
 
         $criteria->setSort($sort);
         $criteria->setOrder($order);
@@ -171,7 +171,7 @@ class MartinHotelPromotionHandler extends XoopsObjectHandler
      * @param  bool              $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $promotion, $force = false)
+    public function insert(\XoopsObject $promotion, $force = false)
     {
         if ('martinhotelpromotion' !== strtolower(get_class($promotion))) {
             return false;
@@ -226,7 +226,7 @@ class MartinHotelPromotionHandler extends XoopsObjectHandler
      * @param  bool              $force
      * @return bool|void
      */
-    public function delete(XoopsObject $promotion, $force = false)
+    public function delete(\XoopsObject $promotion, $force = false)
     {
         if ('martinhotelpromotion' !== strtolower(get_class($promotion))) {
             return false;
@@ -321,7 +321,7 @@ class MartinHotelPromotionHandler extends XoopsObjectHandler
 
         $theObjects = [];
 
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $promotion = new MartinHotelPromotion();
             $promotion->assignVars($myrow);
             $theObjects[$myrow['promotion_id']] =& $promotion;

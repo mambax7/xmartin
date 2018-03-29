@@ -416,7 +416,7 @@ $password = 'pwd';
             echo "<br>正在解压: <input name='dfile[]' type='checkbox' value='$upfile[name]' " . ($checked ? 'checked' : '') . "> $upfile[name]<br><br>";
             if (preg_match('/\.zip$/mis', $upfile[name])) {
                 $result = $z->Extract($upfile[tmp_name], $_POST['todir']);
-                if ($result == -1) {
+                if (-1 == $result) {
                     echo "<br>文件 $upfile[name] 错误.<br>";
                 }
                 echo "<br>完成,共建立 $z->total_folders 个目录,$z->total_files 个文件.<br><br><br>";

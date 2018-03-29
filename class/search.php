@@ -6,7 +6,10 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+
+use XoopsModules\Xmartin;
+
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class MartinSearch
@@ -49,7 +52,7 @@ class MartinSearchHandler extends XoopsObjectHandler
         global $xoopsDB;
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             if (is_null($key)) {
                 $rows[] = $row;
             } else {
@@ -71,7 +74,10 @@ class MartinSearchHandler extends XoopsObjectHandler
      */
     public function search($data)
     {
-        global $hotelHandler, $xoopsModuleConfig;
+        global $hotelHandler;
+        /** @var Xmartin\Helper $helper */
+        $helper = Xmartin\Helper::getInstance();
+
         //var_dump($xoopsModuleConfig);
 
         $rows     = [];
@@ -98,13 +104,13 @@ class MartinSearchHandler extends XoopsObjectHandler
         $sql           .= (empty($order)
                            || empty($by)) ? ' ORDER BY h.hotel_rank DESC , h.hotel_id DESC ' : " ORDER BY $order $by ,h.hotel_rank DESC ";
         $rows['count'] = $this->getCount(str_replace('h.*', 'count(h.hotel_id) as count', $sql));
-        $sql           .= "LIMIT $start,{$xoopsModuleConfig['perpage']}";
+        $sql           .= "LIMIT $start,{$helper->getConfig('perpage')}";
         //echo $sql;
 
         $result          = $this->db->query($sql);
         $this->hotel_ids =& $hotel_ids;
         $cityList        = $hotelHandler->getCityList();
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $hotel_ids[] = $row['hotel_id'];
             $city_ids    = explode(',', $row['hotel_city_id']);
             foreach ($city_ids as $id) {
@@ -138,7 +144,7 @@ class MartinSearchHandler extends XoopsObjectHandler
         }
         $count  = 0;
         $result = $this->db->query($sql);
-        while ($this->db->fetchArray($result)) {
+        while (false !== ($this->db->fetchArray($result))) {
             $count++;
         }
 
@@ -159,7 +165,7 @@ class MartinSearchHandler extends XoopsObjectHandler
         global $xoopsDB;
         $sql    = 'SELECT city_id FROM ' . $xoopsDB->prefix('martin_hotel_city') . " WHERE city_name LIKE '%$city_name%'";
         $result = $xoopsDB->query($sql);
-        while ($city_id = $xoopsDB->fetchArray($result)) {
+        while (false !== ($city_id = $xoopsDB->fetchArray($result))) {
             $city_ids[] = $city_id['city_id'];
         }
 
@@ -192,7 +198,7 @@ class MartinSearchHandler extends XoopsObjectHandler
         $sql    .= 'GROUP BY r.room_id';
         $rows   = [];
         $result = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $room_dates         = [];
             $row['room_prices'] = explode(',', $row['room_prices']);
             $row['room_dates']  = explode(',', $row['room_dates']);

@@ -9,15 +9,15 @@
  * @package        module::tag
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 defined('TAG_INI') || include __DIR__ . '/vars.php';
 
-//function xoops_module_install_martin(XoopsModule $module)
+//function xoops_module_install_martin(\XoopsModule $module)
 //{
 //    return true;
 //}
 //
-//function xoops_module_pre_install_martin(XoopsModule $module)
+//function xoops_module_pre_install_martin(\XoopsModule $module)
 //{
 //    $mod_tables = $module->getInfo("tables");
 //    foreach($mod_tables as $table){
@@ -26,12 +26,12 @@ defined('TAG_INI') || include __DIR__ . '/vars.php';
 //    return true;
 //}
 //
-//function xoops_module_pre_update_martin(XoopsModule $module)
+//function xoops_module_pre_update_martin(\XoopsModule $module)
 //{
 //    return true;
 //}
 //
-//function xoops_module_update_martin(XoopsModule $module, $prev_version = null)
+//function xoops_module_update_martin(\XoopsModule $module, $prev_version = null)
 //{
 //    if ($prev_version <= 150) {
 //        $GLOBALS['xoopsDB']->queryFromFile(XOOPS_ROOT_PATH."/modules/".$module->getVar("dirname")."/sql/mysql.150.sql");

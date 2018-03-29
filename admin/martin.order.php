@@ -1,4 +1,9 @@
 <?php
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 require_once __DIR__ . '/admin_header.php';
 /*
  * 处理
@@ -113,7 +118,7 @@ switch ($action) {
             }
         }
 
-        $pagenav = new XoopsPageNav($Count, $xoopsModuleConfig['perpage'], $start, 'start', $searchStr);
+        $pagenav = new \XoopsPageNav($Count, $helper->getConfig('perpage'), $start, 'start', $searchStr);
         $pavStr  = '<div style="text-align:left;">' . $pagenav->renderNav() . '</div>';
 
         //html
@@ -136,7 +141,7 @@ switch ($action) {
         ];
         //$htmlStar = getModuleArray('hotelrank','hotel_star');
 
-        $OrderObjs = $Count > 0 ? $orderHandler->getOrders($searchData, $xoopsModuleConfig['perpage'], $start, 0) : null;
+        $OrderObjs = $Count > 0 ? $orderHandler->getOrders($searchData, $helper->getConfig('perpage'), $start, 0) : null;
         // Creating the objects for top categories
 
         echo "$pavStr<table width='100%' cellspacing=1 cellpadding=9 border=0 class = outer>";

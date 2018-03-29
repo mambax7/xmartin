@@ -5,7 +5,7 @@
  * Licence: GNU
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 
@@ -322,9 +322,9 @@ class MartinHotelHandler extends XoopsObjectHandler
             return false;
         }
 
-        $criteria = new CriteriaCompo(new Criteria('hotel_id', $id));
+        $criteria = new \CriteriaCompo(new \Criteria('hotel_id', $id));
         $criteria->setLimit(1);
-        $obj_array = $this->getObjects($criteria);
+        $obj_array =& $this->getObjects($criteria);
         if (1 != count($obj_array)) {
             $obj = $this->create();
 
@@ -357,7 +357,7 @@ class MartinHotelHandler extends XoopsObjectHandler
         global $xoopsDB;
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             if (is_null($key)) {
                 $rows[] = $row;
             } else {
@@ -391,7 +391,7 @@ class MartinHotelHandler extends XoopsObjectHandler
         $order = 'ASC',
         $id_as_key = true
     ) {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
 
         $criteria->setSort($sort);
         $criteria->setOrder($order);
@@ -415,7 +415,7 @@ class MartinHotelHandler extends XoopsObjectHandler
      * @param  bool              $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $hotel, $force = false)
+    public function insert(\XoopsObject $hotel, $force = false)
     {
         if ('martinhotel' !== strtolower(get_class($hotel))) {
             return false;
@@ -470,7 +470,7 @@ class MartinHotelHandler extends XoopsObjectHandler
                            $hotel_open_time,
                 $hotel_add_time
             );
-            //echo $sql;exit;
+        //echo $sql;exit;
         } else {
             $sql = sprintf(
                 'UPDATE %s SET hotel_city = %u,
@@ -542,7 +542,7 @@ class MartinHotelHandler extends XoopsObjectHandler
      * @param  bool              $force
      * @return bool|void
      */
-    public function delete(XoopsObject $hotel, $force = false)
+    public function delete(\XoopsObject $hotel, $force = false)
     {
         if ('martinhotel' !== strtolower(get_class($hotel))) {
             return false;
@@ -683,7 +683,7 @@ class MartinHotelHandler extends XoopsObjectHandler
 
         $theObjects = [];
 
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $hotel = new MartinHotel();
             $hotel->assignVars($myrow);
             $theObjects[$myrow['hotel_id']] =& $hotel;
@@ -731,7 +731,7 @@ class MartinHotelHandler extends XoopsObjectHandler
         $sql      .= "$where     order BY h.hotel_rank ,h.hotel_id DESC ";
         $query    = $this->db->query($sql, $limit, $start);
         $cityList = &self::getCityList();
-        while ($row = $this->db->fetchArray($query)) {
+        while (false !== ($row = $this->db->fetchArray($query))) {
             $city_ids = explode(',', $row['hotel_city_id']);
             foreach ($city_ids as $id) {
                 $city_name[] = $cityList[$id];
@@ -766,7 +766,7 @@ class MartinHotelHandler extends XoopsObjectHandler
             WHERE r.hotel_id IN (' . implode(',', $this->hotel_ids) . ') ';
         $rows   = [];
         $result = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $rows[$row['hotel_id']][] = $row;
         }
 
@@ -789,7 +789,7 @@ class MartinHotelHandler extends XoopsObjectHandler
         $sql    .= !is_null($WHERE) ? ' ' . $WHERE . ' ' : '';
         $result = $this->db->query($sql);
         $rows   = [];
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $rows[$row['city_id']] = $row['city_name'];
         }
 
@@ -911,7 +911,7 @@ class MartinHotelHandler extends XoopsObjectHandler
         $sql    = 'SELECT hotel_star ,count(hotel_id) AS count FROM ' . $xoopsDB->prefix('martin_hotel') . ' GROUP BY hotel_star ORDER BY hotel_star  ';
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $rows[$row['hotel_star']] = $row['count'];
         }
 

@@ -6,7 +6,7 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -103,27 +103,27 @@ class form_room_price extends XoopsThemeForm
                     ';
         //var_dump($Price);
         if (!empty($Price) && is_array($Price) && isset($Price['room_price'])) {
-            $PriceArea   = new XoopsFormElementTray($js . '房间价格');
-            $RoomElement = new XoopsFormSelect(_AM_MARTIN_GUEST_ROOM, 'room_id', $Price['room_id'], 1);
+            $PriceArea   = new \XoopsFormElementTray($js . '房间价格');
+            $RoomElement = new \XoopsFormSelect(_AM_MARTIN_GUEST_ROOM, 'room_id', $Price['room_id'], 1);
             $RoomElement->addOptionArray($this->RoomList);
             $PriceArea->addElement($RoomElement, true);
-            $PriceArea->addElement(new XoopsFormText(_AM_MARTIN_PRICE . ':', 'room_price', 11, 11, $Price['room_price']), true);
-            $PriceArea->addElement(new XoopsFormText(_AM_MARTIN_PRICE_RANGE . ':', 'room_advisory_range_small', 11, 11, $Price['room_advisory_range_small']), true);
-            $PriceArea->addElement(new XoopsFormText('-', 'room_advisory_range_max', 11, 11, $Price['room_advisory_range_max']), true);
+            $PriceArea->addElement(new \XoopsFormText(_AM_MARTIN_PRICE . ':', 'room_price', 11, 11, $Price['room_price']), true);
+            $PriceArea->addElement(new \XoopsFormText(_AM_MARTIN_PRICE_RANGE . ':', 'room_advisory_range_small', 11, 11, $Price['room_advisory_range_small']), true);
+            $PriceArea->addElement(new \XoopsFormText('-', 'room_advisory_range_max', 11, 11, $Price['room_advisory_range_max']), true);
             //_AM_MARTIN_GIFT_VOUCHER
-            $PriceArea->addElement(new XoopsFormText(_AM_MARTIN_GIFT_VOUCHER . ':', 'room_sented_coupon', 11, 11, $Price['room_sented_coupon']), true);
-            $Special = new XoopsFormCheckBox('', 'room_is_today_special', $Price['room_is_today_special']);
+            $PriceArea->addElement(new \XoopsFormText(_AM_MARTIN_GIFT_VOUCHER . ':', 'room_sented_coupon', 11, 11, $Price['room_sented_coupon']), true);
+            $Special = new \XoopsFormCheckBox('', 'room_is_today_special', $Price['room_is_today_special']);
             $Special->addOption(1, '<label for="room_is_today_special">' . _YES . ' ' . _AM_MARTIN_LAST_MINUTE . '</label>');
-            //$PriceArea->addElement(new XoopsFormText('时间:', 'room_date', 11, 11, date("Y-m-d",$Price['room_date'])), true);
-            $PriceArea->addElement(new XoopsFormHidden('room_date[]', $Price['room_date']));
+            //$PriceArea->addElement(new \XoopsFormText('时间:', 'room_date', 11, 11, date("Y-m-d",$Price['room_date'])), true);
+            $PriceArea->addElement(new \XoopsFormHidden('room_date[]', $Price['room_date']));
             $PriceArea->addElement($Special, false);
             $this->addElement($PriceArea, false);
         } else {
-            $RoomElement = new XoopsFormSelect($js . _AM_MARTIN_GUEST_ROOM . '<br><span style="color:red"><b>' . _AM_MARTIN_DO_NOT_MODIFY_TIME . '</b></span>', 'room_id', '', 1);
+            $RoomElement = new \XoopsFormSelect($js . _AM_MARTIN_GUEST_ROOM . '<br><span style="color:red"><b>' . _AM_MARTIN_DO_NOT_MODIFY_TIME . '</b></span>', 'room_id', '', 1);
             $RoomElement->addOptionArray($this->RoomList);
             $this->addElement($RoomElement);
-            $Select = new XoopsFormElementTray(_AM_MARTIN_BATCH_PROCESSING);
-            $Select->addElement(new XoopsFormLabel('', $button_str));
+            $Select = new \XoopsFormElementTray(_AM_MARTIN_BATCH_PROCESSING);
+            $Select->addElement(new \XoopsFormLabel('', $button_str));
 
             $this->addElement($Select);
 
@@ -135,43 +135,43 @@ class form_room_price extends XoopsThemeForm
                 $dateTime = strtotime($date);
 
                 //var_dump($Price[$dateTime]);
-                //                ${"PriceArea" . $today} = new XoopsFormElementTray(_AM_MARTIN_ROOM . $date . ' ' . _AM_MARTIN_PRICE_ON);
-                ${'PriceArea' . $today} = new XoopsFormElementTray(_AM_MARTIN_ROOM_PRICE_ON_DATE . $date);
-                $room_price             = new XoopsFormText(_AM_MARTIN_PRICE . ':', 'room_price[]', 11, 11, isset($Price[$dateTime]) ? $Price[$dateTime]['room_price'] : '0.00');
+                //                ${"PriceArea" . $today} = new \XoopsFormElementTray(_AM_MARTIN_ROOM . $date . ' ' . _AM_MARTIN_PRICE_ON);
+                ${'PriceArea' . $today} = new \XoopsFormElementTray(_AM_MARTIN_ROOM_PRICE_ON_DATE . $date);
+                $room_price             = new \XoopsFormText(_AM_MARTIN_PRICE . ':', 'room_price[]', 11, 11, isset($Price[$dateTime]) ? $Price[$dateTime]['room_price'] : '0.00');
                 $room_price->setExtra("class='room_price'");
                 ${'PriceArea' . $today}->addElement($room_price, true);
 
-                $room_advisory_range_small = new XoopsFormText(_AM_MARTIN_PRICE_RANGE . ':', 'room_advisory_range_small[]', 11, 11, isset($Price[$dateTime]) ? $Price[$dateTime]['room_advisory_range_small'] : '0.00');
+                $room_advisory_range_small = new \XoopsFormText(_AM_MARTIN_PRICE_RANGE . ':', 'room_advisory_range_small[]', 11, 11, isset($Price[$dateTime]) ? $Price[$dateTime]['room_advisory_range_small'] : '0.00');
                 $room_advisory_range_small->setExtra("class='room_advisory_range_small'");
                 ${'PriceArea' . $today}->addElement($room_advisory_range_small, true);
 
-                $room_advisory_range_max = new XoopsFormText('-', 'room_advisory_range_max[]', 11, 11, isset($Price[$dateTime]) ? $Price[$dateTime]['room_advisory_range_max'] : '0.00');
+                $room_advisory_range_max = new \XoopsFormText('-', 'room_advisory_range_max[]', 11, 11, isset($Price[$dateTime]) ? $Price[$dateTime]['room_advisory_range_max'] : '0.00');
                 $room_advisory_range_max->setExtra("class='room_advisory_range_max'");
                 ${'PriceArea' . $today}->addElement($room_advisory_range_max, true);
                 //_AM_MARTIN_GIFT_VOUCHER
-                $room_sented_coupon = new XoopsFormText(_AM_MARTIN_GIFT_VOUCHER . ':', 'room_sented_coupon[]', 11, 11, isset($Price[$dateTime]) ? $Price[$dateTime]['room_sented_coupon'] : '0.00');
+                $room_sented_coupon = new \XoopsFormText(_AM_MARTIN_GIFT_VOUCHER . ':', 'room_sented_coupon[]', 11, 11, isset($Price[$dateTime]) ? $Price[$dateTime]['room_sented_coupon'] : '0.00');
                 $room_sented_coupon->setExtra("class='room_sented_coupon'");
                 ${'PriceArea' . $today}->addElement($room_sented_coupon, true);
 
-                $Special = new XoopsFormCheckBox('', "room_is_today_special[$dateTime]", isset($Price[$dateTime]) ? $Price[$dateTime]['room_is_today_special'] : 0);
+                $Special = new \XoopsFormCheckBox('', "room_is_today_special[$dateTime]", isset($Price[$dateTime]) ? $Price[$dateTime]['room_is_today_special'] : 0);
                 $Special->addOption(1, '<label class="sel">' . _YES . ' ' . _AM_MARTIN_LAST_MINUTE . '</label>');
                 //echo isset($Price[$dateTime]) ? $Price[$dateTime]['room_is_today_special'] : 0;echo '<br>';
                 //hide time
-                //${"PriceArea".$today}->addElement(new XoopsFormText('时间:', 'room_date[]', 11, 11, $date), true);
-                ${'PriceArea' . $today}->addElement(new XoopsFormHidden('room_date[]', $date));
+                //${"PriceArea".$today}->addElement(new \XoopsFormText('时间:', 'room_date[]', 11, 11, $date), true);
+                ${'PriceArea' . $today}->addElement(new \XoopsFormHidden('room_date[]', $date));
                 ${'PriceArea' . $today}->addElement($Special, false);
                 $this->addElement(${'PriceArea' . $today}, false);
                 unset(${'PriceArea' . $today}, $dateTime, $date, $room_price, $room_advisory_range_max, $room_advisory_range_small, $room_sented_coupon, $Special);
             }
         }
-        /*$this->addElement( new XoopsFormText(_AM_MARTIN_ROOM_NAME, 'room_name', 45, 45, $this->Obj->room_name()), true);
-        $this->addElement( new XoopsFormText(_AM_MARTIN_ROOMS_AREA, 'room_area', 11, 11, $this->Obj->room_area()), true);
-        $this->addElement( new XoopsFormText(_AM_MARTIN_ROOM_FLOOR, 'room_floor', 45, 45, $this->Obj->room_floor()), true);
+        /*$this->addElement( new \XoopsFormText(_AM_MARTIN_ROOM_NAME, 'room_name', 45, 45, $this->Obj->room_name()), true);
+        $this->addElement( new \XoopsFormText(_AM_MARTIN_ROOMS_AREA, 'room_area', 11, 11, $this->Obj->room_area()), true);
+        $this->addElement( new \XoopsFormText(_AM_MARTIN_ROOM_FLOOR, 'room_floor', 45, 45, $this->Obj->room_floor()), true);
 
-        $this->addElement( new XoopsFormText('加价', 'room_add_money', 11, 11, $this->Obj->room_add_money()), false);
-        $this->addElement( new XoopsFormTextArea('床描述', 'room_bed_info', $this->Obj->room_bed_info()) , false);
-        $this->addElement( new XoopsFormRadioYN(_AM_MARTIN_ROOM_STATUS, 'room_status', $this->Obj->room_status(), _AM_MARTIN_PUBLISHED,  _AM_MARTIN_DRAFT) , true);
-        $this->addElement( new XoopsFormText(_AM_MARTIN_GIFT_VOUCHER, 'room_sented_coupon', 11, 11, (int)($this->Obj->room_sented_coupon())), false);*/
+        $this->addElement( new \XoopsFormText('加价', 'room_add_money', 11, 11, $this->Obj->room_add_money()), false);
+        $this->addElement( new \XoopsFormTextArea('床描述', 'room_bed_info', $this->Obj->room_bed_info()) , false);
+        $this->addElement( new \XoopsFormRadioYN(_AM_MARTIN_ROOM_STATUS, 'room_status', $this->Obj->room_status(), _AM_MARTIN_PUBLISHED,  _AM_MARTIN_DRAFT) , true);
+        $this->addElement( new \XoopsFormText(_AM_MARTIN_GIFT_VOUCHER, 'room_sented_coupon', 11, 11, (int)($this->Obj->room_sented_coupon())), false);*/
     }
 
     /**
@@ -183,31 +183,31 @@ class form_room_price extends XoopsThemeForm
      * */
     public function createButtons()
     {
-        $button_tray = new XoopsFormElementTray('', '');
+        $button_tray = new \XoopsFormElementTray('', '');
         // No ID for category -- then it's new category, button says 'Create'
         if (empty($this->Obj)) {
-            $butt_create = new XoopsFormButton('', 'sub', _SUBMIT, 'button');
+            $butt_create = new \XoopsFormButton('', 'sub', _SUBMIT, 'button');
             //$butt_create->setExtra('onclick="this.form.elements.op.value=\'addcategory\'"');
             $button_tray->addElement($butt_create);
 
-            $butt_clear = new XoopsFormButton('', '', _RESET, 'reset');
+            $butt_clear = new \XoopsFormButton('', '', _RESET, 'reset');
             $button_tray->addElement($butt_clear);
 
-            $butt_cancel = new XoopsFormButton('', '', _CANCEL, 'button');
+            $butt_cancel = new \XoopsFormButton('', '', _CANCEL, 'button');
             $butt_cancel->setExtra('onclick="history.go(-1)"');
             $button_tray->addElement($butt_cancel);
 
             $this->addElement($button_tray);
         } else {
             // button says 'Update'
-            $butt_create = new XoopsFormButton('', 'sub', _EDIT, 'button');
+            $butt_create = new \XoopsFormButton('', 'sub', _EDIT, 'button');
             //$butt_create->setExtra('onclick="this.form.elements.op.value=\'addcategory\'"');
             $button_tray->addElement($butt_create);
 
-            $butt_clear = new XoopsFormButton('', '', _RESET, 'reset');
+            $butt_clear = new \XoopsFormButton('', '', _RESET, 'reset');
             $button_tray->addElement($butt_clear);
 
-            $butt_cancel = new XoopsFormButton('', '', _CANCEL, 'button');
+            $butt_cancel = new \XoopsFormButton('', '', _CANCEL, 'button');
             $butt_cancel->setExtra('onclick="history.go(-1)"');
             $button_tray->addElement($butt_cancel);
 

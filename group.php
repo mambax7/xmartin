@@ -1,4 +1,9 @@
 <?php
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 include __DIR__ . '/../../mainfile.php';
 include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 
@@ -36,7 +41,7 @@ if ('save' === $action) {
     if ($groupHandler->CheckJoinExist($data)) {
         redirect_header('javascript:history.go(-1);', 2, '您已经参加过了.');
     } elseif ($groupHandler->AddUserGroup($data)) {
-        redirect_header(XOOPS_URL . '/modules/martin/group.php/group-' . $group_id . $xoopsModuleConfig['hotel_static_prefix'], 2, '提交成功.');
+        redirect_header(XOOPS_URL . '/modules/martin/group.php/group-' . $group_id . $helper->getConfig('hotel_static_prefix'), 2, '提交成功.');
     } else {
         redirect_header('javascript:history.go(-1);', 2, '提交失败.');
     }
@@ -90,6 +95,6 @@ $xoopsTpl->assign('user', $user);
 $xoopsTpl->assign('groupdate', $GroupDate);
 $xoopsTpl->assign('alias', $CityAlias);
 $xoopsTpl->assign('joins', $joins);
-$xoopsTpl->assign('hotel_static_prefix', $xoopsModuleConfig['hotel_static_prefix']);
+$xoopsTpl->assign('hotel_static_prefix', $helper->getConfig('hotel_static_prefix'));
 
 include XOOPS_ROOT_PATH . '/footer.php';

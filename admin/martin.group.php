@@ -1,4 +1,9 @@
 <?php
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 require_once __DIR__ . '/admin_header.php';
 /*
  * 处理
@@ -126,10 +131,10 @@ switch ($action) {
             '<div style="background-color:#FF0000">' . _AM_MARTIN_DRAFT . '</div>',
             '<div style="background-color:#00FF00">' . _AM_MARTIN_PUBLISHED . '</div>'
         ];
-        $GroupObjs = $groupHandler->getGroups($xoopsModuleConfig['perpage'], $start, 0);
+        $GroupObjs = $groupHandler->getGroups($helper->getConfig('perpage'), $start, 0);
         $Cout      = $groupHandler->getCount();
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-        $pagenav = new XoopsPageNav($Cout, $xoopsModuleConfig['perpage'], $start, 'start');
+        $pagenav = new \XoopsPageNav($Cout, $helper->getConfig('perpage'), $start, 'start');
         $pavStr  = '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
 
         // Creating the objects for top categories
@@ -152,7 +157,7 @@ switch ($action) {
                 $modify    = "<a href='?action=add&id=" . $thiscat->group_id() . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/images/icon/edit.gif'></a>";
                 $delete    = "<a href='?action=del&id=" . $thiscat->group_id() . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/images/icon/delete.gif'></a>";
                 echo "<tr><td class='even' align='left'>" . $thiscat->group_id() . '</td>';
-                echo "<td class='even' align='left' width=50><a href='../group.php/group-" . $thiscat->group_id() . $xoopsModuleConfig['hotel_static_prefix'] . "'>" . $thiscat->group_name() . '</a></td>';
+                echo "<td class='even' align='left' width=50><a href='../group.php/group-" . $thiscat->group_id() . $helper->getConfig('hotel_static_prefix') . "'>" . $thiscat->group_name() . '</a></td>';
                 echo "<td class='even' align='left'>" . date('Y-m-d', $thiscat->check_in_date()) . '</td>';
                 echo "<td class='even' align='left'>" . date('Y-m-d', $thiscat->check_out_date()) . '</td>';
                 echo "<td class='even' align='left'>" . date('Y-m-d H:i:s', $thiscat->apply_start_date()) . '</td>';

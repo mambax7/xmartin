@@ -6,7 +6,7 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 if (!@require_once XOOPS_ROOT_PATH . '/Frameworks/xoops22/class/xoopsformloader.php') {
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';

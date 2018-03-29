@@ -312,9 +312,9 @@ $isAdmin = $xoopsUser->isAdmin();
             global $faisunZIP;
             $sub_file_num = 0;
 
-            if (is_file("$dir")) {
-                if (realpath($faisunZIP->gzfilename) != realpath("$dir")) {
-                    $faisunZIP->addfile(implode('', file("$dir")), "$dir");
+            if (is_file((string)$dir)) {
+                if (realpath($faisunZIP->gzfilename) != realpath((string)$dir)) {
+                    $faisunZIP->addfile(implode('', file((string)$dir)), (string)$dir);
 
                     return 1;
                 }
@@ -322,7 +322,7 @@ $isAdmin = $xoopsUser->isAdmin();
                 return 0;
             }
 
-            $handle = opendir("$dir");
+            $handle = opendir((string)$dir);
             while ($file = readdir($handle)) {
                 if ('.' === $file || '..' === $file) {
                     continue;

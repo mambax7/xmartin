@@ -1,4 +1,9 @@
 <?php
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 require_once __DIR__ . '/admin_header.php';
 /*
  * 处理
@@ -100,7 +105,7 @@ switch ($action) {
                           ]
                       ]);
 
-        $HoteCityObjs = $hotelcityHandler->getHotelCitys($xoopsModuleConfig['perpage'], $start, 0);
+        $HoteCityObjs = $hotelcityHandler->getHotelCitys($helper->getConfig('perpage'), $start, 0);
 
         // Creating the objects for top categories
         echo "<br>\n<table width='100%' cellspacing=1 cellpadding=2 border=0 class = outer>";
@@ -121,7 +126,7 @@ switch ($action) {
         }
         echo "</table>\n";
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-        $pagenav = new XoopsPageNav($CityCout, $xoopsModuleConfig['perpage'], 0, 'start');
+        $pagenav = new \XoopsPageNav($CityCout, $helper->getConfig('perpage'), 0, 'start');
         echo '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
         echo '<br>';
         martin_close_collapsable('createtable', 'createtableicon');

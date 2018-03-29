@@ -5,7 +5,7 @@
  * Licence: GNU
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 
@@ -74,9 +74,9 @@ class MartinHotelServiceTypeHandler extends XoopsObjectHandler
             return false;
         }
 
-        $criteria = new CriteriaCompo(new Criteria('service_type_id', $id));
+        $criteria = new \CriteriaCompo(new \Criteria('service_type_id', $id));
         $criteria->setLimit(1);
-        $obj_array = $this->getObjects($criteria);
+        $obj_array =& $this->getObjects($criteria);
         if (1 != count($obj_array)) {
             $obj = $this->create();
 
@@ -107,7 +107,7 @@ class MartinHotelServiceTypeHandler extends XoopsObjectHandler
         $order = 'ASC',
         $id_as_key = true
     ) {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
 
         $criteria->setSort($sort);
         $criteria->setOrder($order);
@@ -121,12 +121,12 @@ class MartinHotelServiceTypeHandler extends XoopsObjectHandler
     /**
      * insert a new hotelservicetype in the database
      *
-     * @param object|XoopsObject $hotelservicetype reference to the {@link hotelservicetype}
+     * @param object|\XoopsObject $hotelservicetype reference to the {@link hotelservicetype}
      *                                             object
      * @param  bool              $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $hotelservicetype, $force = false)
+    public function insert(\XoopsObject $hotelservicetype, $force = false)
     {
         if ('martinhotelservicetype' !== strtolower(get_class($hotelservicetype))) {
             return false;
@@ -180,11 +180,11 @@ class MartinHotelServiceTypeHandler extends XoopsObjectHandler
      * @created   :2010年05月21日 20时40分
      * @copyright 1997-2010 The Martin Group
      * @author    Martin <china.codehome@gmail.com>
-     * @param object|XoopsObject $hotelservicetype
+     * @param object|\XoopsObject $hotelservicetype
      * @param  bool              $force
      * @return bool|void
      */
-    public function delete(XoopsObject $hotelservicetype, $force = false)
+    public function delete(\XoopsObject $hotelservicetype, $force = false)
     {
         if ('martinhotelservicetype' !== strtolower(get_class($hotelservicetype))) {
             return false;
@@ -277,7 +277,7 @@ class MartinHotelServiceTypeHandler extends XoopsObjectHandler
 
         $theObjects = [];
 
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $hotelservicetype = new MartinHotelServiceType();
             $hotelservicetype->assignVars($myrow);
             $theObjects[$myrow['service_type_id']] =& $hotelservicetype;
@@ -310,7 +310,7 @@ class MartinHotelServiceTypeHandler extends XoopsObjectHandler
         $sql    = 'SELECT * FROM ' . $this->db->prefix('martin_hotel_service_type');
         $result = $this->db->query($sql);
         $rows   = [];
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $rows[$row['service_type_id']] = $row['service_type_name'];
         }
 

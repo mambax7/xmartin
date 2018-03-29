@@ -8,7 +8,7 @@
  * @since          1.00
  * @package        module::tag
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Get item fileds:
@@ -25,7 +25,7 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
  * @return boolean
  *
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 if (!function_exists($GLOBALS['artdirname'] . '_tag_iteminfo')):
 
@@ -50,7 +50,7 @@ if (!function_exists($GLOBALS['artdirname'] . '_tag_iteminfo')):
             }
         }
         $itemHandler = xoops_getModuleHandler('hotel', 'martin');
-        $items_obj   = $itemHandler->getObjects(new Criteria('hotel_id', '(' . implode(', ', $items_id) . ')', 'IN'), true);
+        $items_obj   = $itemHandler->getObjects(new \Criteria('hotel_id', '(' . implode(', ', $items_id) . ')', 'IN'), true);
 
         foreach (array_keys($items) as $cat_id) {
             foreach (array_keys($items[$cat_id]) as $item_id) {
@@ -79,7 +79,7 @@ if (!function_exists($GLOBALS['artdirname'] . '_tag_iteminfo')):
     function martin_tag_synchronization($mid)
     {
         $itemHandler = xoops_getModuleHandler('article', $GLOBALS['artdirname']);
-        $linkHandler = xoops_getModuleHandler('link', 'tag');
+        $linkHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Link'); //@var \XoopsModules\Tag\Handler $tagHandler
 
         /* clear tag-item links */
         if ($linkHandler->mysql_major_version() >= 4):

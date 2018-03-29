@@ -5,7 +5,7 @@
  * Licence: GNU
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 
@@ -183,9 +183,9 @@ class MartinAuctionHandler extends XoopsObjectHandler
             return false;
         }
 
-        $criteria = new CriteriaCompo(new Criteria('auction_id', $id));
+        $criteria = new \CriteriaCompo(new \Criteria('auction_id', $id));
         $criteria->setLimit(1);
-        $obj_array = $this->getObjects($criteria);
+        $obj_array =& $this->getObjects($criteria);
         if (1 != count($obj_array)) {
             $obj = $this->create();
 
@@ -210,7 +210,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
         global $xoopsDB;
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             if (is_null($key)) {
                 $rows[] = $row;
             } else {
@@ -242,7 +242,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
         $order = 'DESC',
         $id_as_key = true
     ) {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
 
         $criteria->setSort($sort);
         $criteria->setOrder($order);
@@ -260,7 +260,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
      * @param  bool        $force
      * @return bool   FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $auction, $force = false)
+    public function insert(\XoopsObject $auction, $force = false)
     {
         if ('martinauction' !== strtolower(get_class($auction))) {
             return false;
@@ -363,7 +363,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
      * @param  bool              $force
      * @return bool|void
      */
-    public function delete(XoopsObject $auction, $force = false)
+    public function delete(\XoopsObject $auction, $force = false)
     {
         if ('martinauction' !== strtolower(get_class($auction))) {
             return false;
@@ -465,7 +465,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
 
         $theObjects = [];
 
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $auction = new MartinAuction();
             $auction->assignVars($myrow);
             $theObjects[$myrow['auction_id']] =& $auction;
@@ -506,7 +506,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
             WHERE auction_id = ' . $auction_id;
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $rows[] = $row;
         }
 
@@ -562,7 +562,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
         $sql    .= $hotel_id > 0 ? ' WHERE hotel_id = ' . $hotel_id : ' ';
         $result = $xoopsDB->query($sql);
         $rows   = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $rows[$row['room_id']] = $row['room_name'];
         }
 

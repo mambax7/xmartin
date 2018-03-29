@@ -1,4 +1,9 @@
 <?php
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 require_once __DIR__ . '/admin_header.php';
 /*
  * 处理
@@ -231,10 +236,10 @@ switch ($action) {
     case 'list':
         martin_collapsableBar('createtable', 'createtableicon', _AM_MARTIN_ROOMS_LIST, _AM_MARTIN_ROOMS_LIST);
         CreateButton();
-        $RoomObjs = $roomHandler->getRooms($xoopsModuleConfig['perpage'], $start, 0);
+        $RoomObjs = $roomHandler->getRooms($helper->getConfig('perpage'), $start, 0);
         $Cout     = $roomHandler->getCount();
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-        $pagenav = new XoopsPageNav($Cout, $xoopsModuleConfig['perpage'], $start, 'action=' . $action . '&start');
+        $pagenav = new \XoopsPageNav($Cout, $helper->getConfig('perpage'), $start, 'action=' . $action . '&start');
         $pavStr  = '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
 
         echo $pavStr . "<table width='100%' cellspacing=1 cellpadding=2 border=0 class = outer>";
@@ -305,7 +310,7 @@ switch ($action) {
         }
         echo "</table>\n";
         /*nclude_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-        $pagenav = new XoopsPageNav($Cout, $xoopsModuleConfig['perpage'], 0, 'start');
+        $pagenav = new \XoopsPageNav($Cout, $helper->getConfig('perpage'), 0, 'start');
         echo '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
         echo "<br>";*/
         martin_close_collapsable('createtable', 'createtableicon');
@@ -314,7 +319,7 @@ switch ($action) {
     case 'pricelist':
         martin_collapsableBar('createtable', 'createtableicon', _AM_MARTIN_RESERVATION_LIST, _AM_MARTIN_RESERVATION_LIST);
         CreateButton();
-        $Prices = $roomHandler->GetRoomPriceList($xoopsModuleConfig['perpage'], $start);
+        $Prices = $roomHandler->GetRoomPriceList($helper->getConfig('perpage'), $start);
 
         echo "<table width='100%' cellspacing=1 cellpadding=2 border=0 class = outer>";
         echo '<tr>';
@@ -342,7 +347,7 @@ switch ($action) {
         }
         echo "</table>\n";
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-        $pagenav = new XoopsPageNav($Cout, $xoopsModuleConfig['perpage'], $start, 'action=' . $action . '&start');
+        $pagenav = new \XoopsPageNav($Cout, $helper->getConfig('perpage'), $start, 'action=' . $action . '&start');
         echo '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
         echo '<br>';
 

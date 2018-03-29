@@ -1,5 +1,10 @@
 <?php
-global $xoopsModuleConfig, $xoopsModule, $xoopsTpl, $hotelHandler;
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
+global $xoopsModule, $xoopsTpl, $hotelHandler;
 
 $isNewsModule = false;
 //新闻
@@ -8,7 +13,7 @@ if ('martin' !== $xoopsModule->dirname()) {
         $isNewsModule = true;
     }
     $xoopsModule       = $moduleHandler->getByDirname('martin');
-    $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
+//    $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 }
 
 require_once XOOPS_ROOT_PATH . '/modules/martin/include/functions.php';
@@ -35,8 +40,8 @@ if (is_array($ViewedhotelArr)) {
     }
 }
 
-$hotel_guide         = explode(',', $xoopsModuleConfig['hotel_guide']);
-$hotel_today_special = explode(',', $xoopsModuleConfig['hotel_today_special']);
+$hotel_guide         = explode(',', $helper->getConfig('hotel_guide'));
+$hotel_today_special = explode(',', $helper->getConfig('hotel_today_special'));
 $hotel_news_ids      = (is_array($hotel_guide) && is_array($hotel_today_special)) ? array_merge($hotel_guide, $hotel_today_special) : null;
 $hotel_news_ids      = array_filter($hotel_news_ids);
 $hotelnews           = $newsHandler->GetHotelNews($hotel_news_ids);
@@ -63,7 +68,7 @@ $Tpl->assign('auctionList', $auctionHandler->GetAuctionList());
 $Tpl->assign('hotel_guide_rows', $hotel_guide_rows);
 $Tpl->assign('hotel_today_special_rows', $hotel_today_special_rows);
 $Tpl->assign('cityList', $hotelHandler->GetCityList('WHERE city_parentid = 0'));
-$Tpl->assign('hotel_static_prefix', $xoopsModuleConfig['hotel_static_prefix']);
+$Tpl->assign('hotel_static_prefix', $helper->getConfig('hotel_static_prefix'));
 $Tpl->assign('isNewsModule', $isNewsModule);
 $Tpl->assign('module_config', $xoopsModuleConfig);
 $Tpl->display('db:martin_hotel_search_left.tpl');

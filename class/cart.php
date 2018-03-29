@@ -8,6 +8,9 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
+
+use XoopsModules\Xmartin;
+
 class MartinCart extends XoopsObject
 {
     public function __construct()
@@ -290,7 +293,10 @@ class MartinCartHandler extends XoopsObjectHandler
         if (!$order_id || !is_int($order_id)) {
             return $order_id;
         }
-        global $xoopsDB, $xoopsModuleConfig;
+        global $xoopsDB;
+        /** @var Xmartin\Helper $helper */
+        $helper = Xmartin\Helper::getInstance();
+
         $sql = 'SELECT * FROM ' . $xoopsDB->prefix('martin_order') . ' WHERE order_id = ' . $order_id;
         $row = $xoopsDB->fetchArray($xoopsDB->query($sql));
         if (empty($row)) {
@@ -298,7 +304,7 @@ class MartinCartHandler extends XoopsObjectHandler
         }
         $order_pay_method        = getModuleArray('order_pay_method', 'order_pay_method', true);
         $row['order_pay_method'] = (int)$row['order_pay_method'];
-        $pays                    = 2 == (int)$row['order_pay_method'] ? getModuleArray('line_pays', 'line_pays', true) : getModuleArray('online_pays', 'online_pays', true);
+        $pays                    = 2 == $row['order_pay_method'] ? getModuleArray('line_pays', 'line_pays', true) : getModuleArray('online_pays', 'online_pays', true);
         //var_dump($pays);
         $row['order_pay_str']    = isset($pays[$row['order_pay']]) ? $pays[$row['order_pay']] : null;
         $row['order_pay_method'] = isset($order_pay_method['order_pay_method']) ? $order_pay_method['order_pay_method'] : null;
@@ -311,7 +317,7 @@ class MartinCartHandler extends XoopsObjectHandler
         $row['room_name']  = $row_room['hotel_name'] . '-' . $row_room['room_name'];
         $row['hotel_name'] = $row_room['hotel_name'];
         $row['room_info']  = $row_room['room_bed_info'];
-        $row['room_url']   = XOOPS_URL . '/hotel-' . $row_room['hotel_alias'] . $xoopsModuleConfig['hotel_static_prefix'];
+        $row['room_url']   = XOOPS_URL . '/hotel-' . $row_room['hotel_alias'] . $helper->getConfig('hotel_static_prefix');
         unset($row_room);
 
         return $row;

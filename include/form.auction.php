@@ -6,7 +6,12 @@
  * @copyright 1997-2010 The Martin auction
  * @author    Martin <china.codehome@gmail.com>
  * */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -76,45 +81,45 @@ class form_auction extends XoopsThemeForm
                 }
             }
             </script>';
-        $Room        = new XoopsFormElementTray($js . _AM_MARTIN_SELECT_ROOMS . '<br>' . _AM_MARTIN_FILTER_BY_HOTEL);
-        $RoomElement = new XoopsFormSelect('', 'hotel_id', $this->HotelList, 5, false);
+        $Room        = new \XoopsFormElementTray($js . _AM_MARTIN_SELECT_ROOMS . '<br>' . _AM_MARTIN_FILTER_BY_HOTEL);
+        $RoomElement = new \XoopsFormSelect('', 'hotel_id', $this->HotelList, 5, false);
         $RoomElement->addOptionArray($this->HotelList);
         //$RoomElement->addOption('class','hotel');
         $Room->addElement($RoomElement, false);
-        $Room->addElement(new XoopsFormElementTray('<br><br><div id="room"></div><div id="rooms">' . $RoomStr . '</div>'), false);
+        $Room->addElement(new \XoopsFormElementTray('<br><br><div id="room"></div><div id="rooms">' . $RoomStr . '</div>'), false);
 
         $this->addElement($Room, false);
 
-        $this->addElement(new XoopsFormTextDateSelect(_AM_MARTIN_CHECK_IN, 'check_in_date', $size = 15, $this->Obj->check_in_date(), false), true);
+        $this->addElement(new \XoopsFormTextDateSelect(_AM_MARTIN_CHECK_IN, 'check_in_date', $size = 15, $this->Obj->check_in_date(), false), true);
 
-        $this->addElement(new XoopsFormTextDateSelect(_AM_MARTIN_LAUNCH_TIME, 'check_out_date', $size = 15, $this->Obj->check_out_date(), false), true);
+        $this->addElement(new \XoopsFormTextDateSelect(_AM_MARTIN_LAUNCH_TIME, 'check_out_date', $size = 15, $this->Obj->check_out_date(), false), true);
 
-        //$this->addElement( new XoopsFormTextDateSelect(_AM_MARTIN_START_BID_TIME, 'apply_start_date', $size = 15, $this->Obj->apply_start_date(),false ) ,true);
+        //$this->addElement( new \XoopsFormTextDateSelect(_AM_MARTIN_START_BID_TIME, 'apply_start_date', $size = 15, $this->Obj->apply_start_date(),false ) ,true);
         $this->addElement(new MartinFormDateTime(_AM_MARTIN_START_BID_TIME, 'apply_start_date', $size = 15, $this->Obj->apply_start_date()), true);
-        //$this->addElement( new XoopsFormTextDateSelect(_AM_MARTIN_END_TIME_BIDDING, 'apply_end_date', $size = 15, $this->Obj->apply_end_date() ) ,true);
+        //$this->addElement( new \XoopsFormTextDateSelect(_AM_MARTIN_END_TIME_BIDDING, 'apply_end_date', $size = 15, $this->Obj->apply_end_date() ) ,true);
         $this->addElement(new MartinFormDateTime(_AM_MARTIN_END_TIME_BIDDING, 'apply_end_date', $size = 15, $this->Obj->apply_end_date()), true);
 
-        $this->addElement(new XoopsFormText(_AM_MARTIN_STARTING_PRICE, 'auction_price', 11, 11, $this->Obj->auction_price()), true);
-        $this->addElement(new XoopsFormText(_AM_MARTIN_CHEAP, 'auction_low_price', 11, 11, $this->Obj->auction_low_price()), true);
-        $this->addElement(new XoopsFormText(_AM_MARTIN_PRICE_MARKUP, 'auction_add_price', 11, 11, $this->Obj->auction_add_price()), true);
-        $this->addElement(new XoopsFormText(_AM_MARTIN_GIFT_VOUCHER . '?', 'auction_sented_coupon', 11, 11, (int)$this->Obj->auction_sented_coupon()), true);
-        $this->addElement(new XoopsFormRadioYN(_AM_MARTIN_CAN_YOU_USE_CASH_VOLUME, 'auction_can_use_coupon', $this->Obj->auction_can_use_coupon(), _YES, _NO), true);
-        $this->addElement(new XoopsFormRadioYN(_AM_MARTIN_STATUS, 'auction_status', $this->Obj->auction_status(), _AM_MARTIN_PUBLISHED, _AM_MARTIN_DRAFT), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_STARTING_PRICE, 'auction_price', 11, 11, $this->Obj->auction_price()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_CHEAP, 'auction_low_price', 11, 11, $this->Obj->auction_low_price()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_PRICE_MARKUP, 'auction_add_price', 11, 11, $this->Obj->auction_add_price()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_GIFT_VOUCHER . '?', 'auction_sented_coupon', 11, 11, (int)$this->Obj->auction_sented_coupon()), true);
+        $this->addElement(new \XoopsFormRadioYN(_AM_MARTIN_CAN_YOU_USE_CASH_VOLUME, 'auction_can_use_coupon', $this->Obj->auction_can_use_coupon(), _YES, _NO), true);
+        $this->addElement(new \XoopsFormRadioYN(_AM_MARTIN_STATUS, 'auction_status', $this->Obj->auction_status(), _AM_MARTIN_PUBLISHED, _AM_MARTIN_DRAFT), true);
 
-        $this->addElement(new XoopsFormText(_AM_MARTIN_TITLE, 'auction_name', 50, 255, $this->Obj->auction_name()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_TITLE, 'auction_name', 50, 255, $this->Obj->auction_name()), true);
         $editor       = 'tinymce';
         $auction_info = $this->Obj->auction_info();
         //var_dump($auction_info);
         $editor_configs           = [];
         $editor_configs['name']   = 'auction_info';
         $editor_configs['value']  = $auction_info;
-        $editor_configs['rows']   = empty($xoopsModuleConfig['editor_rows']) ? 35 : $xoopsModuleConfig['editor_rows'];
-        $editor_configs['cols']   = empty($xoopsModuleConfig['editor_cols']) ? 60 : $xoopsModuleConfig['editor_cols'];
-        $editor_configs['width']  = empty($xoopsModuleConfig['editor_width']) ? '100%' : $xoopsModuleConfig['editor_width'];
-        $editor_configs['height'] = empty($xoopsModuleConfig['editor_height']) ? '400px' : $xoopsModuleConfig['editor_height'];
+        $editor_configs['rows']   = empty($helper->getConfig('editor_rows')) ? 35 : $helper->getConfig('editor_rows');
+        $editor_configs['cols']   = empty($helper->getConfig('editor_cols')) ? 60 : $helper->getConfig('editor_cols');
+        $editor_configs['width']  = empty($helper->getConfig('editor_width')) ? '100%' : $helper->getConfig('editor_width');
+        $editor_configs['height'] = empty($helper->getConfig('editor_height')) ? '400px' : $helper->getConfig('editor_height');
 
-        $this->addElement(new XoopsFormEditor(_AM_MARTIN_AUCTION_DETAILS, $editor, $editor_configs, false, $onfailure = null), false);
-        $this->addElement(new XoopsFormHidden('id', $this->Obj->auction_id()));
+        $this->addElement(new \XoopsFormEditor(_AM_MARTIN_AUCTION_DETAILS, $editor, $editor_configs, false, $onfailure = null), false);
+        $this->addElement(new \XoopsFormHidden('id', $this->Obj->auction_id()));
     }
 
     /**
@@ -126,31 +131,31 @@ class form_auction extends XoopsThemeForm
      * */
     public function createButtons()
     {
-        $button_tray = new XoopsFormElementTray('', '');
+        $button_tray = new \XoopsFormElementTray('', '');
         // No ID for category -- then it's new category, button says 'Create'
         if (!$this->Obj->auction_id()) {
-            $butt_create = new XoopsFormButton('', '', _RESET, 'submit');
+            $butt_create = new \XoopsFormButton('', '', _RESET, 'submit');
             $butt_create->setExtra('onclick="this.form.elements.op.value=\'addcategory\'"');
             $button_tray->addElement($butt_create);
 
-            $butt_clear = new XoopsFormButton('', '', _SUBMIT, 'reset');
+            $butt_clear = new \XoopsFormButton('', '', _SUBMIT, 'reset');
             $button_tray->addElement($butt_clear);
 
-            $butt_cancel = new XoopsFormButton('', '', _CANCEL, 'button');
+            $butt_cancel = new \XoopsFormButton('', '', _CANCEL, 'button');
             $butt_cancel->setExtra('onclick="history.go(-1)"');
             $button_tray->addElement($butt_cancel);
 
             $this->addElement($button_tray);
         } else {
             // button says 'Update'
-            $butt_create = new XoopsFormButton('', '', _EDIT, 'submit');
+            $butt_create = new \XoopsFormButton('', '', _EDIT, 'submit');
             $butt_create->setExtra('onclick="this.form.elements.op.value=\'addcategory\'"');
             $button_tray->addElement($butt_create);
 
-            $butt_clear = new XoopsFormButton('', '', _SUBMIT, 'reset');
+            $butt_clear = new \XoopsFormButton('', '', _SUBMIT, 'reset');
             $button_tray->addElement($butt_clear);
 
-            $butt_cancel = new XoopsFormButton('', '', _CANCEL, 'button');
+            $butt_cancel = new \XoopsFormButton('', '', _CANCEL, 'button');
             $butt_cancel->setExtra('onclick="history.go(-1)"');
             $button_tray->addElement($butt_cancel);
 

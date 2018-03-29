@@ -1,4 +1,9 @@
 <?php
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 include __DIR__ . '/../../mainfile.php';
 include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 if (!defined('MODULE_URL')) {
@@ -62,7 +67,7 @@ include XOOPS_ROOT_PATH . '/modules/martin/HotelSearchLeft.php';
 $xoopsOption['xoops_pagetitle'] = $select_title . ' - 酒店预定';// - '.$xoopsConfig['sitename'];
 $xoopsTpl->assign('check_date_count', $check_date_count);
 $xoopsTpl->assign('xoops_pagetitle', $xoopsOption['xoops_pagetitle']);
-$xoopsTpl->assign('hotel_static_prefix', $xoopsModuleConfig['hotel_static_prefix']);
+$xoopsTpl->assign('hotel_static_prefix', $helper->getConfig('hotel_static_prefix'));
 $xoopsTpl->assign('module_url', MODULE_URL);
 $xoopsTpl->assign('this_url', $this_url);
 $xoopsTpl->assign('hotelrank', $hotelrank);

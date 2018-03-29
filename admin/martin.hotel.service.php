@@ -1,4 +1,9 @@
 <?php
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 require_once __DIR__ . '/admin_header.php';
 /*
  * 处理
@@ -183,7 +188,7 @@ switch ($action) {
     case 'list':
         martin_collapsableBar('createtable', 'createtableicon', _AM_MARTIN_SERVICE_LIST, _AM_MARTIN_SERVICE_LIST);
         CreateButton();
-        $HotelServiceObjs = $hotelserviceHandler->getHotelServices($xoopsModuleConfig['perpage'], $start, 0);
+        $HotelServiceObjs = $hotelserviceHandler->getHotelServices($helper->getConfig('perpage'), $start, 0);
 
         echo "<table width='100%' cellspacing=1 cellpadding=2 border=0 class = outer>";
         echo '<tr>';
@@ -211,7 +216,7 @@ switch ($action) {
         }
         echo "</table>\n";
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-        $pagenav = new XoopsPageNav($Cout, $xoopsModuleConfig['perpage'], $start, "action=$action&start");
+        $pagenav = new \XoopsPageNav($Cout, $helper->getConfig('perpage'), $start, "action=$action&start");
         echo '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
         echo '<br>';
         martin_close_collapsable('createtable', 'createtableicon');
@@ -220,7 +225,7 @@ switch ($action) {
     case 'typelist':
         martin_collapsableBar('createtable', 'createtableicon', _AM_MARTIN_SERVICE_TYPE_LIST, _AM_MARTIN_SERVICE_TYPE_LIST);
         CreateButton();
-        $HotelServiceTypeObjs = $hotelservicetypeHandler->getHotelServiceTypes($xoopsModuleConfig['perpage'], $start, 0);
+        $HotelServiceTypeObjs = $hotelservicetypeHandler->getHotelServiceTypes($helper->getConfig('perpage'), $start, 0);
 
         echo "<table width='100%' cellspacing=1 cellpadding=2 border=0 class = outer>";
         echo '<tr>';
@@ -244,7 +249,7 @@ switch ($action) {
         }
         echo "</table>\n";
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-        $pagenav = new XoopsPageNav($Cout, $xoopsModuleConfig['perpage'], $start, "action=$action&start");
+        $pagenav = new \XoopsPageNav($Cout, $helper->getConfig('perpage'), $start, "action=$action&start");
         echo '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
         echo '<br>';
         martin_close_collapsable('createtable', 'createtableicon');
@@ -253,7 +258,7 @@ switch ($action) {
     case 'hotellist':
         martin_collapsableBar('createtable', 'createtableicon', _AM_MARTIN_HOTEL_SERVICE_LIST, _AM_MARTIN_HOTEL_SERVICE_LIST);
         CreateButton();
-        $HotelServiceRelations = $hotelserviceHandler->getHotelServiceRelations($xoopsModuleConfig['perpage'], $start);
+        $HotelServiceRelations = $hotelserviceHandler->getHotelServiceRelations($helper->getConfig('perpage'), $start);
 
         echo "<table width='100%' cellspacing=1 cellpadding=2 border=0 class = outer>";
         echo '<tr>';
@@ -279,7 +284,7 @@ switch ($action) {
         }
         echo "</table>\n";
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-        $pagenav = new XoopsPageNav($Cout, $xoopsModuleConfig['perpage'], $start, "action=$action&start");
+        $pagenav = new \XoopsPageNav($Cout, $helper->getConfig('perpage'), $start, "action=$action&start");
         echo '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
         echo '<br>';
 

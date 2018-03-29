@@ -6,7 +6,7 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -39,17 +39,17 @@ class form_hotel_city extends XoopsThemeForm
     public function createElements()
     {
         global $xoopsDB;
-        $mytree = new XoopsTree($xoopsDB->prefix('martin_hotel_city'), 'city_id', 'city_parentid');
+        $mytree = new \XoopsTree($xoopsDB->prefix('martin_hotel_city'), 'city_id', 'city_parentid');
         // Parent Category
         ob_start();
         $mytree->makeMySelBox('city_name', '', $this->Obj->city_parentid(), 1, 'city_parentid');
         //makeMySelBox($title,$order="",$preset_id=0, $none=0, $sel_name="", $onchange="")
-        $this->addElement(new XoopsFormLabel(_AM_MARTIN_PARENT, ob_get_contents()));
+        $this->addElement(new \XoopsFormLabel(_AM_MARTIN_PARENT, ob_get_contents()));
         ob_end_clean();
         // City Name
-        $this->addElement(new XoopsFormText(_AM_MARTIN_CITY_NAME, 'city_name', 50, 255, $this->Obj->city_name()), true);
-        $this->addElement(new XoopsFormText(_AM_MARTIN_CITY_ALIAS, 'city_alias', 50, 255, $this->Obj->city_alias()), true);
-        $this->addElement(new XoopsFormHidden('id', $this->Obj->city_id()));
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_CITY_NAME, 'city_name', 50, 255, $this->Obj->city_name()), true);
+        $this->addElement(new \XoopsFormText(_AM_MARTIN_CITY_ALIAS, 'city_alias', 50, 255, $this->Obj->city_alias()), true);
+        $this->addElement(new \XoopsFormHidden('id', $this->Obj->city_id()));
     }
 
     /**
@@ -61,31 +61,31 @@ class form_hotel_city extends XoopsThemeForm
      * */
     public function createButtons()
     {
-        $button_tray = new XoopsFormElementTray('', '');
+        $button_tray = new \XoopsFormElementTray('', '');
         // No ID for category -- then it's new category, button says 'Create'
         if (!$this->Obj->city_id()) {
-            $butt_create = new XoopsFormButton('', '', _SUBMIT, 'submit');
+            $butt_create = new \XoopsFormButton('', '', _SUBMIT, 'submit');
             $butt_create->setExtra('onclick="this.form.elements.op.value=\'addcategory\'"');
             $button_tray->addElement($butt_create);
 
-            $butt_clear = new XoopsFormButton('', '', _RESET, 'reset');
+            $butt_clear = new \XoopsFormButton('', '', _RESET, 'reset');
             $button_tray->addElement($butt_clear);
 
-            $butt_cancel = new XoopsFormButton('', '', _CANCEL, 'button');
+            $butt_cancel = new \XoopsFormButton('', '', _CANCEL, 'button');
             $butt_cancel->setExtra('onclick="history.go(-1)"');
             $button_tray->addElement($butt_cancel);
 
             $this->addElement($button_tray);
         } else {
             // button says 'Update'
-            $butt_create = new XoopsFormButton('', '', _SUBMIT, 'submit');
+            $butt_create = new \XoopsFormButton('', '', _SUBMIT, 'submit');
             $butt_create->setExtra('onclick="this.form.elements.op.value=\'addcategory\'"');
             $button_tray->addElement($butt_create);
 
-            $butt_clear = new XoopsFormButton('', '', _RESET, 'reset');
+            $butt_clear = new \XoopsFormButton('', '', _RESET, 'reset');
             $button_tray->addElement($butt_clear);
 
-            $butt_cancel = new XoopsFormButton('', '', _CANCEL, 'button');
+            $butt_cancel = new \XoopsFormButton('', '', _CANCEL, 'button');
             $butt_cancel->setExtra('onclick="history.go(-1)"');
             $button_tray->addElement($butt_cancel);
 

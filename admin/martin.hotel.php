@@ -1,4 +1,9 @@
 <?php
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 require_once __DIR__ . '/admin_header.php';
 /*
  * 处理
@@ -29,7 +34,7 @@ $confirm = isset($_POST['confirm']) ? $_POST['confirm'] : 0;
 //parameter 参数
 
 //模块配置
-$Ranks = getRanks($xoopsModuleConfig);
+$Ranks = getRanks($xoopsModuleConfig); //TODO
 //Hotels
 $hotelHandler = xoops_getModuleHandler('hotel', MARTIN_DIRNAME, true);
 //城市
@@ -89,7 +94,7 @@ switch ($action) {
         if (!empty($_FILES['hotel_icon']['tmp_name'])) {
             $path           = MARTIN_ROOT_PATH . '/images/hotelicon/';
             $FileTypeUpload = ['image/jpg', 'image/png', 'image/gif', 'image/jpeg'];
-            $uploader       = new XoopsMediaUploader($path, $FileTypeUpload, 2048 * 1024);
+            $uploader       = new \XoopsMediaUploader($path, $FileTypeUpload, 2048 * 1024);
             if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
                 $uploader->ext = strtolower(ltrim(strrchr($uploader->getMediaName(), '.'), '.'));
                 $SaveFileName  = time() . mt_rand(1000, 10000) . '.' . $uploader->ext;
@@ -222,14 +227,14 @@ switch ($action) {
                           ]
                       ]);
 
-        $HotelObjs = $hotelHandler->getHotelList($searchData, $xoopsModuleConfig['perpage'], $start);
+        $HotelObjs = $hotelHandler->getHotelList($searchData, $helper->getConfig('perpage'), $start);
         //print_r($hotelHandler->hotel_ids);
         $hotelRooms = $hotelHandler->GethotelRooms();
 
         //分页
         $HotelCout = $hotelHandler->getCount($searchData);
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-        $pagenav = new XoopsPageNav($HotelCout, $xoopsModuleConfig['perpage'], $start, 'start', "hotel_city_id={$searchData['hotel_city_id']}&hotel_star={$searchData['hotel_star']}&hotel_name={$searchData['hotel_name']}&start");
+        $pagenav = new \XoopsPageNav($HotelCout, $helper->getConfig('perpage'), $start, 'start', "hotel_city_id={$searchData['hotel_city_id']}&hotel_star={$searchData['hotel_star']}&hotel_name={$searchData['hotel_name']}&start");
         $pavStr  = '<div style="text-align:left;">' . $pagenav->renderNav() . '</div>';
 
         $StarStr = "<option value='0'>----</option>";
@@ -272,7 +277,7 @@ switch ($action) {
                 $addroom   = "<a href='martin.room.php?action=add&hotel_id=" . $hotel['hotel_id'] . "' title='" . _AM_MARTIN_ADD_HOTEL_ROOMS . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/images/icon/addroom.jpg'></a>";
                 $modify    = "<a href='?action=add&id=" . $hotel['hotel_id'] . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/images/icon/edit.gif'></a>";
                 $delete    = "<a href='?action=del&id=" . $hotel['hotel_id'] . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/images/icon/delete.gif'></a>";
-                $hotel_url = XOOPS_URL . '/hotel-' . $hotel['hotel_alias'] . $xoopsModuleConfig['hotel_static_prefix'];
+                $hotel_url = XOOPS_URL . '/hotel-' . $hotel['hotel_alias'] . $helper->getConfig('hotel_static_prefix');
                 echo '<tr>';
                 echo "<td class='even' align='lefet'><a href='$hotel_url'>{$hotel['hotel_name']}</a></td>";
                 echo "<td class='even' align='lefet'><a href='martin.room.php?action=add&amp;hotel_id={$hotel['hotel_id']}'><img src='../images/icon/add_btn_icon.gif' title='" . _AM_MARTIN_NEW_ROOM_TYPES . "'></a></td>";

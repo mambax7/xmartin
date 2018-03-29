@@ -6,7 +6,7 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * @method: 日期
@@ -31,7 +31,7 @@ class MartinFormDateTime extends XoopsFormElementTray
         $value    = (int)$value;
         $value    = ($value > 0) ? $value : time();
         $datetime = getdate($value);
-        $this->addElement(new XoopsFormTextDateSelect('', $name . '[date]', $size, $value));
+        $this->addElement(new \XoopsFormTextDateSelect('', $name . '[date]', $size, $value));
         $timearray = [];
         for ($i = 0; $i < 24; $i++) {
             for ($j = 0; $j < 60; $j = $j + 10) {
@@ -40,7 +40,7 @@ class MartinFormDateTime extends XoopsFormElementTray
             }
         }
         ksort($timearray);
-        $timeselect = new XoopsFormSelect('', $name . '[time]', $datetime['hours'] * 3600 + 600 * floor($datetime['minutes'] / 10));
+        $timeselect = new \XoopsFormSelect('', $name . '[time]', $datetime['hours'] * 3600 + 600 * floor($datetime['minutes'] / 10));
         $timeselect->addOptionArray($timearray);
         $this->addElement($timeselect);
     }

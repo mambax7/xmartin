@@ -6,7 +6,12 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 if (!defined('MARTIN_DIRNAME')) {
     define('MARTIN_DIRNAME', 'martin');
@@ -30,11 +35,10 @@ if (!defined('MARTIN_HOTEL_IMAGE_PATH')) {
 defined('DS') || define('DS', DIRECTORY_SEPARATOR);
 
 // include common language files
-global $xoopsConfig, $xoopsModuleConfig;
-$common_lang_file = MARTIN_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/common.php';
-if (!file_exists($common_lang_file)) {
-    $common_lang_file = MARTIN_ROOT_PATH . 'language/english/common.php';
-}
+
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+$helper->loadLanguage('common');
 
 // include common functions
 $function_file = MARTIN_ROOT_PATH . 'include/functions.php';
@@ -46,7 +50,7 @@ if (file_exists($function_file)) {
 if (isset($_SERVER['PATH_INFO'])) {
     if ($_SERVER['PATH_INFO']) {
         $GET  = [];
-        $GETS = $id = str_replace($xoopsModuleConfig['hotel_static_prefix'], '', $_SERVER['PATH_INFO']);
+        $GETS = $id = str_replace($helper->getConfig('hotel_static_prefix'), '', $_SERVER['PATH_INFO']);
         $id   = empty($id) ? 0 : array_reverse(explode('-', $id));
         $id   = isset($id[0]) ? (int)$id[0] : 0;
         $GETS = empty($GETS) ? null : explode(DS, $GETS);

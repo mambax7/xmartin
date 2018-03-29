@@ -1,4 +1,9 @@
 <?php
+
+use XoopsModules\Xmartin;
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 include __DIR__ . '/../../mainfile.php';
 include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 if (!defined('MODULE_URL')) {
@@ -61,7 +66,7 @@ include XOOPS_ROOT_PATH . '/modules/martin/HotelSearchLeft.php';
 
 $xoopsOption['xoops_pagetitle'] = _AM_MARTIN_PAYMENT_OPTIONS;// - '.$xoopsConfig['sitename'];
 $xoopsTpl->assign('xoops_pagetitle', $xoopsOption['xoops_pagetitle']);
-$xoopsTpl->assign('hotel_static_prefix', $xoopsModuleConfig['hotel_static_prefix']);
+$xoopsTpl->assign('hotel_static_prefix', $helper->getConfig('hotel_static_prefix'));
 $xoopsTpl->assign('module_url', MODULE_URL);
 $xoopsTpl->assign('order_id', $order_id);
 $xoopsTpl->assign('order_pay', $order['order_pay']);
