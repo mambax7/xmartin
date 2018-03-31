@@ -14,8 +14,8 @@ $FileType = strtolower(substr(strrchr($hotel_icon, '.'), 1));
 
 $img_t = isset($_GET['t']) ? trim($_GET['t']) : null;
 
-$target_width  = isset($_GET['w']) ? (int)$_GET['w'] : 100;
-$target_height = isset($_GET['h']) ? (int)$_GET['h'] : 100;
+$target_width  = \Xmf\Request::getInt('w', 100, 'GET');
+$target_height = \Xmf\Request::getInt('h', 100, 'GET');
 
 switch ($FileType) {
     case 'jpg':

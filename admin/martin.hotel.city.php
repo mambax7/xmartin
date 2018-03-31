@@ -21,10 +21,10 @@ $action        = empty($action) ? 'list' : $action;
 $action        = trim(strtolower($action));
 $id            = !empty($_POST['id']) ? $_POST['id'] : @$_GET['id'];
 $id            = (int)$id;
-$start         = isset($_GET['start']) ? (int)$_GET['start'] : 0;
-$city_parentid = isset($_GET['city_parentid']) ? (int)$_GET['city_parentid'] : 0;
+$start         = \Xmf\Request::getInt('start', 0, 'GET');
+$city_parentid = \Xmf\Request::getInt('city_parentid', 0, 'GET');
 //确认删除
-$confirm = isset($_POST['confirm']) ? $_POST['confirm'] : 0;
+$confirm = \Xmf\Request::getInt('confirm', 0, POST);
 //parameter 参数
 
 // martin_adminMenu(5, "订房后台 > 城市管理");
@@ -53,7 +53,7 @@ switch ($action) {
 
     case 'save':
         $city_alias    = isset($_POST['city_alias']) ? addslashes($_POST['city_alias']) : '';
-        $city_parentid = isset($_POST['city_parentid']) ? (int)$_POST['city_parentid'] : 0;
+        $city_parentid = \Xmf\Request::getInt('city_parentid', 0, 'POST');
         $city_alias    = $city_parentid ? '' : $city_alias;
         $HotelCityObj->setVar('city_id', $id);
         $HotelCityObj->setVar('city_parentid', $city_parentid);

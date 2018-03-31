@@ -11,7 +11,8 @@ $searchHandler = xoops_getModuleHandler('search', 'martin');
 $memberHandler = xoops_getModuleHandler('member', 'martin');
 $reviewHandler = xoops_getModuleHandler('review', 'martin');
 
-$hotel_id = isset($_GET['hotel_id']) ? (int)$_GET['hotel_id'] : (int)$_POST['hotel_id'];
+//$hotel_id = isset($_GET['hotel_id']) ? (int)$_GET['hotel_id'] : (int)$_POST['hotel_id'];
+$hotel_id = \Xmf\Request::getInt('hotel_id', 0);
 $hotel    = $hotelHandler->get($hotel_id);
 if (!$hotel_id || !$hotel) {
     redirect_header('javascript:history.go(-1);', 2, '该酒店不存在.');

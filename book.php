@@ -18,8 +18,8 @@ $roomHandler      = xoops_getModuleHandler('room', 'martin');
 $serviceHandler   = xoops_getModuleHandler('hotelservice', 'martin');
 $promotionHandler = xoops_getModuleHandler('hotelpromotion', 'martin');
 //paramerters
-$hotel_id       = isset($_GET['hotel_id']) ? (int)$_GET['hotel_id'] : 0;
-$room_id        = isset($_GET['room_id']) ? (int)$_GET['room_id'] : 0;
+$hotel_id       = \Xmf\Request::getInt('hotel_id', 0, 'GET');
+$room_id        = \Xmf\Request::getInt('room_id', 0, 'GET');
 $isFind         = isset($_GET['isFind']) ? trim($_GET['isFind']) : false;
 $isFind         = 'true' === $isFind ? true : $isFind;
 $isFind         = 'false' === $isFind ? false : $isFind;

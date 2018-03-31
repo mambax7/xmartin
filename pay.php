@@ -18,8 +18,8 @@ if (!$xoopsUser) {
 $cartHandler  = xoops_getModuleHandler('cart', 'martin');
 $hotelHandler = xoops_getModuleHandler('hotel', 'martin');
 
-$order_id  = isset($_GET['order_id']) ? (int)$_GET['order_id'] : 0;
-$order_id  = isset($_POST['order_id']) ? (int)$_POST['order_id'] : $order_id;
+$order_id  = \Xmf\Request::getInt('order_id', 0, 'GET');
+$order_id  = \Xmf\Request::getInt('order_id', $order_id, 'POST');
 $order_pay = isset($_POST['order_pay']) ? trim($_POST['order_pay']) : null;
 if (!$order_id) {
     redirect_header(XOOPS_URL, 1, _AM_MARTIN_ILLEGAL_OPERATION);

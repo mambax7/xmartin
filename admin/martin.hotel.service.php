@@ -22,11 +22,11 @@ $action     = trim(strtolower($action));
 $id         = !empty($_POST['id']) ? $_POST['id'] : @$_GET['id'];
 $id         = (int)$id;
 $typeid     = !empty($_POST['typeid']) ? (int)$_POST['typeid'] : (int)(@$_GET['typeid']);
-$hotel_id   = isset($_GET['hotel_id']) ? (int)$_GET['hotel_id'] : 0;
-$service_id = isset($_GET['service_id']) ? (int)$_GET['service_id'] : 0;
-$start      = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+$hotel_id   = \Xmf\Request::getInt('hotel_id', 0, 'GET');
+$service_id = \Xmf\Request::getInt('service_id', 0, 'GET');
+$start      = \Xmf\Request::getInt('start', 0, 'GET');
 //确认删除
-$confirm = isset($_POST['confirm']) ? $_POST['confirm'] : 0;
+$confirm = \Xmf\Request::getInt('confirm', 0, POST);
 //parameter 参数
 
 // martin_adminMenu(3, "订房后台 > 酒店服务");

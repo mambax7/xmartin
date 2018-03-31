@@ -15,7 +15,7 @@ $hotelHandler  = xoops_getModuleHandler('hotel', 'martin');
 //var_dump($_GET);
 //paramerters
 $city_id = isset($city_id) ? $city_id : 0;
-$city_id = isset($_GET['City']) ? (int)$_GET['City'] : $city_id;
+$city_id = \Xmf\Request::getInt('City', $city_id, 'GET');
 //时间处理
 $check_date = isset($_GET['CheckDate']) ? [
     strtotime($_GET['CheckDate'][0]),
@@ -28,8 +28,8 @@ $check_date = isset($_GET['CheckDate']) ? [
 $price         = isset($_GET['price']) ? $_GET['price'] : null;
 $hotel_address = isset($_GET['HotelAddress']) ? trim($_GET['HotelAddress']) : null;
 $hotel_name    = isset($_GET['HotelName']) ? trim($_GET['HotelName']) : null;
-$hotel_star    = isset($_GET['HotelStar']) ? (int)$_GET['HotelStar'] : isset($GET['HotelStar']) ? $GET['HotelStar'] : 0;
-$p             = isset($_GET['p']) ? (int)$_GET['p'] : 0;
+$hotel_star    = \Xmf\Request::getInt('HotelStar', 0, 'GET');
+$p             = \Xmf\Request::getInt('p', 0, 'GET');
 $order         = isset($_GET['Order']) ? trim($_GET['Order']) : null;
 $by            = isset($_GET['By']) ? strtoupper(trim($_GET['By'])) : null;
 $by            = in_array($by, ['ASC', 'DESC']) ? $by : '';

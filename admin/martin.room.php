@@ -21,14 +21,14 @@ $action    = empty($action) ? 'list' : $action;
 $action    = trim(strtolower($action));
 $id        = !empty($_POST['id']) ? $_POST['id'] : @$_GET['id'];
 $id        = (int)$id;
-$room_id   = isset($_GET['room_id']) ? (int)$_GET['room_id'] : 0;
+$room_id   = \Xmf\Request::getInt('room_id', 0, 'GET');
 $room_date = isset($_GET['room_date']) ? trim($_GET['room_date']) : 0;
-$hotel_id  = isset($_GET['hotel_id']) ? (int)$_GET['hotel_id'] : 0;
-$typeid    = isset($_GET['typeid']) ? (int)$_GET['typeid'] : 0;
-$start     = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+$hotel_id  = \Xmf\Request::getInt('hotel_id', 0, 'GET');
+$typeid    = \Xmf\Request::getInt('typeid', 0, 'GET');
+$start     = \Xmf\Request::getInt('start', 0, 'GET');
 //确认删除
 
-$confirm = isset($_POST['confirm']) ? $_POST['confirm'] : 0;
+$confirm = \Xmf\Request::getInt('confirm', 0, POST);
 //parameter 参数
 // martin_adminMenu(6, "订房后台 > 客房管理");
 

@@ -6,7 +6,7 @@ if (!defined('MODULE_URL')) {
 }
 
 global $xoopsUser, $xoopsdModule;
-$order_id = isset($_POST['order_id']) ? (int)$_POST['order_id'] : 0;
+$order_id = \Xmf\Request::getInt('order_id', 0, 'POST');
 if (!$xoopsUser || !$order_id) {
     redirect_header(XOOPS_URL, 3, '非法访问.');
 }
@@ -14,11 +14,11 @@ if (!$xoopsUser || !$order_id) {
 $dateNumber      = isset($_POST['dateNumber']) ? $_POST['dateNumber'] : null;
 $service         = isset($_POST['serviceNum']) ? $_POST['serviceNum'] : null;
 $person_exchange = isset($_POST['person_exchange']) ? round($_POST['person_exchange'], 2) : null;
-$room_id         = isset($_POST['room_id']) ? (int)$_POST['room_id'] : 0;
-$hotel_id        = isset($_POST['hotel_id']) ? (int)$_POST['hotel_id'] : 0;
-$check_in_date   = isset($_POST['check_in_date']) ? (int)$_POST['check_in_date'] : 0;
-$check_out_date  = isset($_POST['check_out_date']) ? (int)$_POST['check_out_date'] : 0;
-$extra_person    = isset($_POST['extra_person']) ? $_POST['extra_person'] : '';
+$room_id         = \Xmf\Request::getInt('room_id', 0, 'POST');
+$hotel_id        = \Xmf\Request::getInt('hotel_id', 0, 'POST');
+$check_in_date   = \Xmf\Request::getInt('check_in_date', 0, 'POST');
+$check_out_date  = \Xmf\Request::getInt('check_out_date', 0, 'POST');
+$extra_person    = \Xmf\Request::getString('extra_person', '', 'POST');
 $extra_person    = (is_array($extra_person) && !empty($extra_person)) ? serialize($extra_person) : '';
 $User            = isset($_POST['user']) ? array_filter($_POST['user']) : null;
 if (is_null($User)) {

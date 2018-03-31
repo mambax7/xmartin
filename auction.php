@@ -12,8 +12,8 @@ if (!$xoopsUser) {
     redirect_header(XOOPS_URL . '/user.php?xoops_redirect=/' . $_SERVER['REQUEST_URI'], 1, '您还没有登录.');
 }
 
-$auction_id = isset($_GET['auction_id']) ? (int)$_GET['auction_id'] : $id;
-$auction_id = isset($_POST['auction_id']) ? (int)$_POST['auction_id'] : $auction_id;
+$auction_id = \Xmf\Request::getInt('auction_id', $id, 'GET');
+$auction_id = \Xmf\Request::getInt('auction_id', $auction_id, 'POST');
 if (!$auction_id) {
     redirect_header(XOOPS_URL, 3, _AM_MARTIN_UNAUTHORIZED_ACCESS);
 }

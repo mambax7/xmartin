@@ -13,8 +13,8 @@ if (!$xoopsUser) {
     redirect_header(XOOPS_URL . '/user.php?xoops_redirect=/' . $_SERVER['REQUEST_URI'], 1, '您还没有登录.');
 }
 
-$group_id = isset($_GET['group_id']) ? (int)$_GET['group_id'] : $id;
-$group_id = isset($_POST['group_id']) ? (int)$_POST['group_id'] : $group_id;
+$group_id = \Xmf\Request::getInt('group_id', $id, 'GET');
+$group_id = \Xmf\Request::getInt('group_id', $group_id, 'POST');
 if (!$group_id) {
     redirect_header(XOOPS_URL, 3, _AM_MARTIN_UNAUTHORIZED_ACCESS);
 }
@@ -35,7 +35,7 @@ if ($group_obj->apply_end_date() < time()) {
 //参加团购
 $uid         = $xoopsUser->getVar('uid');
 $action      = isset($_GET['action']) ? trim($_GET['action']) : null;
-$room_number = isset($_POST['room_number']) ? (int)$_POST['room_number'] : 1;
+$room_number = \Xmf\Request::getInt('room_number', 1, 'POST');
 if ('save' === $action) {
     $data = ['uid' => $uid, 'group_id' => $group_id, 'room_number' => $room_number, 'join_time' => time()];
     if ($groupHandler->CheckJoinExist($data)) {

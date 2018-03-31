@@ -13,10 +13,10 @@ if (!$xoopsUser) {
 $dateNumber      = isset($_POST['dateNumber']) ? $_POST['dateNumber'] : null;
 $service         = isset($_POST['serviceNum']) ? $_POST['serviceNum'] : null;
 $person_exchange = isset($_POST['person_exchange']) ? $_POST['person_exchange'] : null;
-$room_id         = isset($_POST['room_id']) ? (int)$_POST['room_id'] : 0;
-$hotel_id        = isset($_POST['hotel_id']) ? (int)$_POST['hotel_id'] : 0;
-$check_in_date   = isset($_POST['check_in_date']) ? (int)$_POST['check_in_date'] : 0;
-$check_out_date  = isset($_POST['check_out_date']) ? (int)$_POST['check_out_date'] : 0;
+$room_id         = \Xmf\Request::getInt('room_id', 0, 'POST');
+$hotel_id        = \Xmf\Request::getInt('hotel_id', 0, 'POST');
+$check_in_date   = \Xmf\Request::getInt('check_in_date', 0, 'POST');
+$check_out_date  = \Xmf\Request::getInt('check_out_date', 0, 'POST');
 $extra_person    = isset($_POST['extra_person']) ? trim($_POST['extra_person']) : '';
 $User            = isset($_POST['user']) ? array_filter($_POST['user']) : null;
 if (is_null($User)) {

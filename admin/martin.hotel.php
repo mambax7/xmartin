@@ -21,8 +21,8 @@ $action        = empty($action) ? 'list' : $action;
 $action        = trim(strtolower($action));
 $id            = !empty($_POST['id']) ? $_POST['id'] : @$_GET['id'];
 $id            = (int)$id;
-$start         = isset($_GET['start']) ? (int)$_GET['start'] : 0;
-$hotel_city_id = isset($_GET['hotel_city_id']) ? (int)$_GET['hotel_city_id'] : 0;
+$start         = \Xmf\Request::getInt('start', 0, 'GET');
+$hotel_city_id = \Xmf\Request::getInt('hotel_city_id', 0, 'GET');
 
 $searchData = [
     'hotel_city_id' => (int)$_GET['hotel_city_id'],
@@ -30,7 +30,7 @@ $searchData = [
     'hotel_name'    => trim($_GET['hotel_name'])
 ];
 //确认删除
-$confirm = isset($_POST['confirm']) ? $_POST['confirm'] : 0;
+$confirm = \Xmf\Request::getInt('confirm', 0, POST);
 //parameter 参数
 
 //模块配置

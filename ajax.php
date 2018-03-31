@@ -24,7 +24,7 @@ $action = isset($_POST['action']) ? trim(strtolower($_POST['action'])) : $action
 switch ($action) {
     case 'saveuser':
         global $xoopsUser;
-        $document       = isset($_POST['document']) ? (int)$_POST['document'] : 0;
+        $document       = \Xmf\Request::getInt('document', 0, 'POST');
         $document_value = isset($_POST['document_value']) ? trim($_POST['document_value']) : '';
         $name           = isset($_POST['name']) ? trim($_POST['name']) : '';
         $phone          = isset($_POST['phone']) ? trim($_POST['phone']) : '';

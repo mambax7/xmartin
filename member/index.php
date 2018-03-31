@@ -28,7 +28,7 @@ if (!defined('MEMBER_URL')) {
 $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $isAdmin = $gpermHandler->checkRight( 'system_admin', XOOPS_SYSTEM_USER, $groups); // isadmin is true if user has 'edit users' admin rights*/
 // get userid
-$uid = isset($_GET['uid']) ? (int)$_GET['uid'] : 0;
+$uid = \Xmf\Request::getInt('uid', 0, 'GET');
 
 $memberHandler = xoops_getHandler('member');
 if ($uid) {
@@ -53,8 +53,8 @@ $query_string = str_replace('&order_id=' . $_GET['order_id'], '', $query_string)
 $query_string = str_replace('&hotel_id=' . $_GET['hotel_id'], '', $query_string);
 $query_string = str_replace('&uid=' . $_GET['uid'], '', $query_string);
 
-$start    = isset($_GET['start']) ? (int)$_GET['start'] : 0;
-$order_id = isset($_GET['order_id']) ? (int)$_GET['order_id'] : 0;
+$start    = \Xmf\Request::getInt('start', 0, 'GET');
+$order_id = \Xmf\Request::getInt('order_id', 0, 'GET');
 $action   = isset($_GET['action']) ? strtolower(trim($_GET['action'])) : '';
 $action   = empty($action) ? strtolower(trim($query_string)) : $action;
 $action   = empty($action) ? 'index' : $action;
