@@ -56,7 +56,7 @@ class MartinMemberHandler extends XoopsObjectHandler
         $result = $xoopsDB->query($sql);
         $rows   = [];
         while (false !== ($row = $xoopsDB->fetchArray($result))) {
-            if (is_null($key)) {
+            if (null === $key) {
                 $rows[] = $row;
             } else {
                 $rows[$row[$key]] = $row;
@@ -75,7 +75,7 @@ class MartinMemberHandler extends XoopsObjectHandler
      * @author    Martin <china.codehome@gmail.com>
      * @param $uid
      * @param $hotel_id
-     * @return
+     * @return void
      */
     public function addFavorite($uid, $hotel_id)
     {

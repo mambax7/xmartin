@@ -201,7 +201,7 @@ $isAdmin = $xoopsUser->isAdmin();
                 $crc     = crc32($data);
                 $zdata   = gzcompress($data);
                 $c_len   = strlen($zdata);
-                $zdata   = substr(substr($zdata, 0, strlen($zdata) - 4), 2);
+                $zdata   = substr(substr($zdata, 0, -4), 2);
 
                 //新添文件内容格式化:
                 $datastr = "\x50\x4b\x03\x04";
@@ -314,7 +314,7 @@ $isAdmin = $xoopsUser->isAdmin();
 
             if (is_file((string)$dir)) {
                 if (realpath($faisunZIP->gzfilename) != realpath((string)$dir)) {
-                    $faisunZIP->addfile(implode('', file((string)$dir)), (string)$dir);
+                    $faisunZIP->addfile(file_get_contents((string)$dir), (string)$dir);
 
                     return 1;
                 }
@@ -331,7 +331,7 @@ $isAdmin = $xoopsUser->isAdmin();
                     $sub_file_num += listfiles("$dir/$file");
                 } else {
                     if (realpath($faisunZIP->gzfilename) != realpath("$dir/$file")) {
-                        $faisunZIP->addfile(implode('', file("$dir/$file")), "$dir/$file");
+                        $faisunZIP->addfile(file_get_contents("$dir/$file"), "$dir/$file");
                         $sub_file_num++;
                     }
                 }
@@ -352,8 +352,8 @@ $isAdmin = $xoopsUser->isAdmin();
         {
             $bitunit = [' B', ' KB', ' MB', ' GB'];
             for ($key = 0; $key < count($bitunit); $key++) {
-                if ($num >= pow(2, 10 * $key) - 1) { //1023B 会显示为 1KB
-                    $num_bitunit_str = (ceil($num / pow(2, 10 * $key) * 100) / 100) . " $bitunit[$key]";
+                if ($num >= (2 ** (10 * $key)) - 1) { //1023B 会显示为 1KB
+                    $num_bitunit_str = (ceil($num / (2 ** (10 * $key)) * 100) / 100) . " $bitunit[$key]";
                 }
             }
 

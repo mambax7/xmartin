@@ -19,7 +19,7 @@ $check_in_date   = \Xmf\Request::getInt('check_in_date', 0, 'POST');
 $check_out_date  = \Xmf\Request::getInt('check_out_date', 0, 'POST');
 $extra_person    = isset($_POST['extra_person']) ? trim($_POST['extra_person']) : '';
 $User            = isset($_POST['user']) ? array_filter($_POST['user']) : null;
-if (is_null($User)) {
+if (null === $User) {
     redirect_header(XOOPS_URL, 2, '非法.');
 }
 

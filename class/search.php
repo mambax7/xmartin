@@ -53,7 +53,7 @@ class MartinSearchHandler extends XoopsObjectHandler
         $result = $xoopsDB->query($sql);
         $rows   = [];
         while (false !== ($row = $xoopsDB->fetchArray($result))) {
-            if (is_null($key)) {
+            if (null === $key) {
                 $rows[] = $row;
             } else {
                 $rows[$row[$key]] = $row;

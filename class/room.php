@@ -233,7 +233,7 @@ class MartinRoomHandler extends XoopsObjectHandler
         $result = $xoopsDB->query($sql);
         $rows   = [];
         while (false !== ($row = $xoopsDB->fetchArray($result))) {
-            if (is_null($key)) {
+            if (null === $key) {
                 $rows[] = $row;
             } else {
                 $rows[$row[$key]] = $row;
@@ -553,7 +553,7 @@ class MartinRoomHandler extends XoopsObjectHandler
      * @copyright 1997-2010 The Martin Group
      * @author    Martin <china.codehome@gmail.com>
      * @param $typeData
-     * @return
+     * @return bool|\mysqli_result
      */
     public function insertType($typeData)
     {
@@ -581,7 +581,7 @@ class MartinRoomHandler extends XoopsObjectHandler
      * @copyright 1997-2010 The Martin Group
      * @author    Martin <china.codehome@gmail.com>
      * @param $typeid
-     * @return
+     * @return bool|\mysqli_result
      */
     public function deleteRoomType($typeid)
     {
@@ -680,7 +680,7 @@ class MartinRoomHandler extends XoopsObjectHandler
      * @copyright 1997-2010 The Martin Group
      * @author    Martin <china.codehome@gmail.com>
      * @param int $date
-     * @return
+     * @return void
      */
     public function truncatePassData($date = 0)
     {

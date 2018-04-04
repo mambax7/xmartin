@@ -21,7 +21,7 @@ $check_out_date  = \Xmf\Request::getInt('check_out_date', 0, 'POST');
 $extra_person    = \Xmf\Request::getString('extra_person', '', 'POST');
 $extra_person    = (is_array($extra_person) && !empty($extra_person)) ? serialize($extra_person) : '';
 $User            = isset($_POST['user']) ? array_filter($_POST['user']) : null;
-if (is_null($User)) {
+if (null === $User) {
     redirect_header(XOOPS_URL, 2, '非法.');
 }
 //检测现金卷是否真实

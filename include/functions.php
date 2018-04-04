@@ -291,7 +291,7 @@ if (!function_exists('getModuleArray')) {
             $xoopsModuleConfig =& $ModuleConfig;
         }
         //var_dump($xoopsModuleConfig);
-        $keyName = is_null($keyName) ? $module_key : $keyName;
+        $keyName = null === $keyName ? $module_key : $keyName;
         if (isset($xoopsModuleConfig[$module_key]) && !empty($xoopsModuleConfig[$module_key])) {
             $Arrs      = $xoopsModuleConfig[$module_key];
             $Arrs      = array_filter(explode(chr(13), $Arrs));
@@ -315,7 +315,7 @@ if (!function_exists('getModuleArray')) {
             }
 
             //var_dump($ModuleArr);
-            return is_null($keyName) ? $ModuleArr : WriteHtmlSelect($ModuleArr, $keyName, $selected);
+            return null === $keyName ? $ModuleArr : WriteHtmlSelect($ModuleArr, $keyName, $selected);
         }
 
         return $module_key;
@@ -371,7 +371,7 @@ if (!function_exists('MouthLastDay')) {
      */
     function MouthLastDay($mouth = null)
     {
-        $mouth    = is_null($mouth) ? date('m') : $mouth;
+        $mouth    = null === $mouth ? date('m') : $mouth;
         $date     = date('Y') . '-' . $mouth . '-' . date('d');
         $firstday = date('Y-m-01', strtotime($date));
         $lastday  = date('Y-m-d', strtotime("$firstday +1 month -1 day"));

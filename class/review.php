@@ -92,6 +92,7 @@ class MartinReviewHandler extends XoopsObjectHandler
      * @copyright 1997-2010 The Lap Group
      * @author    Martin <china.codehome@gmail.com>
      * @created   time :2010-07-22 16:49:41
+     * @return array|false
      */
     public function getReview($hotel_id)
     {
@@ -109,6 +110,7 @@ class MartinReviewHandler extends XoopsObjectHandler
      * @copyright 1997-2010 The Lap Group
      * @author    Martin <china.codehome@gmail.com>
      * @created   time :2010-07-22 17:03:32
+     * @return array|false
      */
     public function getHotelReview($hotel_id)
     {

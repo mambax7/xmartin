@@ -211,7 +211,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
         $result = $xoopsDB->query($sql);
         $rows   = [];
         while (false !== ($row = $xoopsDB->fetchArray($result))) {
-            if (is_null($key)) {
+            if (null === $key) {
                 $rows[] = $row;
             } else {
                 $rows[$row[$key]] = $row;
@@ -618,7 +618,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
      * @copyright 1997-2010 The Martin Group
      * @author    Martin <china.codehome@gmail.com>
      * @param $Data
-     * @return
+     * @return int
      */
     public function AddUserAuction($Data)
     {

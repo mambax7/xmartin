@@ -99,7 +99,7 @@ $password = 'pwd';
     /**
      * Class zip
      */
-    class zip
+    class Zip
     {
         public $total_files   = 0;
         public $total_folders = 0;
@@ -110,7 +110,7 @@ $password = 'pwd';
          * @param  array $index
          * @return int
          */
-        public function Extract($zn, $to, $index = [-1])
+        public function extract($zn, $to, $index = [-1])
         {
             $ok  = 0;
             $zip = @fopen($zn, 'rb');
@@ -148,7 +148,7 @@ $password = 'pwd';
          * @param $zip
          * @return mixed
          */
-        public function ReadFileHeader($zip)
+        public function readFileHeader($zip)
         {
             $binary_data = fread($zip, 30);
             $data        = unpack('vchk/vid/vversion/vflag/vcompression/vmtime/vmdate/Vcrc/Vcompressed_size/Vsize/vfilename_len/vextra_len', $binary_data);
@@ -190,7 +190,7 @@ $password = 'pwd';
          * @param $zip
          * @return array
          */
-        public function ReadCentralFileHeaders($zip)
+        public function readCentralFileHeaders($zip)
         {
             $binary_data = fread($zip, 46);
             $header      = unpack('vchkid/vid/vversion/vversion_extracted/vflag/vcompression/vmtime/vmdate/Vcrc/Vcompressed_size/Vsize/vfilename_len/vextra_len/vcomment_len/vdisk/vinternal/Vexternal/Voffset', $binary_data);
@@ -238,7 +238,7 @@ $password = 'pwd';
          * @param $zip_name
          * @return mixed
          */
-        public function ReadCentralDir($zip, $zip_name)
+        public function readCentralDir($zip, $zip_name)
         {
             $size = filesize($zip_name);
 
@@ -287,7 +287,7 @@ $password = 'pwd';
          * @param $zip
          * @return bool|void
          */
-        public function ExtractFile($header, $to, $zip)
+        public function extractFile($header, $to, $zip)
         {
             $header = $this->ReadFileHeader($zip);
 

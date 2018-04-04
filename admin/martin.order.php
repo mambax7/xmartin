@@ -133,7 +133,7 @@ switch ($action) {
         $OrderPayMethod = getModuleArray('order_pay_method', 'order_pay_method', true);
         $OrderStatus    = getModuleArray('order_status', 'order_status', true);
 
-        $selectedHotel = is_null($hotel_name) ? '' : "\n<option value='{$hotel_id}' selected>$hotel_name</option>";
+        $selectedHotel = null === $hotel_name ? '' : "\n<option value='{$hotel_id}' selected>$hotel_name</option>";
         $htmlHotel     = "<span id='hotel_name_div'><SELECT name='s[hotel_id]' onchange='hotel_select(this)'><option value='0'>----</option>$selectedHotel</SELECT></span><span id='hotel_name'></span>";
         $Status        = [
             '<div style="background-color:#FF0000">' . _AM_MARTIN_DRAFT . '</div>',

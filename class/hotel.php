@@ -358,7 +358,7 @@ class MartinHotelHandler extends XoopsObjectHandler
         $result = $xoopsDB->query($sql);
         $rows   = [];
         while (false !== ($row = $xoopsDB->fetchArray($result))) {
-            if (is_null($key)) {
+            if (null === $key) {
                 $rows[] = $row;
             } else {
                 $rows[$row[$key]] = $row;
@@ -786,7 +786,7 @@ class MartinHotelHandler extends XoopsObjectHandler
     public function getCityList($WHERE = null)
     {
         $sql    = 'SELECT * FROM ' . $this->db->prefix('martin_hotel_city');
-        $sql    .= !is_null($WHERE) ? ' ' . $WHERE . ' ' : '';
+        $sql    .= null !== $WHERE ? ' ' . $WHERE . ' ' : '';
         $result = $this->db->query($sql);
         $rows   = [];
         while (false !== ($row = $this->db->fetchArray($result))) {

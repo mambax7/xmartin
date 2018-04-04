@@ -74,7 +74,7 @@ if (!function_exists($GLOBALS['artdirname'] . '_tag_iteminfo')):
      * Remove orphan tag-item links
      *
      * @param $mid
-     * @return bool
+     * @return void
      */
     function martin_tag_synchronization($mid)
     {

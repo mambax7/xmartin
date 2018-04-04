@@ -24,9 +24,9 @@ if (!defined('MEMBER_URL')) {
     define('MEMBER_URL', MODULE_URL . 'member/');
 }
 
-/*$gpermHandler =  xoops_getHandler( 'groupperm' );
+/*$grouppermHandler =  xoops_getHandler( 'groupperm' );
 $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-$isAdmin = $gpermHandler->checkRight( 'system_admin', XOOPS_SYSTEM_USER, $groups); // isadmin is true if user has 'edit users' admin rights*/
+$isAdmin = $grouppermHandler->checkRight( 'system_admin', XOOPS_SYSTEM_USER, $groups); // isadmin is true if user has 'edit users' admin rights*/
 // get userid
 $uid = \Xmf\Request::getInt('uid', 0, 'GET');
 
@@ -40,9 +40,9 @@ if (!$xoopsUser) {
     redirect_header(XOOPS_URL . '/user.php?xoops_redirect=/' . $_SERVER['REQUEST_URI'], 1, '您还没有登录.');
 }
 
-$gpermHandler = xoops_getHandler('groupperm');
+$grouppermHandler = xoops_getHandler('groupperm');
 $groups       = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-$isAdmin      = $gpermHandler->checkRight('system_admin', XOOPS_SYSTEM_USER, $groups);
+$isAdmin      = $grouppermHandler->checkRight('system_admin', XOOPS_SYSTEM_USER, $groups);
 // isadmin is true if user has 'edit users' admin rights
 
 //var_dump($xoopsUser);

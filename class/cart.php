@@ -286,7 +286,7 @@ class MartinCartHandler extends XoopsObjectHandler
      * @copyright 1997-2010 The Martin Group
      * @author    Martin <china.codehome@gmail.com>
      * @param $order_id
-     * @return
+     * @return array|false
      */
     public function getOrderInfo($order_id)
     {

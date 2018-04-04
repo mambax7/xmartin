@@ -12,7 +12,7 @@ $FileType = strtolower(substr(strrchr($id, '.'), 1));
 $full = './images/hotelicon/' . $id;
 $full = file_exists($full) ? $full : './images/hotel/' . $id;
 
-if (is_null($id)) {
+if (null === $id) {
     throw new Exception('Error : Image Id Is Not Null.');
 } elseif (!file_exists($full)) {
     throw new Exception('Error : No Such File.');
