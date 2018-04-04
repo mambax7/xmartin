@@ -117,7 +117,7 @@ $password = 'pwd';
             if (!$zip) {
                 return (-1);
             }
-            $cdir      = $this->ReadCentralDir($zip, $zn);
+            $cdir      = $this->readCentralDir($zip, $zn);
             $pos_entry = $cdir['offset'];
 
             if (!is_array($index)) {
@@ -130,13 +130,13 @@ $password = 'pwd';
             }
             for ($i = 0; $i < $cdir['entries']; $i++) {
                 @fseek($zip, $pos_entry);
-                $header          = $this->ReadCentralFileHeaders($zip);
+                $header          = $this->readCentralFileHeaders($zip);
                 $header['index'] = $i;
                 $pos_entry       = ftell($zip);
                 @rewind($zip);
                 fseek($zip, $header['offset']);
                 if (in_array('-1', $index) || in_array($i, $index)) {
-                    $stat[$header['filename']] = $this->ExtractFile($header, $to, $zip);
+                    $stat[$header['filename']] = $this->extractFile($header, $to, $zip);
                 }
             }
             fclose($zip);
@@ -289,7 +289,7 @@ $password = 'pwd';
          */
         public function extractFile($header, $to, $zip)
         {
-            $header = $this->ReadFileHeader($zip);
+            $header = $this->readFileHeader($zip);
 
             if ('/' !== substr($to, -1)) {
                 $to .= '/';

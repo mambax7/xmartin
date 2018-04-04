@@ -86,7 +86,7 @@ $xoopsTpl->assign('person_exchange_price', $xoopsUser->total_coupon());
 
 session_start();
 //防止重复提交
-$Form_Validate             = md5(rand(1000, 10000));
+$Form_Validate             = md5(mt_rand(1000, 10000));
 $_SESSION['Form_Validate'] = $Form_Validate;
 $xoopsTpl->assign('Form_Validate', $Form_Validate);
 
