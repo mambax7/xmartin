@@ -24,9 +24,9 @@ $isFind         = isset($_GET['isFind']) ? trim($_GET['isFind']) : false;
 $isFind         = 'true' === $isFind ? true : $isFind;
 $isFind         = 'false' === $isFind ? false : $isFind;
 $check_in_date  = isset($_GET['check_in_date']) ? strtotime($_GET['check_in_date']) : 0;
-$check_in_date  = !$check_in_date ? (int)$_GET['check_in_date'] : (int)$check_in_date;
+$check_in_date  = !$check_in_date ? \Xmf\Request::getInt('check_in_date', 0, 'GET') : (int)$check_in_date;
 $check_out_date = isset($_GET['check_out_date']) ? strtotime($_GET['check_out_date']) : 0;
-$check_out_date = !$check_out_date ? (int)$_GET['check_out_date'] : (int)$check_out_date;
+$check_out_date = !$check_out_date ? \Xmf\Request::getInt('check_out_date', 0, 'GET') : (int)$check_out_date;
 //时间处理
 //paramerters
 

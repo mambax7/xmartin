@@ -55,8 +55,8 @@ switch ($action) {
         //$GroupObj->setVar('apply_start_date', (isset($_POST['apply_start_date'])) ? strtotime($_POST['apply_start_date']) : 0);
         //$GroupObj->setVar('apply_end_date', (isset($_POST['apply_end_date'])) ? strtotime($_POST['apply_end_date']) : 0);
 
-        $GroupObj->setVar('apply_start_date', isset($_POST['apply_start_date']) ? strtotime($_POST['apply_start_date']['date']) + (int)$_POST['apply_start_date']['time'] : 0);
-        $GroupObj->setVar('apply_end_date', isset($_POST['apply_end_date']) ? strtotime($_POST['apply_end_date']['date']) + (int)$_POST['apply_end_date']['time'] : 0);
+        $GroupObj->setVar('apply_start_date', isset($_POST['apply_start_date']) ? strtotime($_POST['apply_start_date']['date']) + \Xmf\Request::getInt('apply_start_date', 0, 'POST')['time'] : 0);
+        $GroupObj->setVar('apply_end_date', isset($_POST['apply_end_date']) ? strtotime($_POST['apply_end_date']['date']) + \Xmf\Request::getInt('apply_end_date', 0, 'POST')['time'] : 0);
 
         $GroupObj->setVar('group_price', isset($_POST['group_price']) ? round($_POST['group_price'], 2) : 0);
         $GroupObj->setVar('group_can_use_coupon', isset($_POST['group_can_use_coupon']) ? intval($_POST['group_can_use_coupon'], 2) : 0);

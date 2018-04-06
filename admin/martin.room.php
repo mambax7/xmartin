@@ -77,18 +77,18 @@ switch ($action) {
         break;
     case 'save':
         $RoomObj->setVar('room_id', $id);
-        $RoomObj->setVar('room_type_id', isset($_POST['room_type_id']) ? (int)$_POST['room_type_id'] : 0);
-        $RoomObj->setVar('hotel_id', isset($_POST['hotel_id']) ? (int)$_POST['hotel_id'] : 0);
-        $RoomObj->setVar('room_count', isset($_POST['room_count']) ? (int)$_POST['room_count'] : 0);
-        $RoomObj->setVar('room_bed_type', isset($_POST['room_bed_type']) ? (int)$_POST['room_bed_type'] : 0);
+        $RoomObj->setVar('room_type_id',\Xmf\Request::getInt('room_type_id', 0, 'POST'));
+        $RoomObj->setVar('hotel_id',\Xmf\Request::getInt('hotel_id', 0, 'POST'));
+        $RoomObj->setVar('room_count',\Xmf\Request::getInt('room_count', 0, 'POST'));
+        $RoomObj->setVar('room_bed_type',\Xmf\Request::getInt('room_bed_type', 0, 'POST'));
         $RoomObj->setVar('room_name', isset($_POST['room_name']) ? addslashes($_POST['room_name']) : '');
-        $RoomObj->setVar('room_area', isset($_POST['room_area']) ? (int)$_POST['room_area'] : 0);
+        $RoomObj->setVar('room_area',\Xmf\Request::getInt('room_area', 0, 'POST'));
         $RoomObj->setVar('room_floor', isset($_POST['room_floor']) ? addslashes($_POST['room_floor']) : '');
         $RoomObj->setVar('room_initial_price', isset($_POST['room_initial_price']) ? round($_POST['room_initial_price'], 2) : 0);
-        $RoomObj->setVar('room_is_add_bed', isset($_POST['room_is_add_bed']) ? (int)$_POST['room_is_add_bed'] : 0);
-        $RoomObj->setVar('room_add_money', isset($_POST['room_add_money']) ? (int)$_POST['room_add_money'] : 0);
+        $RoomObj->setVar('room_is_add_bed',\Xmf\Request::getInt('room_is_add_bed', 0, 'POST'));
+        $RoomObj->setVar('room_add_money',\Xmf\Request::getInt('room_add_money', 0, 'POST'));
         $RoomObj->setVar('room_bed_info', isset($_POST['room_bed_info']) ? addslashes($_POST['room_bed_info']) : '');
-        $RoomObj->setVar('room_status', isset($_POST['room_status']) ? (int)$_POST['room_status'] : 0);
+        $RoomObj->setVar('room_status',\Xmf\Request::getInt('room_status', 0, 'POST'));
         $RoomObj->setVar('room_sented_coupon', isset($_POST['room_sented_coupon']) ? round($_POST['room_sented_coupon'], 2) : 0);
         if (!$id) {
             $RoomObj->setNew();
@@ -134,7 +134,7 @@ switch ($action) {
         foreach ($room_prices as $key => $room_price) {
             $dateTime = strtotime($room_dates[$key]);
             $Data[]   = [
-                'room_id'                   => (int)$_POST['room_id'],
+                'room_id'                   => \Xmf\Request::getInt('room_id', 0, 'POST'),
                 'room_price'                => $room_prices[$key],
                 'room_is_today_special'     => isset($room_is_totay_specials[$dateTime]) ? (int)$room_is_totay_specials[$dateTime] : 0,
                 'room_advisory_range_small' => round($room_advisory_range_smalls[$key], 2),
@@ -151,8 +151,8 @@ switch ($action) {
             $redirect_msg = _AM_MARTIN_MODIFIED_SUCCESSFULLY;
             $Data         = [
                 'room_id'                   => $room_id,
-                'room_price'                => (int)$_POST['room_price'],
-                'room_is_today_special'     => (int)$_POST['room_is_today_special'],
+                'room_price'                => \Xmf\Request::getInt('room_price', 0, 'POST'),
+                'room_is_today_special'     => \Xmf\Request::getInt('room_is_today_special', 0, 'POST'),
                 'room_advisory_range_small' => round($_POST['room_advisory_range_small'], 2),
                 'room_advisory_range_max'   => round($_POST['room_advisory_range_max'], 2),
                 'room_sented_coupon'        => round($_POST['room_sented_coupon'], 2),

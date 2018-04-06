@@ -48,7 +48,7 @@ switch ($action) {
     case 'save':
         //var_dump(($_POST['group_info']));exit;
         $PromotionObj->setVar('promotion_id', $id);
-        $PromotionObj->setVar('hotel_id', (int)$_POST['hotel_id']);
+        $PromotionObj->setVar('hotel_id', \Xmf\Request::getInt('hotel_id', 0, 'POST'));
         $PromotionObj->setVar('promotion_description', (isset($_POST['promotion_description']) ? $_POST['promotion_description'] : ''));
         $PromotionObj->setVar('promotion_start_date', isset($_POST['promotion_start_date']) ? strtotime($_POST['promotion_start_date']) : 0);
         $PromotionObj->setVar('promotion_end_date', isset($_POST['promotion_end_date']) ? strtotime($_POST['promotion_end_date']) : 0);

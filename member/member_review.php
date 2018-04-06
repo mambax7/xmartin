@@ -22,7 +22,7 @@ $xoopsOption['xoops_pagetitle'] = '点评 - ' . $hotel->hotel_name() . ' - 用�
 
 if (is_array($_POST) && !empty($_POST)) {
     $review_type     = $_POST['review_type'];
-    $review_purpose  = (int)$_POST['review_purpose'];
+    $review_purpose  = \Xmf\Request::getInt('review_purpose', 0, 'POST');
     $review_content  = trim($_POST['review_content']);
     $review_type_avg = round(array_sum($review_type) / count($review_type), 2);
     $uid             = $xoopsUser->uid();

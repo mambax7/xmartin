@@ -76,7 +76,7 @@ class MartinHotelServiceTypeHandler extends XoopsObjectHandler
 
         $criteria = new \CriteriaCompo(new \Criteria('service_type_id', $id));
         $criteria->setLimit(1);
-        $obj_array =& $this->getObjects($criteria);
+        $obj_array = $this->getObjects($criteria);
         if (1 != count($obj_array)) {
             $obj = $this->create();
 

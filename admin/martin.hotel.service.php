@@ -21,7 +21,7 @@ $action     = empty($action) ? 'list' : $action;
 $action     = trim(strtolower($action));
 $id         = !empty($_POST['id']) ? $_POST['id'] : @$_GET['id'];
 $id         = (int)$id;
-$typeid     = !empty($_POST['typeid']) ? (int)$_POST['typeid'] : (int)(@$_GET['typeid']);
+$typeid     =\Xmf\Request::getInt('typeid', 0);
 $hotel_id   = \Xmf\Request::getInt('hotel_id', 0, 'GET');
 $service_id = \Xmf\Request::getInt('service_id', 0, 'GET');
 $start      = \Xmf\Request::getInt('start', 0, 'GET');
@@ -68,7 +68,7 @@ switch ($action) {
         break;
     case 'save':
         $HotelServiceObj->setVar('service_id', $id);
-        $HotelServiceObj->setVar('service_type_id', isset($_POST['service_type_id']) ? (int)$_POST['service_type_id'] : 0);
+        $HotelServiceObj->setVar('service_type_id',\Xmf\Request::getInt('service_type_id', 0, 'POST'));
         $HotelServiceObj->setVar('service_unit', isset($_POST['service_unit']) ? addslashes($_POST['service_unit']) : '');
         $HotelServiceObj->setVar('service_name', isset($_POST['service_name']) ? addslashes($_POST['service_name']) : '');
         $HotelServiceObj->setVar('service_instruction', isset($_POST['service_instruction']) ? addslashes($_POST['service_instruction']) : '');
@@ -105,9 +105,9 @@ switch ($action) {
         break;
     case 'hotelsave':
         $RelationData = [
-            'hotel_id'            => (int)$_POST['hotel_id'],
-            'service_id'          => (int)$_POST['service_id'],
-            'service_extra_price' => (int)$_POST['service_extra_price']
+            'hotel_id'            => \Xmf\Request::getInt('hotel_id', 0, 'POST'),
+            'service_id'          => \Xmf\Request::getInt('service_id', 0, 'POST'),
+            'service_extra_price' => \Xmf\Request::getInt('service_extra_price', 0, 'POST')
         ];
 
         $IsOld        = false;
@@ -118,7 +118,7 @@ switch ($action) {
             $RelationData = [
                 'hotel_id'            => $hotel_id,
                 'service_id'          => $service_id,
-                'service_extra_price' => (int)$_POST['service_extra_price']
+                'service_extra_price' => \Xmf\Request::getInt('service_extra_price', 0, 'POST')
             ];
         }
         $redirect_to = 'martin.hotel.service.php?action=hotellist';

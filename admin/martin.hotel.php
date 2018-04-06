@@ -25,8 +25,8 @@ $start         = \Xmf\Request::getInt('start', 0, 'GET');
 $hotel_city_id = \Xmf\Request::getInt('hotel_city_id', 0, 'GET');
 
 $searchData = [
-    'hotel_city_id' => (int)$_GET['hotel_city_id'],
-    'hotel_star'    => (int)$_GET['hotel_star'],
+    'hotel_city_id' => \Xmf\Request::getInt('hotel_city_id', 0, 'GET'),
+    'hotel_star'    => \Xmf\Request::getInt('hotel_star', 0, 'GET'),
     'hotel_name'    => trim($_GET['hotel_name'])
 ];
 //确认删除
@@ -70,21 +70,21 @@ switch ($action) {
         $hotel_city_id = implode(',', $_POST['hotel_city_id']);
 
         $HotelObj->setVar('hotel_id', $id);
-        $HotelObj->setVar('hotel_city', isset($_POST['hotel_city']) ? (int)$_POST['hotel_city'] : 0);
+        $HotelObj->setVar('hotel_city',\Xmf\Request::getInt('hotel_city', 0, 'POST'));
         $HotelObj->setVar('hotel_city_id', $hotel_city_id);
         $HotelObj->setVar('hotel_environment', isset($_POST['hotel_environment']) ? addslashes($_POST['hotel_environment']) : '');
-        $HotelObj->setVar('hotel_rank', isset($_POST['hotel_rank']) ? (int)$_POST['hotel_rank'] : 0);
+        $HotelObj->setVar('hotel_rank',\Xmf\Request::getInt('hotel_rank', 0, 'POST'));
         $HotelObj->setVar('hotel_name', isset($_POST['hotel_name']) ? addslashes($_POST['hotel_name']) : '');
         $HotelObj->setVar('hotel_enname', isset($_POST['hotel_enname']) ? addslashes($_POST['hotel_enname']) : '');
         $HotelObj->setVar('hotel_alias', isset($_POST['hotel_alias']) ? $alias_url : '');
         $HotelObj->setVar('hotel_keywords', isset($_POST['hotel_keywords']) ? addslashes($_POST['hotel_keywords']) : '');
         $HotelObj->setVar('hotel_tags', isset($_POST['hotel_tags']) ? addslashes($_POST['hotel_tags']) : '');
         $HotelObj->setVar('hotel_description', isset($_POST['hotel_description']) ? addslashes($_POST['hotel_description']) : '');
-        $HotelObj->setVar('hotel_star', isset($_POST['hotel_star']) ? (int)$_POST['hotel_star'] : 0);
+        $HotelObj->setVar('hotel_star',\Xmf\Request::getInt('hotel_star', 0, 'POST'));
         $HotelObj->setVar('hotel_address', isset($_POST['hotel_address']) ? addslashes($_POST['hotel_address']) : '');
         $HotelObj->setVar('hotel_telephone', isset($_POST['hotel_telephone']) ? addslashes($_POST['hotel_telephone']) : '');
         $HotelObj->setVar('hotel_fax', isset($_POST['hotel_fax']) ? addslashes($_POST['hotel_fax']) : '');
-        $HotelObj->setVar('hotel_room_count', isset($_POST['hotel_room_count']) ? (int)$_POST['hotel_room_count'] : 0);
+        $HotelObj->setVar('hotel_room_count',\Xmf\Request::getInt('hotel_room_count', 0, 'POST'));
 
         //file upload
         $hotel_icon = isset($_POST['hotel_icon_old']) ? $_POST['hotel_icon_old'] : null;
@@ -147,7 +147,7 @@ switch ($action) {
         $HotelObj->setVar('hotel_reminded', isset($_POST['hotel_reminded']) ? addslashes($_POST['hotel_reminded']) : '');
         $HotelObj->setVar('hotel_facility', isset($_POST['hotel_facility']) ? addslashes($_POST['hotel_facility']) : '');
         $HotelObj->setVar('hotel_info', isset($_POST['hotel_info']) ? $_POST['hotel_info'] : '');
-        $HotelObj->setVar('hotel_status', isset($_POST['hotel_status']) ? (int)$_POST['hotel_status'] : 0);
+        $HotelObj->setVar('hotel_status',\Xmf\Request::getInt('hotel_status', 0, 'POST'));
         //$HotelObj->setVar('hotel_open_time',strtotime(trim($_POST['hotel_open_time']['date'])) + (int)(trim($_POST['hotel_open_time']['time'])) );
         $HotelObj->setVar('hotel_open_time', strtotime(trim($_POST['hotel_open_time'])));
         $HotelObj->setVar('hotel_add_time', time());

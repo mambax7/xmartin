@@ -61,7 +61,7 @@ switch ($action) {
         break;*/
     case 'save':
         $OrderObj->setVar('order_id', $id);
-        $OrderObj->setVar('order_status', (int)$_POST['order_status']);
+        $OrderObj->setVar('order_status', \Xmf\Request::getInt('order_status', 0, 'POST'));
         $room_price = $_POST['room_price'];
 
         if (!$id) {
