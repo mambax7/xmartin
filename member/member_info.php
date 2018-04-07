@@ -17,7 +17,7 @@ if ($_POST['uid'] > 0) {
     $_POST['telephone'] = implode('-', $_POST['telephone']);
     $memberHandler      = xoops_getHandler('member');
     $edituser           = $memberHandler->getUser($xoopsUser->uid());
-    if (!empty($_POST['passwd'])) {
+   if (\Xmf\Request::hasVar('passwd', 'POST')) {
         if ($_POST['passwd_check'] != $_POST['passwd']) {
             redirect_header(MEMBER_URL . '?info', 1, '密码输入不一致.');
         } else {

@@ -141,7 +141,7 @@ class MartinHotelServiceTypeHandler extends XoopsObjectHandler
         }
 
         if ($hotelservicetype->isNew()) {
-            $sql = sprintf('INSERT INTO %s (
+            $sql = sprintf('INSERT INTO `%s` (
                                 service_type_id,
                                 service_type_name
                             ) VALUES (
@@ -149,7 +149,7 @@ class MartinHotelServiceTypeHandler extends XoopsObjectHandler
                                 %s
                             )', $this->db->prefix('martin_hotel_service_type'), $this->db->quoteString($service_type_name));
         } else {
-            $sql = sprintf('UPDATE %s SET
+            $sql = sprintf('UPDATE `%s` SET
                                 service_type_name = %s
                             WHERE service_type_id = %u', $this->db->prefix('martin_hotel_service_type'), $this->db->quoteString($service_type_name), $service_type_id);
         }

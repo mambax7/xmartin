@@ -294,7 +294,7 @@ class MartinRoomHandler extends XoopsObjectHandler
 
         if ($room->isNew()) {
             $sql = sprintf(
-                'INSERT INTO %s (
+                'INSERT INTO `%s` (
                                 room_id,room_type_id,hotel_id,room_count,room_bed_type,room_name,room_area,
                                 room_floor,room_initial_price,room_is_add_bed,
                                 room_add_money,room_bed_info,room_status,room_sented_coupon
@@ -320,7 +320,7 @@ class MartinRoomHandler extends XoopsObjectHandler
             );
         } else {
             $sql = sprintf(
-                'UPDATE %s SET
+                'UPDATE `%s` SET
                                 room_type_id = %u,
                                 hotel_id = %u,
                                 room_count = %u,

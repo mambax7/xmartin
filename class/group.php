@@ -254,7 +254,7 @@ class MartinGroupHandler extends XoopsObjectHandler
 
         if ($group->isNew()) {
             $sql = sprintf(
-                'INSERT INTO %s (
+                'INSERT INTO `%s` (
                                 group_id,
                                 group_name,
                                 group_info,
@@ -286,7 +286,7 @@ class MartinGroupHandler extends XoopsObjectHandler
             );
         } else {
             $sql = sprintf(
-                'UPDATE %s SET
+                'UPDATE `%s` SET
                                 group_name = %s,
                                 group_info = %s,
                                 check_in_date = %u,

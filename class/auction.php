@@ -276,7 +276,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
 
         if ($auction->isNew()) {
             $sql = sprintf(
-                'INSERT INTO %s (
+                'INSERT INTO `%s` (
                                 auction_id,
                                 auction_name,
                                 auction_info,
@@ -312,7 +312,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
             );
         } else {
             $sql = sprintf(
-                'UPDATE %s SET
+                'UPDATE `%s` SET
                                 auction_name = %s,
                                 auction_info = %s,
                                 check_in_date = %u,

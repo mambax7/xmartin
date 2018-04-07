@@ -87,7 +87,7 @@ class MartinCartHandler extends XoopsObjectHandler
         }
 
         $sql = sprintf(
-            'INSERT INTO %s (
+            'INSERT INTO `%s` (
                             order_id,
                             order_type,
                             order_mode,

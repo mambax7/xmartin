@@ -176,7 +176,7 @@ class MartinHotelCityHandler extends XoopsObjectHandler
         }
 
         if ($hotelcity->isNew()) {
-            $sql = sprintf('INSERT INTO %s (
+            $sql = sprintf('INSERT INTO `%s` (
                                 city_id,
                                 city_parentid,
                                 city_name,
@@ -190,7 +190,7 @@ class MartinHotelCityHandler extends XoopsObjectHandler
                                 %s
                             )', $this->db->prefix('martin_hotel_city'), $city_parentid, $this->db->quoteString($city_name), $this->db->quoteString($city_alias), $this->db->quoteString($city_level));
         } else {
-            $sql = sprintf('UPDATE %s SET
+            $sql = sprintf('UPDATE `%s` SET
                                 city_parentid = %u,
                                 city_name = %s,
                                 city_alias = %s,

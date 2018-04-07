@@ -338,7 +338,7 @@ class MartinOrderHandler extends XoopsObjectHandler
         }
 
         if ($order->isNew()) {
-            $sql = sprintf('INSERT INTO %s (
+            $sql = sprintf('INSERT INTO `%s` (
                                 order_type_id,
                                 order_type_name
                             ) VALUES (
@@ -346,7 +346,7 @@ class MartinOrderHandler extends XoopsObjectHandler
                                 %s
                             )', $this->db->prefix('martin_hotel_order_type'), $this->db->quoteString($order_type_name));
         } else {
-            $sql = sprintf('UPDATE %s SET
+            $sql = sprintf('UPDATE `%s` SET
                                 order_type_name = %s
                             WHERE order_type_id = %u', $this->db->prefix('martin_hotel_order_type'), $this->db->quoteString($order_type_name), $order_type_id);
         }

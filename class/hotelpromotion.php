@@ -186,7 +186,7 @@ class MartinHotelPromotionHandler extends XoopsObjectHandler
         }
 
         if ($promotion->isNew()) {
-            $sql = sprintf('INSERT INTO %s (
+            $sql = sprintf('INSERT INTO `%s` (
                                 promotion_id,
                                 promotion_description,
                                 hotel_id,
@@ -198,7 +198,7 @@ class MartinHotelPromotionHandler extends XoopsObjectHandler
                                 %s,%u,%u,%u,%u
                             )', $this->db->prefix('martin_hotel_promotions'), $this->db->quoteString($promotion_description), $hotel_id, $promotion_start_date, $promotion_end_date, $promotion_add_time);
         } else {
-            $sql = sprintf('UPDATE %s SET
+            $sql = sprintf('UPDATE `%s` SET
                                 promotion_description = %s,
                                 hotel_id = %u,
                                 promotion_start_date = %u,
