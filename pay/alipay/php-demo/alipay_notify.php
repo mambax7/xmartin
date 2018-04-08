@@ -176,7 +176,7 @@ class alipay_notify
         if (!isset($_output_charset)) {
             $_output_charset = $this->parameter['_input_charset '];
         }
-        if ($_input_charset == $_output_charset || null == $input) {
+        if ($_input_charset == $_output_charset || null === $input) {
             $output = $input;
         } elseif (function_exists('mb_convert_encoding')) {
             $output = mb_convert_encoding($input, $_output_charset, $_input_charset);
@@ -196,7 +196,7 @@ class alipay_notify
         if (!isset($_input_charset)) {
             $_input_charset = $this->_input_charset;
         }
-        if ($_input_charset == $_output_charset || null == $input) {
+        if ($_input_charset == $_output_charset || null === $input) {
             $output = $input;
         } elseif (function_exists('mb_convert_encoding')) {
             $output = mb_convert_encoding($input, $_output_charset, $_input_charset);

@@ -198,7 +198,7 @@ class MartinHotelCityHandler extends XoopsObjectHandler
                             WHERE city_id = %u', $this->db->prefix('martin_hotel_city'), $city_parentid, $this->db->quoteString($city_name), $this->db->quoteString($city_alias), $this->db->quoteString($city_level), $city_id);
         }
         //echo "<br>" . $sql . "<br>";
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -238,7 +238,7 @@ class MartinHotelCityHandler extends XoopsObjectHandler
 
         $sql = 'DELETE FROM ' . $this->db->prefix('martin_hotel_city') . ' WHERE city_id IN ( ' . implode(',', $subcats) . ' )';
 
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

@@ -512,7 +512,7 @@ class MartinHotelHandler extends XoopsObjectHandler
         }
         //echo $sql;exit;
         //echo "<br>" . $sql . "<br>";exit;
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -589,7 +589,7 @@ class MartinHotelHandler extends XoopsObjectHandler
         $this->db->queryF($sql);
 
         $sql = 'DELETE FROM ' . $this->db->prefix('martin_hotel') . ' WHERE hotel_id = ' . $hotel->hotel_id();
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

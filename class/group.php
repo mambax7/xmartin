@@ -313,7 +313,7 @@ class MartinGroupHandler extends XoopsObjectHandler
             );
         }
         //echo $sql;exit;
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -341,7 +341,7 @@ class MartinGroupHandler extends XoopsObjectHandler
 
         $sql = 'DELETE FROM ' . $this->db->prefix('martin_group') . ' WHERE group_id = ' . $group->group_id();
 
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -349,7 +349,7 @@ class MartinGroupHandler extends XoopsObjectHandler
 
         $sql = 'DELETE FROM ' . $this->db->prefix('martin_group_room') . ' WHERE group_id = ' . $group->group_id();
 
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

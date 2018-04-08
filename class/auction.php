@@ -343,7 +343,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
             );
         }
         //echo $sql;exit;
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -371,7 +371,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
 
         $sql = 'DELETE FROM ' . $this->db->prefix('martin_auction') . ' WHERE auction_id = ' . $auction->auction_id();
 
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -379,7 +379,7 @@ class MartinAuctionHandler extends XoopsObjectHandler
 
         $sql = 'DELETE FROM ' . $this->db->prefix('martin_auction_room') . ' WHERE auction_id = ' . $auction->auction_id();
 
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

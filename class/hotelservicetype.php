@@ -154,7 +154,7 @@ class MartinHotelServiceTypeHandler extends XoopsObjectHandler
                             WHERE service_type_id = %u', $this->db->prefix('martin_hotel_service_type'), $this->db->quoteString($service_type_name), $service_type_id);
         }
         //echo $sql;exit;
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -192,7 +192,7 @@ class MartinHotelServiceTypeHandler extends XoopsObjectHandler
 
         $sql = 'DELETE FROM ' . $this->db->prefix('martin_hotel_service_type') . ' WHERE service_type_id = ' . $hotelservicetype->service_type_id();
 
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

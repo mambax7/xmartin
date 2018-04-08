@@ -351,7 +351,7 @@ class MartinOrderHandler extends XoopsObjectHandler
                             WHERE order_type_id = %u', $this->db->prefix('martin_hotel_order_type'), $this->db->quoteString($order_type_name), $order_type_id);
         }
         //echo $sql;exit;
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -429,7 +429,7 @@ class MartinOrderHandler extends XoopsObjectHandler
 
         $sql = 'DELETE FROM ' . $xoopsDB->prefix('martin_order') . ' WHERE order_id = ' . $order->order_id();
 
-        if (false != $force) {
+        if (false !== $force) {
             $result = $xoopsDB->queryF($sql);
         } else {
             $result = $xoopsDB->query($sql);

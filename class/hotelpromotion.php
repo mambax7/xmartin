@@ -206,7 +206,7 @@ class MartinHotelPromotionHandler extends XoopsObjectHandler
                             WHERE promotion_id = %u', $this->db->prefix('martin_hotel_promotions'), $this->db->quoteString($promotion_description), $hotel_id, $promotion_start_date, $promotion_end_date, $promotion_id);
         }
         //echo $sql;exit;
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -234,7 +234,7 @@ class MartinHotelPromotionHandler extends XoopsObjectHandler
 
         $sql = 'DELETE FROM ' . $this->db->prefix('martin_hotel_promotions') . ' WHERE promotion_id = ' . $promotion->promotion_id();
 
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

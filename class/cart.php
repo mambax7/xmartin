@@ -152,7 +152,7 @@ class MartinCartHandler extends XoopsObjectHandler
             $order_submit_time
         );
         //echo $sql;exit;
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

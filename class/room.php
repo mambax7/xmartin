@@ -354,7 +354,7 @@ class MartinRoomHandler extends XoopsObjectHandler
         }
         //echo $sql;exit;
         //echo "<br>" . $sql . "<br>";
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -413,7 +413,7 @@ class MartinRoomHandler extends XoopsObjectHandler
 
         $sql = 'DELETE FROM ' . $this->db->prefix('martin_room') . ' WHERE room_id = ' . $room->room_id();
 
-        if (false != $force) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
