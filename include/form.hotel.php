@@ -16,7 +16,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 /**
  * Class form_hotel
  */
-class form_hotel extends XoopsThemeForm
+class form_hotel extends \XoopsThemeForm
 {
     /**
      * form_hotel constructor.

@@ -8,8 +8,6 @@
  * */
 
 use XoopsModules\Xmartin;
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
 
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -18,7 +16,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 /**
  * Class form_hotel_promotion
  */
-class form_hotel_promotion extends XoopsThemeForm
+class form_hotel_promotion extends \XoopsThemeForm
 {
     /**
      * form_hotel_promotion constructor.
@@ -47,6 +45,9 @@ class form_hotel_promotion extends XoopsThemeForm
     {
         //require_once MARTIN_ROOT_PATH . '/include/formdatetime.php';
         require_once XOOPS_ROOT_PATH . '/modules/martin/class/xoopsformloader.php';
+
+        /** @var Xmartin\Helper $helper */
+        $helper = Xmartin\Helper::getInstance();
 
         $js          = '<script type=\'text/javascript\'>
             jQuery.noConflict();

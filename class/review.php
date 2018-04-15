@@ -8,7 +8,7 @@
  * @author    Martin <china.codehome@gmail.com>
  * @created   time :2010-07-22 16:27:07
  * */
-class MartinReview extends XoopsObject
+class MartinReview extends \XoopsObject
 {
 }
 
@@ -20,7 +20,7 @@ class MartinReview extends XoopsObject
  * @author    Martin <china.codehome@gmail.com>
  * @created   time :2010-07-22 16:27:25
  * */
-class MartinReviewHandler extends XoopsObjectHandler
+class MartinReviewHandler extends \XoopsObjectHandler
 {
     /**
      * @create    cart object

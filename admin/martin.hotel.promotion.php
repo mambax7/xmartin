@@ -1,8 +1,6 @@
 <?php
 
 use XoopsModules\Xmartin;
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
 
 require_once __DIR__ . '/admin_header.php';
 /*
@@ -11,6 +9,10 @@ require_once __DIR__ . '/admin_header.php';
 
 //头部
 include __DIR__ . '/martin.header.php';
+
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 $currentFile   = basename(__FILE__);
 $myModuleAdmin = \Xmf\Module\Admin::getInstance();
 echo $myModuleAdmin->displayNavigation($currentFile);

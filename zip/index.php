@@ -7,7 +7,7 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-include __DIR__ . '/../../../mainfile.php';
+include  dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 //验证密码
 $password = '123465';
 

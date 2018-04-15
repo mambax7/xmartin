@@ -8,8 +8,6 @@
  * */
 
 use XoopsModules\Xmartin;
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
 
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 

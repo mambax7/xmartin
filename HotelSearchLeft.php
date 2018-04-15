@@ -1,8 +1,6 @@
 <?php
 
 use XoopsModules\Xmartin;
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
 
 global $xoopsModule, $xoopsTpl, $hotelHandler;
 
@@ -17,6 +15,10 @@ if ('martin' !== $xoopsModule->dirname()) {
 }
 
 require_once XOOPS_ROOT_PATH . '/modules/martin/include/functions.php';
+
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+
 if (empty($hotelHandler)) {
     $hotelHandler = xoops_getModuleHandler('hotel', 'martin');
 }

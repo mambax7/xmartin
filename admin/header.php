@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/../../../mainfile.php';
+require_once  dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 
 if (!defined('SMARTSECTION_NOCPFUNC')) {
-    require_once __DIR__ . '/../../../include/cp_header.php';
+    require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 }
 
 require_once XOOPS_ROOT_PATH . "/'kernel/module.php";

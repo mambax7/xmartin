@@ -9,10 +9,8 @@
  * */
 
 use XoopsModules\Xmartin;
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
 
-class MartinMember extends XoopsObject
+class MartinMember extends \XoopsObject
 {
 }
 
@@ -24,7 +22,7 @@ class MartinMember extends XoopsObject
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-class MartinMemberHandler extends XoopsObjectHandler
+class MartinMemberHandler extends \XoopsObjectHandler
 {
     /**
      * @create    cart object

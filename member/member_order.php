@@ -9,8 +9,6 @@
 //构造对象
 
 use XoopsModules\Xmartin;
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
 
 $searchHandler = xoops_getModuleHandler('search', 'martin');
 $orderHandler  = xoops_getModuleHandler('order', 'martin');
@@ -33,6 +31,9 @@ if ('order' !== $action) {
 //echo $action;
 
 //echo $orderHandler->order_status;
+
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
 
 $Count     = $orderHandler->getCount();
 $OrderObjs = $Count > 0 ? $orderHandler->getOrders([], $helper->getConfig('front_perpage'), $start, 0) : null;

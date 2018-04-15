@@ -12,7 +12,7 @@ require_once XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 /**
  * Class MartinHotelcity
  */
-class MartinHotelcity extends XoopsObject
+class MartinHotelcity extends \XoopsObject
 {
     public function __construct()
     {
@@ -74,7 +74,7 @@ class MartinHotelcity extends XoopsObject
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-class MartinHotelCityHandler extends XoopsObjectHandler
+class MartinHotelCityHandler extends \XoopsObjectHandler
 {
     /**
      * create a new hotel city

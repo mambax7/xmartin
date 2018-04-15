@@ -15,7 +15,7 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-class MartinFormDateTime extends XoopsFormElementTray
+class MartinFormDateTime extends \XoopsFormElementTray
 {
     /**
      * MartinFormDateTime constructor.

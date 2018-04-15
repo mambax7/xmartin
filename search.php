@@ -1,13 +1,14 @@
 <?php
 
 use XoopsModules\Xmartin;
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
 
 if (file_exists(__DIR__ . '/../../mainfile.php')) {
-    require_once __DIR__ . '/../../mainfile.php';
+    require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
 }
 include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
+
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
 
 $searchHandler = xoops_getModuleHandler('search', 'martin');
 $hotelHandler  = xoops_getModuleHandler('hotel', 'martin');

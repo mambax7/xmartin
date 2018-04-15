@@ -1,15 +1,15 @@
 <?php
 
 use XoopsModules\Xmartin;
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
 
-include __DIR__ . '/../../mainfile.php';
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
 include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 if (!defined('MODULE_URL')) {
     define('MODULE_URL', XOOPS_URL . '/modules/martin/');
 }
 
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
 global $xoopsUser;
 if (!$xoopsUser) {
     redirect_header(XOOPS_URL . '/user.php?xoops_redirect=/' . $_SERVER['REQUEST_URI'], 1, '您还没有登录.');

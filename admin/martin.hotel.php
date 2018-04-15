@@ -1,10 +1,13 @@
 <?php
 
 use XoopsModules\Xmartin;
+
+require_once __DIR__ . '/admin_header.php';
+
 /** @var Xmartin\Helper $helper */
 $helper = Xmartin\Helper::getInstance();
 
-require_once __DIR__ . '/admin_header.php';
+
 /*
  * 处理
  **/

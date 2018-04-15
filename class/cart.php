@@ -11,7 +11,7 @@
 
 use XoopsModules\Xmartin;
 
-class MartinCart extends XoopsObject
+class MartinCart extends \XoopsObject
 {
     public function __construct()
     {
@@ -46,7 +46,7 @@ class MartinCart extends XoopsObject
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-class MartinCartHandler extends XoopsObjectHandler
+class MartinCartHandler extends \XoopsObjectHandler
 {
     /**
      * @create    cart object

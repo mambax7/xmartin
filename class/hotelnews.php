@@ -7,7 +7,7 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-class MartinHotelNews extends XoopsObject
+class MartinHotelNews extends \XoopsObject
 {
 }
 
@@ -18,7 +18,7 @@ class MartinHotelNews extends XoopsObject
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-class MartinHotelNewsHandler extends XoopsObjectHandler
+class MartinHotelNewsHandler extends \XoopsObjectHandler
 {
     /**
      * @get       rows

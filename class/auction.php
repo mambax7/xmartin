@@ -12,7 +12,7 @@ require_once XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 /**
  * Class MartinAuction
  */
-class MartinAuction extends XoopsObject
+class MartinAuction extends \XoopsObject
 {
     public function __construct()
     {
@@ -154,7 +154,7 @@ class MartinAuction extends XoopsObject
  * @copyright 1997-2010 The Martin auction
  * @author    Martin <china.codehome@gmail.com>
  * */
-class MartinAuctionHandler extends XoopsObjectHandler
+class MartinAuctionHandler extends \XoopsObjectHandler
 {
     /**
      * create a new hotel city

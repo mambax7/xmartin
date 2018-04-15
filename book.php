@@ -1,14 +1,14 @@
 <?php
 
 use XoopsModules\Xmartin;
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
 
-include __DIR__ . '/../../mainfile.php';
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
 include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 if (!defined('MODULE_URL')) {
     define('MODULE_URL', XOOPS_URL . '/modules/martin/');
 }
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
 
 //测试阶段
 //redirect_header('http://chat.53kf.com/company.php?arg=gjlmo&style=1',1,'客户接入中....');

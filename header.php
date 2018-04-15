@@ -9,7 +9,7 @@
  * @package        module::article
  */
 
-require_once __DIR__ . '/../../mainfile.php';
+require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
 
 /*
 if(!empty($GLOBALS["xoopsModuleConfig"]['theme_set'])){

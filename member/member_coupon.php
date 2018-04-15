@@ -8,6 +8,7 @@
  * */
 
 use XoopsModules\Xmartin;
+
 /** @var Xmartin\Helper $helper */
 $helper = Xmartin\Helper::getInstance();
 

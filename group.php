@@ -1,12 +1,12 @@
 <?php
 
 use XoopsModules\Xmartin;
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
 
-include __DIR__ . '/../../mainfile.php';
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
 include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
 global $xoopsUser;
 
 if (!$xoopsUser) {

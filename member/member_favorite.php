@@ -8,12 +8,13 @@
  * */
 
 use XoopsModules\Xmartin;
+
 /** @var Xmartin\Helper $helper */
 $helper = Xmartin\Helper::getInstance();
 
-$hotelHandler  = xoops_getModuleHandler('hotel', 'martin');
-$searchHandler = xoops_getModuleHandler('search', 'martin');
-$memberHandler = xoops_getModuleHandler('member', 'martin');
+$hotelHandler  = $helper->getHandler('Hotel');
+$searchHandler = $helper->getHandler('Search');
+$memberHandler = $helper->getHandler('Member');
 
 $xoopsOption['xoops_pagetitle'] = '我的收藏 - 用户中心';
 

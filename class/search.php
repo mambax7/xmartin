@@ -14,7 +14,7 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 /**
  * Class MartinSearch
  */
-class MartinSearch extends XoopsObject
+class MartinSearch extends \XoopsObject
 {
     public function __construct()
     {
@@ -27,7 +27,7 @@ class MartinSearch extends XoopsObject
 /**
  * Class MartinSearchHandler
  */
-class MartinSearchHandler extends XoopsObjectHandler
+class MartinSearchHandler extends \XoopsObjectHandler
 {
     /**
      * @return MartinSearch

@@ -9,11 +9,13 @@
  * */
 
 use XoopsModules\Xmartin;
+
+include  dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
+
 /** @var Xmartin\Helper $helper */
 $helper = Xmartin\Helper::getInstance();
 
-include __DIR__ . '/../../../mainfile.php';
-include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 if (!defined('NEWS_URL')) {
     define('NEWS_URL', XOOPS_URL . '/modules/news/');
 }

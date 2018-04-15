@@ -8,8 +8,6 @@
  * */
 
 use XoopsModules\Xmartin;
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
 
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -18,7 +16,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 /**
  * Class form_auction
  */
-class form_auction extends XoopsThemeForm
+class form_auction extends \XoopsThemeForm
 {
     /**
      * form_auction constructor.
@@ -47,6 +45,9 @@ class form_auction extends XoopsThemeForm
      * */
     public function createElements()
     {
+        /** @var Xmartin\Helper $helper */
+        $helper = Xmartin\Helper::getInstance();
+
         //require_once MARTIN_ROOT_PATH . '/include/formdatetime.php';
         require_once XOOPS_ROOT_PATH . '/modules/martin/class/xoopsformloader.php';
         require_once MARTIN_ROOT_PATH . '/include/formdatetime.php';

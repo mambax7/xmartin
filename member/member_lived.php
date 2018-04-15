@@ -8,8 +8,6 @@
  * */
 
 use XoopsModules\Xmartin;
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
 
 $hotelHandler  = xoops_getModuleHandler('hotel', 'martin');
 $searchHandler = xoops_getModuleHandler('search', 'martin');
@@ -23,6 +21,9 @@ $Count = $hotels['count'];
 unset($hotels['count']);
 //分页
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
 $pagenav = new \XoopsPageNav($Count, $helper->getConfig('front_perpage'), $start, 'start', '');
 
 $xoopsTpl->assign('hotels', $hotels);

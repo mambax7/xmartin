@@ -12,7 +12,7 @@ require_once XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
 /**
  * Class MartinOrder
  */
-class MartinOrder extends XoopsObject
+class MartinOrder extends \XoopsObject
 {
     public function __construct()
     {
@@ -239,7 +239,7 @@ class MartinOrder extends XoopsObject
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-class MartinOrderHandler extends XoopsObjectHandler
+class MartinOrderHandler extends \XoopsObjectHandler
 {
     /**
      * create a new hotel order
