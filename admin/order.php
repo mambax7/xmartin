@@ -12,7 +12,7 @@ $helper = \XoopsModules\Xmartin\Helper::getInstance();
  **/
 
 //头部
-require_once __DIR__ . '/martin.header.php';
+//require_once __DIR__ . '/martin.header.php';
 $currentFile = basename(__FILE__);
 $adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation($currentFile);
@@ -71,10 +71,10 @@ switch ($action) {
 
         if ($OrderObj->isNew()) {
             $redirect_msg = _AM_XMARTIN_ADDED_SUCCESSFULLY;
-            $redirect_to  = 'martin.order.php';
+            $redirect_to  = 'order.php';
         } else {
             $redirect_msg = _AM_XMARTIN_MODIFIED_SUCCESSFULLY;
-            $redirect_to  = 'martin.order.php';
+            $redirect_to  = 'order.php';
         }
         if (!$orderHandler->updateOrder($OrderObj, $room_price)) {
             redirect_header('javascript:history.go(-1);', 2, _AM_XMARTIN_OPERATION_FAILED);
@@ -87,7 +87,7 @@ switch ($action) {
         } else {
             if ($orderHandler->delete($OrderObj)) {
                 $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
-                $redirect_to  = 'martin.order.php';
+                $redirect_to  = 'order.php';
             } else {
                 $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -221,7 +221,7 @@ function CreateButton()
     Create_button(
         [
             'servicetypelist' => [
-                'url'   => 'martin.order.php?action=list',
+                'url'   => 'order.php?action=list',
                 'value' => _AM_XMARTIN_HOTEL_ORDER_LIST,
             ],
         ]

@@ -82,7 +82,7 @@ $modversion['helpsection'] = [
 $modversion['blocks'] = [];
 $i                    = 0;
 $i++;
-$modversion['blocks'][$i]['file']        = 'martin.hotel.php';
+$modversion['blocks'][$i]['file']        = 'hotel.php';
 $modversion['blocks'][$i]['name']        = 'hotel search';
 $modversion['blocks'][$i]['description'] = 'hotel Search';
 $modversion['blocks'][$i]['show_func']   = 'martin_hotel_search_show';

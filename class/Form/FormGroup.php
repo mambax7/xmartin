@@ -66,7 +66,7 @@ class FormGroup extends \XoopsThemeForm
             jQuery(document).ready(function($){
                 $("#hotel_id").click(function(){
                     var hotel_id =  Number($(this).val());
-                    $.post("martin.ajax.php?action=getroomlist",{hotel_id:hotel_id},function(data){
+                    $.post("ajax.php?action=getroomlist",{hotel_id:hotel_id},function(data){
                         $("#room").html(data);
                     });
                 });

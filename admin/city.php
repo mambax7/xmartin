@@ -8,7 +8,7 @@ require_once __DIR__ . '/admin_header.php';
  **/
 
 //头部
-require_once __DIR__ . '/martin.header.php';
+//require_once __DIR__ . '/martin.header.php';
 
 /** @var Xmartin\Helper $helper */
 $helper = Xmartin\Helper::getInstance();
@@ -45,7 +45,7 @@ if ($id) {
 switch ($action) {
     case 'add':
         martin_collapsableBar('createtable', 'createtableicon', _AM_XMARTIN_ADD_HOTEL_CITY, _AM_XMARTIN_ADD_HOTEL_CITY);
-        //Create_button(array('addcity'=>array('url'=>'mconfirmartin.hotel.city.php?action=add','value'=>_AM_XMARTIN_CITY_NAME)));
+        //Create_button(array('addcity'=>array('url'=>'mconfircity.php?action=add','value'=>_AM_XMARTIN_CITY_NAME)));
         $form = new Xmartin\Form\FormCity($cityObj);
 
         $form->display();
@@ -67,10 +67,10 @@ switch ($action) {
 
         if ($cityObj->isNew()) {
             $redirect_msg = _AM_XMARTIN_ADDED_SUCCESSFULLY;
-            $redirect_to  = 'martin.hotel.city.php';
+            $redirect_to  = 'city.php';
         } else {
             $redirect_msg = _AM_XMARTIN_MODIFIED_SUCCESSFULLY;
-            $redirect_to  = 'martin.hotel.city.php';
+            $redirect_to  = 'city.php';
         }
         if (!$cityHandler->insert($cityObj)) {
             redirect_header('javascript:history.go(-1);', 2, _AM_XMARTIN_OPERATION_FAILED);
@@ -93,7 +93,7 @@ switch ($action) {
         } else {
             if ($cityHandler->delete($cityObj)) {
                 $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
-                $redirect_to  = 'martin.hotel.city.php';
+                $redirect_to  = 'city.php';
             } else {
                 $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -106,7 +106,7 @@ switch ($action) {
         Create_button(
             [
                 'addcity' => [
-                    'url'   => 'martin.hotel.city.php?action=add',
+                    'url'   => 'city.php?action=add',
                     'value' => _AM_XMARTIN_CITY_NAME,
                 ],
             ]

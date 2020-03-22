@@ -8,7 +8,7 @@ require_once __DIR__ . '/admin_header.php';
  **/
 
 //头部
-require_once __DIR__ . '/martin.header.php';
+//require_once __DIR__ . '/martin.header.php';
 
 /** @var Xmartin\Helper $helper */
 $helper = Xmartin\Helper::getInstance();
@@ -95,7 +95,7 @@ switch ($action) {
         } else {
             $redirect_msg = _AM_XMARTIN_MODIFIED_SUCCESSFULLY;
         }
-        $redirect_to = 'martin.room.php?action=list';
+        $redirect_to = 'room.php?action=list';
         if ($roomHandler->checkHotelRoomExist($roomObj)) {
             redirect_header('javascript:history.go(-1);', 2, _AM_XMARTIN_HOTEL_ADDED_TO_ROOM);
         }
@@ -112,7 +112,7 @@ switch ($action) {
         } else {
             $redirect_msg = _AM_XMARTIN_MODIFIED_SUCCESSFULLY;
         }
-        $redirect_to = 'martin.room.php?action=typelist';
+        $redirect_to = 'room.php?action=typelist';
         if (!$roomHandler->insertType($typeData)) {
             redirect_header('javascript:history.go(-1);', 2, _AM_XMARTIN_OPERATION_FAILED);
         }
@@ -156,7 +156,7 @@ switch ($action) {
                 'room_date'                 => strtotime($room_date),
             ];
         }
-        $redirect_to = 'martin.room.php?action=pricelist';
+        $redirect_to = 'room.php?action=pricelist';
 
         //var_dump($IsOld);
         //var_dump($Data);exit;
@@ -173,7 +173,7 @@ switch ($action) {
         } else {
             if ($roomHandler->delete($roomObj)) {
                 $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
-                $redirect_to  = 'martin.room.php';
+                $redirect_to  = 'room.php';
             } else {
                 $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -188,7 +188,7 @@ switch ($action) {
         } else {
             if ($roomHandler->deleteRoomType($typeid)) {
                 $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
-                $redirect_to  = 'martin.room.php?action=typelist';
+                $redirect_to  = 'room.php?action=typelist';
             } else {
                 $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -213,7 +213,7 @@ switch ($action) {
         } else {
             if ($roomHandler->deleteRoomPrice($room_id, date('Y-m-d', $roomPrice['room_date']))) {
                 $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
-                $redirect_to  = 'martin.room.php?action=pricelist';
+                $redirect_to  = 'room.php?action=pricelist';
             } else {
                 $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -227,7 +227,7 @@ switch ($action) {
         } else {
             if ($roomHandler->truncatePassData($date)) {
                 $redirect_msg = _AM_XMARTIN_CLEARING_SUCCESSFUL;
-                $redirect_to  = 'martin.room.php?action=pricelist';
+                $redirect_to  = 'room.php?action=pricelist';
             } else {
                 $redirect_msg = _AM_XMARTIN_CLEARING_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -365,23 +365,23 @@ function CreateButton()
     global $action;
     $arr = [
         'addservicetype'  => [
-            'url'   => 'martin.room.php?action=typeadd',
+            'url'   => 'room.php?action=typeadd',
             'value' => _AM_XMARTIN_ADD_ROOM_CATEGORIES,
         ],
         'servicetypelist' => [
-            'url'   => 'martin.room.php?action=typelist',
+            'url'   => 'room.php?action=typelist',
             'value' => _AM_XMARTIN_ROOM_CATEGORY_LIST,
         ],
-        'addservice'      => ['url' => 'martin.room.php?action=add', 'value' => _AM_XMARTIN_ADD_ROOM],
-        'servicetype'     => ['url' => 'martin.room.php?action=list', 'value' => _AM_XMARTIN_ROOMS_LIST],
-        'addprice'        => ['url' => 'martin.room.php?action=addprice', 'value' => _AM_XMARTIN_ADDING_RATES],
-        'price'           => ['url' => 'martin.room.php?action=pricelist', 'value' => _AM_XMARTIN_RESERVATION_LIST],
+        'addservice'      => ['url' => 'room.php?action=add', 'value' => _AM_XMARTIN_ADD_ROOM],
+        'servicetype'     => ['url' => 'room.php?action=list', 'value' => _AM_XMARTIN_ROOMS_LIST],
+        'addprice'        => ['url' => 'room.php?action=addprice', 'value' => _AM_XMARTIN_ADDING_RATES],
+        'price'           => ['url' => 'room.php?action=pricelist', 'value' => _AM_XMARTIN_RESERVATION_LIST],
     ];
     $arr = 'pricelist' === $action ? array_merge(
         $arr,
         [
             'delte_pass_data' => [
-                'url'   => 'martin.room.php?action=deletepassdata',
+                'url'   => 'room.php?action=deletepassdata',
                 'value' => _AM_XMARTIN_DELETE_EXPIRED_DATA,
             ],
         ]

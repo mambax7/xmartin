@@ -18,7 +18,7 @@
  */
 require_once __DIR__ . '/admin_header.php';
 // Display Admin header
-xoops_cp_header();
+//xoops_cp_header();
 
 $currentFile = basename(__FILE__);
 $indexAdmin  = \Xmf\Module\Admin::getInstance();

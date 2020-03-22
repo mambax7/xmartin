@@ -145,7 +145,7 @@ if (!function_exists('martin_close_collapsable')) {
             $(".existimage").click(function () {
                 var filename = this.id;
                 if (!confirm("confirm to delete?")) return false;
-                $.post('martin.hotel.php', {action: 'deleteimg', img: filename});
+                $.post('hotel.php', {action: 'deleteimg', img: filename});
                 $(this).parent("div").remove();
             });
 
@@ -178,7 +178,7 @@ if (!function_exists('martin_order_list_js')) {
             {
                 alert("请选取三级类目! please select correct regoin!");return false;
             }*/
-            $.get('martin.ajax.php?action=gethotellist',params,function(data){
+            $.get('ajax.php?action=gethotellist',params,function(data){
                 $("#hotel_name_div").html(data);
                 $("#hotel_name").html('');
             });
@@ -190,7 +190,7 @@ if (!function_exists('martin_order_list_js')) {
             {
                 alert("请选取三级类目! please select correct regoin!");return false;
             }*/
-            $.get('martin.ajax.php?action=gethotellist',params,function(data){
+            $.get('ajax.php?action=gethotellist',params,function(data){
                 $("#hotel_name_div").html(data);
                 $("#hotel_name").html('');
             });

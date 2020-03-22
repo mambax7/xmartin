@@ -109,7 +109,7 @@ if ($cartHandler->saveCart($cartObj)) {
     //send email
     $title = '订单确认,订单号 : ' . $order_id;
     $msg   = $xoopsUser->uname() . "， 确认了订单 \n
-        订单号：$order_id " . MODULE_URL . "admin/martin.order.php?action=edit&id=$order_id ";
+        订单号：$order_id " . MODULE_URL . "admin/order.php?action=edit&id=$order_id ";
     MartinSendEmail($title, $msg);
 
     redirect_header(MODULE_URL . 'pay.php?order_id=' . $order_id, 2, '订单提成功.');

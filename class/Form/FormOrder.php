@@ -76,8 +76,8 @@ class FormOrder extends \XoopsThemeForm
         if ($qrooms) {
             $orderqrooms = '<br><br>';
             foreach ($qrooms as $room) {
-                $orderqrooms       .= $orderqroomsPrefix . _AM_XMARTIN_HOTEL_NAME . ': <a href="martin.hotel.php?action=add&id=' . $room['hotel_id'] . '">' . $room['hotel_name'] . '</a> &nbsp;';
-                $orderqrooms       .= _AM_XMARTIN_ROOM_COUNT . ': <a href="martin.room.php?action=add&id=' . $room['room_id'] . '">' . $room['room_name'] . '</a> &nbsp;';
+                $orderqrooms       .= $orderqroomsPrefix . _AM_XMARTIN_HOTEL_NAME . ': <a href="hotel.php?action=add&id=' . $room['hotel_id'] . '">' . $room['hotel_name'] . '</a> &nbsp;';
+                $orderqrooms       .= _AM_XMARTIN_ROOM_COUNT . ': <a href="room.php?action=add&id=' . $room['room_id'] . '">' . $room['room_name'] . '</a> &nbsp;';
                 $orderqrooms       .= _AM_XMARTIN_THE_NUMBER_OF_ROOMS . ': <b>' . $room['room_count'] . '</b>&nbsp;';
                 $orderqrooms       .= _AM_XMARTIN_RESERVATION_TIME . ': <b>' . date('Y-m-d', $room['room_date']) . '</b>&nbsp;';
                 $orderqrooms       .= _AM_XMARTIN_PRICE_SETTING . ' : <input type="text" name="room_price[' . $room['room_id'] . '-' . $room['room_date'] . ']" value= ' . $room['room_price'] . '>&nbsp;';
@@ -159,8 +159,8 @@ class FormOrder extends \XoopsThemeForm
         $rooms      = $this->Obj->rooms;
         if ($rooms) {
             foreach ($rooms as $room) {
-                $orderrooms       .= $orderroomsPrefix . _AM_XMARTIN_HOTEL_NAME . ': <a href="martin.hotel.php?action=add&id=' . $room['hotel_id'] . '">' . $room['hotel_name'] . '</a> &nbsp;';
-                $orderrooms       .= _AM_XMARTIN_ROOM_COUNT . ': <a href="martin.room.php?action=add&id=' . $room['room_id'] . '">' . $room['room_name'] . '</a> &nbsp;';
+                $orderrooms       .= $orderroomsPrefix . _AM_XMARTIN_HOTEL_NAME . ': <a href="hotel.php?action=add&id=' . $room['hotel_id'] . '">' . $room['hotel_name'] . '</a> &nbsp;';
+                $orderrooms       .= _AM_XMARTIN_ROOM_COUNT . ': <a href="room.php?action=add&id=' . $room['room_id'] . '">' . $room['room_name'] . '</a> &nbsp;';
                 $orderrooms       .= _AM_XMARTIN_THE_NUMBER_OF_ROOMS . ': <b>' . $room['room_count'] . '</b>&nbsp;';
                 $orderrooms       .= _AM_XMARTIN_RESERVATION_TIME . ': <b>' . date('Y-m-d', $room['room_date']) . '</b>&nbsp;';
                 $orderrooms       .= _AM_XMARTIN_PRICE . ': <b>' . $room['room_price'] . '</b>&nbsp;';

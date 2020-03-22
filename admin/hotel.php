@@ -12,7 +12,7 @@ $helper = Xmartin\Helper::getInstance();
  **/
 
 //头部
-require_once __DIR__ . '/martin.header.php';
+//require_once __DIR__ . '/martin.header.php';
 $currentFile = basename(__FILE__);
 $adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation($currentFile);
@@ -63,7 +63,7 @@ switch ($action) {
     case 'add':
         //xoops_cp_header();
         martin_collapsableBar('createtable', 'createtableicon', _AM_XMARTIN_ADD_HOTEL, _AM_XMARTIN_ADD_HOTEL);
-        //Create_button(array('addcity'=>array('url'=>'mconfirmartin.hotel.city.php?action=add','value'=>_AM_XMARTIN_CITY_NAME)));
+        //Create_button(array('addcity'=>array('url'=>'mconfircity.php?action=add','value'=>_AM_XMARTIN_CITY_NAME)));
 
         $form = new Xmartin\Form\FormHotel($hotelObj, $cityObj);
         $form->display();
@@ -168,10 +168,10 @@ switch ($action) {
 
         if ($hotelObj->isNew()) {
             $redirect_msg = _AM_XMARTIN_ADDED_SUCCESSFULLY;
-            $redirect_to  = 'martin.hotel.php';
+            $redirect_to  = 'hotel.php';
         } else {
             $redirect_msg = _AM_XMARTIN_MODIFIED_SUCCESSFULLY;
-            $redirect_to  = 'martin.hotel.php';
+            $redirect_to  = 'hotel.php';
         }
         if (!$hotelHandler->insert($hotelObj)) {
             if ($hotelObj->_errors) {
@@ -201,7 +201,7 @@ switch ($action) {
         if ($hotelHandler->saveRank($rankData)) {
             $savemsg = _AM_XMARTIN_SAVING_SUCCESSFUL;
         }
-        redirect_header('martin.hotel.php', 2, $savemsg);
+        redirect_header('hotel.php', 2, $savemsg);
         break;
     case 'deleteimg':
         $hotelImgPath = XMARTIN_ROOT_PATH . 'assets/images/hotel/';
@@ -217,7 +217,7 @@ switch ($action) {
         } else {
             if ($hotelHandler->delete($hotelObj)) {
                 $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
-                $redirect_to  = 'martin.hotel.php';
+                $redirect_to  = 'hotel.php';
             } else {
                 $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -231,7 +231,7 @@ switch ($action) {
         Create_button(
             [
                 'addhotel' => [
-                    'url'   => 'martin.hotel.php?action=add',
+                    'url'   => 'hotel.php?action=add',
                     'value' => _AM_XMARTIN_ADD_HOTEL,
                 ],
             ]
@@ -249,7 +249,7 @@ switch ($action) {
 
         $starStr = "<option value='0'>----</option>";
         foreach ($ranks as $key => $rank) {
-            $selected = $key == $_GET['hotel_star'] ? ' selected' : '';
+            $selected = $key == isset($_GET['hotel_star']) ? ' selected' : '';
             $starStr  .= "<option value='$key' $selected>$rank</option>";
         }
         // Creating the objects for top categories
@@ -263,7 +263,7 @@ switch ($action) {
             </form>
             </td></tr>';
         echo '</table>';
-        echo "<form action='martin.hotel.php?action=saverank' method='post'>";
+        echo "<form action='hotel.php?action=saverank' method='post'>";
         echo $GLOBALS['xoopsSecurity']->getTokenHTML();
         echo "<div align='right'><input type='submit' value='" . _AM_XMARTIN_SAVE_RANK . "'.</div><table width='100%' cellspacing=1 cellpadding=9 border=0 class = outer>";
         echo "<td class='bg3' align='left'><b>" . _AM_XMARTIN_HOTEL_NAME . '</b></td>';
@@ -283,14 +283,14 @@ switch ($action) {
         ];
         if ($hotelCount > 0) {
             foreach ($hotelObjects as $hotel) {
-                $add       = "<a href='martin.hotel.service.php?action=addhotel&hotel_id=" . $hotel['hotel_id'] . "' title='" . _AM_XMARTIN_ADD_HOTEL_SERVICE . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/images/icon/add.jpg'></a>";
-                $addroom   = "<a href='martin.room.php?action=add&hotel_id=" . $hotel['hotel_id'] . "' title='" . _AM_XMARTIN_ADD_HOTEL_ROOMS . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/images/icon/addroom.jpg'></a>";
+                $add       = "<a href='service.php?action=addhotel&hotel_id=" . $hotel['hotel_id'] . "' title='" . _AM_XMARTIN_ADD_HOTEL_SERVICE . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/images/icon/add.jpg'></a>";
+                $addroom   = "<a href='room.php?action=add&hotel_id=" . $hotel['hotel_id'] . "' title='" . _AM_XMARTIN_ADD_HOTEL_ROOMS . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/images/icon/addroom.jpg'></a>";
                 $modify    = "<a href='?action=add&id=" . $hotel['hotel_id'] . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/images/icon/edit.gif'></a>";
                 $delete    = "<a href='?action=del&id=" . $hotel['hotel_id'] . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/images/icon/delete.gif'></a>";
                 $hotel_url = XOOPS_URL . '/hotel-' . $hotel['hotel_alias'] . $helper->getConfig('hotel_static_prefix');
                 echo '<tr>';
                 echo "<td class='even' align='lefet'><a href='$hotel_url'>{$hotel['hotel_name']}</a></td>";
-                echo "<td class='even' align='lefet'><a href='martin.room.php?action=add&amp;hotel_id={$hotel['hotel_id']}'><img src='../assets/images/icon/add_btn_icon.gif' title='" . _AM_XMARTIN_NEW_ROOM_TYPES . "'></a></td>";
+                echo "<td class='even' align='lefet'><a href='room.php?action=add&amp;hotel_id={$hotel['hotel_id']}'><img src='../assets/images/icon/add_btn_icon.gif' title='" . _AM_XMARTIN_NEW_ROOM_TYPES . "'></a></td>";
                 echo "<td class='even' align='lefet'>{$hotel['city_name']}</td>";
                 echo "<td class='even' align='lefet'>{$ranks[$hotel['hotel_star']]}</td>";
                 echo "<td class='even' align='lefet'>{$hotel['hotel_telephone']}</td>";
@@ -305,11 +305,11 @@ switch ($action) {
                     foreach ($rooms as $room) {
                         echo '<tr>';
                         echo "<td class='even' align='lefet'></td>";
-                        echo "<td class='even' align='lefet'><a href='martin.room.php?action=add&amp;id={$room['room_id']}'>{$room['room_type_info']}</a></td>";
+                        echo "<td class='even' align='lefet'><a href='room.php?action=add&amp;id={$room['room_id']}'>{$room['room_type_info']}</a></td>";
                         echo "<td class='even' align='lefet'>" . _AM_XMARTIN_HOTEL_AREA . ":{$room['room_area']}</td>";
                         echo "<td class='even' align='lefet'>" . _AM_XMARTIN_HOTEL_FLOOR . ":{$room['room_floor']}</td>";
                         echo "<td class='even' align='lefet'>{$Status[$room['room_status']]}</td>";
-                        echo "<td class='even' align='lefet'><a href='martin.room.php?action=addprice&amp;room_id={$room['room_id']}'>" . _AM_XMARTIN_PRICE_MANAGEMENT . '</a></td>';
+                        echo "<td class='even' align='lefet'><a href='room.php?action=addprice&amp;room_id={$room['room_id']}'>" . _AM_XMARTIN_PRICE_MANAGEMENT . '</a></td>';
                         echo "<td class='even' align='lefet'></td>";
                         echo "<td class='even' align='lefet'></td>";
                         echo "<td class='even' align='lefet'></td>";

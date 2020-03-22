@@ -67,4 +67,6 @@ $helper->loadLanguage('admin');
 $helper->loadLanguage('modinfo');
 $helper->loadLanguage('common');
 
-//xoops_cp_header();
+if (function_exists(xoops_cp_header())) {
+    xoops_cp_header();
+}

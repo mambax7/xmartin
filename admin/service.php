@@ -12,7 +12,7 @@ $helper = Xmartin\Helper::getInstance();
  **/
 
 //头部
-require_once __DIR__ . '/martin.header.php';
+//require_once __DIR__ . '/martin.header.php';
 $currentFile = basename(__FILE__);
 $adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation($currentFile);
@@ -79,7 +79,7 @@ switch ($action) {
         } else {
             $redirect_msg = _AM_XMARTIN_MODIFIED_SUCCESSFULLY;
         }
-        $redirect_to = 'martin.hotel.service.php?action=list';
+        $redirect_to = 'service.php?action=list';
         if (!$hotelserviceHandler->insert($hotelServiceObj)) {
             redirect_header('javascript:history.go(-1);', 2, _AM_XMARTIN_OPERATION_FAILED);
         }
@@ -96,7 +96,7 @@ switch ($action) {
         } else {
             $redirect_msg = _AM_XMARTIN_MODIFIED_SUCCESSFULLY;
         }
-        $redirect_to = 'martin.hotel.service.php?action=typelist';
+        $redirect_to = 'service.php?action=typelist';
         if (!$hotelservicetypeHandler->insert($hotelServiceTypeObj)) {
             redirect_header('javascript:history.go(-1);', 2, _AM_XMARTIN_OPERATION_FAILED);
         }
@@ -120,7 +120,7 @@ switch ($action) {
                 'service_extra_price' => \Xmf\Request::getInt('service_extra_price', 0, 'POST'),
             ];
         }
-        $redirect_to = 'martin.hotel.service.php?action=hotellist';
+        $redirect_to = 'service.php?action=hotellist';
 
         //var_dump($IsOld);
         //var_dump($RelationData);exit;
@@ -137,7 +137,7 @@ switch ($action) {
         } else {
             if ($hotelserviceHandler->delete($hotelServiceObj)) {
                 $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
-                $redirect_to  = 'martin.hotel.service.php';
+                $redirect_to  = 'service.php';
             } else {
                 $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -161,7 +161,7 @@ switch ($action) {
         } else {
             if ($hotelservicetypeHandler->delete($hotelServiceTypeObj)) {
                 $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
-                $redirect_to  = 'martin.hotel.service.php?action=typelist';
+                $redirect_to  = 'service.php?action=typelist';
             } else {
                 $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -186,7 +186,7 @@ switch ($action) {
         } else {
             if ($hotelserviceHandler->deleteServiceRelation($hotel_id, $service_id)) {
                 $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
-                $redirect_to  = 'martin.hotel.service.php?action=hotellist';
+                $redirect_to  = 'service.php?action=hotellist';
             } else {
                 $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -309,27 +309,27 @@ function CreateButton()
     Create_button(
         [
             'addservicetype'  => [
-                'url'   => 'martin.hotel.service.php?action=typeadd',
+                'url'   => 'service.php?action=typeadd',
                 'value' => _AM_XMARTIN_ADD_SERVICE_TYPE,
             ],
             'servicetypelist' => [
-                'url'   => 'martin.hotel.service.php?action=typelist',
+                'url'   => 'service.php?action=typelist',
                 'value' => _AM_XMARTIN_SERVICE_TYPE_LIST,
             ],
             'addservice'      => [
-                'url'   => 'martin.hotel.service.php?action=add',
+                'url'   => 'service.php?action=add',
                 'value' => _AM_XMARTIN_ADD_SERVICE,
             ],
             'servicetype'     => [
-                'url'   => 'martin.hotel.service.php?action=list',
+                'url'   => 'service.php?action=list',
                 'value' => _AM_XMARTIN_SERVICE_LIST,
             ],
             'addhotel'        => [
-                'url'   => 'martin.hotel.service.php?action=addhotel',
+                'url'   => 'service.php?action=addhotel',
                 'value' => _AM_XMARTIN_ADD_HOTEL_SERVICE,
             ],
             'hotelservice'    => [
-                'url'   => 'martin.hotel.service.php?action=hotellist',
+                'url'   => 'service.php?action=hotellist',
                 'value' => _AM_XMARTIN_HOTEL_SERVICE_LIST,
             ],
         ]

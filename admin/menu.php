@@ -22,49 +22,49 @@ $adminmenu[] = [
 
 $adminmenu[] = [
     'title' => _MI_XMARTIN_MENU_02,
-    'link'  => 'admin/martin.hotel.php',
+    'link'  => 'admin/hotel.php',
     'icon'  => $pathModIcon32 . '/house_two.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_XMARTIN_MENU_01,
-    'link'  => 'admin/martin.order.php',
+    'link'  => 'admin/order.php',
     'icon'  => $pathModIcon32 . '/calendar-blue.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_XMARTIN_MENU_03,
-    'link'  => 'admin/martin.hotel.service.php',
+    'link'  => 'admin/service.php',
     'icon'  => $pathModIcon32 . '/account_functions.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_XMARTIN_MENU_04,
-    'link'  => 'admin/martin.hotel.promotion.php',
+    'link'  => 'admin/promotion.php',
     'icon'  => $pathIcon32 . '/fileshare.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_XMARTIN_MENU_05,
-    'link'  => 'admin/martin.hotel.city.php',
+    'link'  => 'admin/city.php',
     'icon'  => $pathModIcon32 . '/google_map_satellite.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_XMARTIN_MENU_06,
-    'link'  => 'admin/martin.room.php',
+    'link'  => 'admin/room.php',
     'icon'  => $pathModIcon32 . '/bed.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_XMARTIN_MENU_07,
-    'link'  => 'admin/martin.group.php',
+    'link'  => 'admin/group.php',
     'icon'  => $pathIcon32 . '/users.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_XMARTIN_MENU_08,
-    'link'  => 'admin/martin.auction.php',
+    'link'  => 'admin/auction.php',
     'icon'  => $pathIcon32 . '/cash_stack.png',
 ];
 
@@ -88,21 +88,21 @@ $adminmenu = [];
 
 $adminmenu[] = array("link" => "admin/index.php", "title" => "Home");
 
-$adminmenu[] = array("link" => "admin/martin.order.php", "title" => "Orders");
+$adminmenu[] = array("link" => "admin/order.php", "title" => "Orders");
 
-$adminmenu[] = array("link" => "admin/martin.hotel.php", "title" => "Hotels");
+$adminmenu[] = array("link" => "admin/hotel.php", "title" => "Hotels");
 
-$adminmenu[] = array("link" => "admin/martin.hotel.service.php", "title" => "Services");
+$adminmenu[] = array("link" => "admin/service.php", "title" => "Services");
 
-$adminmenu[] = array("link" => "admin/martin.hotel.promotion.php", "title" => "Promotions");
+$adminmenu[] = array("link" => "admin/promotion.php", "title" => "Promotions");
 
-$adminmenu[] = array("link" => "admin/martin.hotel.city.php", "title" => "Cities");
+$adminmenu[] = array("link" => "admin/city.php", "title" => "Cities");
 //add by martin
-$adminmenu[] = array("link" => "admin/martin.room.php", "title" => "Rooms");
+$adminmenu[] = array("link" => "admin/room.php", "title" => "Rooms");
 
-$adminmenu[] = array("link" => "admin/martin.group.php", "title" => "Groups");
+$adminmenu[] = array("link" => "admin/group.php", "title" => "Groups");
 
-$adminmenu[] = array("link" => "admin/martin.auction.php", "title" => "Auctions");
+$adminmenu[] = array("link" => "admin/auction.php", "title" => "Auctions");
 
 $adminmenu[] = array("link" => "admin/martin.about.php", "title" => "About");
 
@@ -113,7 +113,7 @@ if (isset($xoopsModule)) {
 
     $i++;
     $headermenu[$i]['title'] = 'Reservation block management';
-    $headermenu[$i]['link']  = 'martin.block.php';
+    $headermenu[$i]['link']  = 'block.php';
 
     $i++;
     $headermenu[$i]['title'] = "Update Module";
@@ -121,7 +121,7 @@ if (isset($xoopsModule)) {
 
     $i++;
     $headermenu[$i]['title'] = "Payment Configuration";
-    $headermenu[$i]['link']  = XOOPS_URL . "/modules/xmartin/admin/martin.pay.php";
+    $headermenu[$i]['link']  = XOOPS_URL . "/modules/xmartin/admin/pay.php";
 }
 
 

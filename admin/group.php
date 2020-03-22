@@ -12,7 +12,7 @@ $helper = \XoopsModules\Xmartin\Helper::getInstance();
  **/
 
 //头部
-require_once __DIR__ . '/martin.header.php';
+//require_once __DIR__ . '/martin.header.php';
 $currentFile = basename(__FILE__);
 $adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation($currentFile);
@@ -40,7 +40,7 @@ switch ($action) {
     case 'add':
         martin_collapsableBar('createtable', 'createtableicon', _AM_XMARTIN_ADD_CUSTOMERS, _AM_XMARTIN_ADD_CUSTOMERS);
         CreateButton();
-        //Create_button(array('addcity'=>array('url'=>'mconfirmartin.hotel.city.php?action=add','value'=>_AM_XMARTIN_CITY_NAME)));
+        //Create_button(array('addcity'=>array('url'=>'mconfircity.php?action=add','value'=>_AM_XMARTIN_CITY_NAME)));
         $form = new Xmartin\Form\FormGroup($groupObj, $groupHandler->getRoomList($id), $hotelserviceHandler->getHotelList());
 
         $form->display();
@@ -79,10 +79,10 @@ switch ($action) {
         }
         if ($groupObj->isNew()) {
             $redirect_msg = _AM_XMARTIN_ADDED_SUCCESSFULLY;
-            $redirect_to  = 'martin.group.php';
+            $redirect_to  = 'group.php';
         } else {
             $redirect_msg = _AM_XMARTIN_MODIFIED_SUCCESSFULLY;
-            $redirect_to  = 'martin.group.php';
+            $redirect_to  = 'group.php';
         }
 
         if (!is_array($room_ids) || empty($room_ids)) {
@@ -122,7 +122,7 @@ switch ($action) {
         } else {
             if ($groupHandler->delete($groupObj)) {
                 $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
-                $redirect_to  = 'martin.group.php';
+                $redirect_to  = 'group.php';
             } else {
                 $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -192,8 +192,8 @@ switch ($action) {
 function CreateButton()
 {
     $arr = [
-        'addservicetype'  => ['url' => 'martin.group.php?action=add', 'value' => _AM_XMARTIN_ADD_CUSTOMERS],
-        'servicetypelist' => ['url' => 'martin.group.php?action=list', 'value' => _AM_XMARTIN_CUSTOMERS_LIST],
+        'addservicetype'  => ['url' => 'group.php?action=add', 'value' => _AM_XMARTIN_ADD_CUSTOMERS],
+        'servicetypelist' => ['url' => 'group.php?action=list', 'value' => _AM_XMARTIN_CUSTOMERS_LIST],
     ];
     Create_button($arr);
 }

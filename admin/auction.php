@@ -9,7 +9,7 @@ require_once __DIR__ . '/admin_header.php';
  **/
 
 //头部
-require_once __DIR__ . '/martin.header.php';
+//require_once __DIR__ . '/martin.header.php';
 
 /** @var Xmartin\Helper $helper */
 $helper      = Xmartin\Helper::getInstance();
@@ -40,7 +40,7 @@ switch ($action) {
     case 'add':
         martin_collapsableBar('createtable', 'createtableicon', _AM_XMARTIN_ADDING_BID, _AM_XMARTIN_ADDING_BID);
         CreateButton();
-        //Create_button(array('addcity'=>array('url'=>'mconfirmartin.hotel.city.php?action=add','value'=>_AM_XMARTIN_CITY_NAME)));
+        //Create_button(array('addcity'=>array('url'=>'mconfircity.php?action=add','value'=>_AM_XMARTIN_CITY_NAME)));
         $form = new Xmartin\Form\FormAuction($auctionObj, $auctionHandler->getRoomList($id), $hotelserviceHandler->getHotelList());
         $form->display();
 
@@ -77,10 +77,10 @@ switch ($action) {
         }
         if ($auctionObj->isNew()) {
             $redirect_msg = _AM_XMARTIN_ADDED_SUCCESSFULLY;
-            $redirect_to  = 'martin.auction.php';
+            $redirect_to  = 'auction.php';
         } else {
             $redirect_msg = _AM_XMARTIN_MODIFIED_SUCCESSFULLY;
-            $redirect_to  = 'martin.auction.php';
+            $redirect_to  = 'auction.php';
         }
 
         if (!is_array($room_ids) || empty($room_ids)) {
@@ -120,7 +120,7 @@ switch ($action) {
         } else {
             if ($auctionHandler->delete($auctionObj)) {
                 $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
-                $redirect_to  = 'martin.auction.php';
+                $redirect_to  = 'auction.php';
             } else {
                 $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -193,8 +193,8 @@ switch ($action) {
 function CreateButton()
 {
     $arr = [
-        'addservicetype'  => ['url' => 'martin.auction.php?action=add', 'value' => _AM_XMARTIN_ADDING_BID],
-        'servicetypelist' => ['url' => 'martin.auction.php?action=list', 'value' => _AM_XMARTIN_AUCTION_LIST],
+        'addservicetype'  => ['url' => 'auction.php?action=add', 'value' => _AM_XMARTIN_ADDING_BID],
+        'servicetypelist' => ['url' => 'auction.php?action=list', 'value' => _AM_XMARTIN_AUCTION_LIST],
     ];
     Create_button($arr);
 }

@@ -16,7 +16,7 @@ require_once __DIR__ . '/admin_header.php';
 
 //require_once __DIR__   . '/martin.header.php';
 
-xoops_cp_header();
+//xoops_cp_header();
 
 $currentFile = basename(__FILE__);
 $adminObject = \Xmf\Module\Admin::getInstance();
@@ -51,7 +51,7 @@ switch ($action) {
     case 'add':
         martin_collapsableBar('createtable', 'createtableicon', _AM_XMARTIN_PROMO_ADD, _AM_XMARTIN_PROMO_ADD);
         CreateButton();
-        //Create_button(array('addcity'=>array('url'=>'mconfirmartin.hotel.city.php?action=add','value'=>_AM_XMARTIN_CITY_NAME)));
+        //Create_button(array('addcity'=>array('url'=>'mconfircity.php?action=add','value'=>_AM_XMARTIN_CITY_NAME)));
 
         $form = new Xmartin\Form\FormPromotion($promotionObj, $hotelserviceHandler->getHotelList());
         $form->display();
@@ -75,10 +75,10 @@ switch ($action) {
         }
         if ($promotionObj->isNew()) {
             $redirect_msg = _AM_XMARTIN_ADDED_SUCCESSFULLY;
-            $redirect_to  = 'martin.hotel.promotion.php';
+            $redirect_to  = 'promotion.php';
         } else {
             $redirect_msg = _AM_XMARTIN_MODIFIED_SUCCESSFULLY;
-            $redirect_to  = 'martin.hotel.promotion.php';
+            $redirect_to  = 'promotion.php';
         }
 
         if (!$promotionHandler->insert($promotionObj)) {
@@ -105,7 +105,7 @@ switch ($action) {
         } else {
             if ($promotionHandler->delete($promotionObj)) {
                 $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
-                $redirect_to  = 'martin.hotel.promotion.php';
+                $redirect_to  = 'promotion.php';
             } else {
                 $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
@@ -166,13 +166,13 @@ switch ($action) {
 function CreateButton()
 {
     $arr = [
-        'addservicetype'  => ['url' => 'martin.hotel.promotion.php?action=add', 'value' => _AM_XMARTIN_PROMO_ADD],
-        'servicetypelist' => ['url' => 'martin.hotel.promotion.php?action=list', 'value' => _AM_XMARTIN_PROMO_LIST],
+        'addservicetype'  => ['url' => 'promotion.php?action=add', 'value' => _AM_XMARTIN_PROMO_ADD],
+        'servicetypelist' => ['url' => 'promotion.php?action=list', 'value' => _AM_XMARTIN_PROMO_LIST],
     ];
     Create_button($arr);
 }
 
 //底部
-//require_once martin.footer.php;
+//require_once footer.php;
 
 require_once __DIR__ . '/admin_footer.php';

@@ -6,7 +6,7 @@ require_once __DIR__ . '/admin_header.php';
  **/
 
 //头部
-require_once __DIR__ . '/martin.header.php';
+//require_once __DIR__ . '/martin.header.php';
 $currentFile = basename(__FILE__);
 $adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation($currentFile);
@@ -85,7 +85,7 @@ switch ($action) {
             chmod($config_file, 0777);
             //file_put_contents($config_file,$fileStr);
         }
-        redirect_header('martin.pay.php', 2, _AM_XMARTIN_MODIFIED_SUCCESSFULLY);
+        redirect_header('pay.php', 2, _AM_XMARTIN_MODIFIED_SUCCESSFULLY);
         break;
     default:
         redirect_header(XOOPS_URL, 2, _AM_XMARTIN_UNAUTHORIZED_ACCESS);
