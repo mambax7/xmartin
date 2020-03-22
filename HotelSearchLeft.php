@@ -2,32 +2,33 @@
 
 use XoopsModules\Xmartin;
 
+require_once __DIR__ . '/header.php';
+
 global $xoopsModule, $xoopsTpl, $hotelHandler;
 
 $isNewsModule = false;
-//新闻
-if ('xmartin' !== $xoopsModule->dirname()) {
+/** @var Xmartin\Helper $helper */
+$helper = Xmartin\Helper::getInstance();
+//News
+if ('xmartin' !== $helper->getDirname()) {
     if (!is_array($aliasurl)) {
         $isNewsModule = true;
     }
-    $xoopsModule = $moduleHandler->getByDirname('martin');
+    $xoopsModule = $moduleHandler->getByDirname('xmartin');
     //    $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 }
 
 require_once XOOPS_ROOT_PATH . '/modules/xmartin/include/functions.php';
 
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
-
 if (empty($hotelHandler)) {
     $hotelHandler = $helper->getHandler('Hotel');
 }
-//$roomHandler = $helper->getHandler("room");
-//$promotionHandler = $helper->getHandler("hotelpromotion");
-//$serviceHandler = $helper->getHandler("hotelservice");
+//$roomHandler = $helper->getHandler("Room");
+//$promotionHandler = $helper->getHandler("Promotion");
+//$serviceHandler = $helper->getHandler("Service");
 $groupHandler   = $helper->getHandler('Group');
 $auctionHandler = $helper->getHandler('Auction');
-$newsHandler    = $helper->getHandler('Sews');
+$newsHandler    = $helper->getHandler('News');
 
 $ViewedhotelIDs = array_filter(explode(',', $_COOKIE['ViewedHotels']));
 if (is_array($ViewedhotelArr)) {

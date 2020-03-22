@@ -4,6 +4,9 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
+$moduleDirName      = basename(__DIR__);
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
 $modversion = [
     'version'       => 1.0,
     'module_status' => 'Beta 1',
@@ -40,25 +43,25 @@ $modversion['min_db']              = ['mysql' => '5.5'];
 $modversion['sqlfile']['mysql'] = 'sql/martin_2.0.sql';
 
 $modversion['tables'] = [
-    $modversion['dirname'] . '_auction_bid',
-    $modversion['dirname'] . '_auction_room',
-    $modversion['dirname'] . '_auction',
-    $modversion['dirname'] . '_group_join',
-    $modversion['dirname'] . '_group_room',
-    $modversion['dirname'] . '_group',
-    $modversion['dirname'] . '_hotel_city',
-    $modversion['dirname'] . '_hotel_promotions',
-    $modversion['dirname'] . '_hotel_service_relation',
-    $modversion['dirname'] . '_hotel_service_type',
-    $modversion['dirname'] . '_hotel_service',
-    $modversion['dirname'] . '_hotel',
-    $modversion['dirname'] . '_order_query_room',
-    $modversion['dirname'] . '_order_room',
-    $modversion['dirname'] . '_order_service',
-    $modversion['dirname'] . '_order',
-    $modversion['dirname'] . '_room_price',
-    $modversion['dirname'] . '_room_type',
-    $modversion['dirname'] . '_room',
+     $moduleDirName . '_' . 'auction_bid',
+     $moduleDirName . '_' . 'auction_room',
+     $moduleDirName . '_' . 'auction',
+     $moduleDirName . '_' . 'group_join',
+     $moduleDirName . '_' . 'group_room',
+     $moduleDirName . '_' . 'group',
+     $moduleDirName . '_' . 'hotel_city',
+     $moduleDirName . '_' . 'hotel_promotions',
+     $moduleDirName . '_' . 'hotel_service_relation',
+     $moduleDirName . '_' . 'hotel_service_type',
+     $moduleDirName . '_' . 'hotel_service',
+     $moduleDirName . '_' . 'hotel',
+     $moduleDirName . '_' . 'order_query_room',
+     $moduleDirName . '_' . 'order_room',
+     $moduleDirName . '_' . 'order_service',
+     $moduleDirName . '_' . 'order',
+     $moduleDirName . '_' . 'room_price',
+     $moduleDirName . '_' . 'room_type',
+     $moduleDirName . '_' . 'room',
 ];
 
 // Admin things
