@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @
  * @method:
@@ -11,15 +12,15 @@ if (empty($order_id)) {
     redirect_header('javascript:history.go(-1);', 1, '没有该订单.');
 }
 
-require_once MARTIN_ROOT_PATH . 'HotelSearchLeft.php';
+require_once XMARTIN_ROOT_PATH . 'HotelSearchLeft.php';
 
 $xoopsOption['xoops_pagetitle'] = '订单 ' . $order_id . ' 详情 - 用户中心';
 
-$searchHandler    = xoops_getModuleHandler('search', 'martin');
-$orderHandler     = xoops_getModuleHandler('order', 'martin');
-$memberHandler    = xoops_getModuleHandler('member', 'martin');
-$hotelHandler     = xoops_getModuleHandler('hotel', 'martin');
-$promotionHandler = xoops_getModuleHandler('hotelpromotion', 'martin');
+$searchHandler    = $helper->getHandler('Search');
+$orderHandler     = $helper->getHandler('Order');
+$memberHandler    = $helper->getHandler('Member');
+$hotelHandler     = $helper->getHandler('Hotel');
+$promotionHandler = $helper->getHandler('Promotion');
 
 $OrderObj = $orderHandler->get($order_id);
 foreach ($OrderObj->vars as $k => $v) {
@@ -50,7 +51,7 @@ foreach ($rooms as $key => $room) {
 $promotion = $promotionHandler->getHotelPromotion($hotel_id, (int)$date);
 //var_dump($promotion);
 
-$services = $memberHandler->GetOrderService($order_id, $hotel_id);
+$services = $memberHandler->getOrderService($order_id, $hotel_id);
 //var_dump($services);
 
 $xoopsTpl->assign('pays', $pays);

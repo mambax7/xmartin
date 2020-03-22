@@ -1,13 +1,14 @@
 <?php
-include  dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
+
+require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+require_once XOOPS_ROOT_PATH . '/modules/xmartin/include/common.php';
 if (!defined('MODULE_URL')) {
-    define('MODULE_URL', XOOPS_URL . '/modules/martin/');
+    define('MODULE_URL', XOOPS_URL . '/modules/xmartin/');
 }
 
 global $xoopsUser, $xoopsdModule;
 if (!$xoopsUser) {
-    redirect_header(XOOPS_URL, 3, _AM_MARTIN_UNAUTHORIZED_ACCESS);
+    redirect_header(XOOPS_URL, 3, _AM_XMARTIN_UNAUTHORIZED_ACCESS);
 }
 
 $dateNumber      = isset($_POST['dateNumber']) ? $_POST['dateNumber'] : null;
@@ -23,9 +24,9 @@ if (null === $User) {
     redirect_header(XOOPS_URL, 2, '非法.');
 }
 
-$cartHandler    = xoops_getModuleHandler('cart', 'martin');
-$roomHandler    = xoops_getModuleHandler('room', 'martin');
-$serviceHandler = xoops_getModuleHandler('hotelservice', 'martin');
+$cartHandler    = $helper->getHandler('Cart');
+$roomHandler    = $helper->getHandler('Room');
+$serviceHandler = $helper->getHandler('HotelService');
 $cartObj        = $cartHandler->create();
 
 $order_total_price   = 0;
@@ -33,7 +34,7 @@ $order_pay_money     = 0;
 $order_sented_coupon = 0;
 $service_total       = 0;
 $hotel_service       = $serviceHandler->getHotelService($hotel_id);
-$room_price          = $roomHandler->GetRoomDatePrie($room_id, $check_in_date, $check_out_date);
+$room_price          = $roomHandler->getRoomDatePrie($room_id, $check_in_date, $check_out_date);
 
 //价格计算
 //var_dump($room_price);exit;
@@ -71,7 +72,8 @@ $cartObj->setVar('service_date_count', $service);
 //order datas
 //var_dump($cartObj);
 
-if ($order_id = $cartHandler->saveCart($cartObj)) {
+$order_id = $cartHandler->saveCart($cartObj);
+if ($order_id) {
     if (is_array($dateNumber) && !empty($dateNumber)) {
         if (!$cartHandler->InsertOrderRoom($order_id, [$room_id], $dateNumber)) {
             redirect_header('javascript:history.go(-1);', 2, '房间写入失败,订单保存失败.');

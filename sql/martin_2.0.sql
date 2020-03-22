@@ -14,11 +14,11 @@
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_auction`
+#-- Table structure for table `xmartin_auction`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_auction` (
-  `auction_id`             INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `xmartin_auction` (
+  `auction_id`             INT(11) NOT NULL AUTO_INCREMENT,
   `auction_name`           VARCHAR(255)              DEFAULT '',
   `auction_info`           TEXT,
   `check_in_date`          INT(11) UNSIGNED          DEFAULT '0',
@@ -39,11 +39,11 @@ CREATE TABLE IF NOT EXISTS `martin_auction` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_auction_bid`
+#-- Table structure for table `xmartin_auction_bid`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_auction_bid` (
-  `bid_id`         INT(11) UNSIGNED NOT NULL AUTO_INCREMENT
+CREATE TABLE `xmartin_auction_bid` (
+  `bid_id`         INT(11) NOT NULL AUTO_INCREMENT
   COMMENT '出价ID',
   `auction_id`     INT(11)          NOT NULL,
   `uid`            INT(11)          NOT NULL,
@@ -65,10 +65,10 @@ CREATE TABLE IF NOT EXISTS `martin_auction_bid` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_auction_room`
+#-- Table structure for table `xmartin_auction_room`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_auction_room` (
+CREATE TABLE `xmartin_auction_room` (
   `auction_id` INT(11) NOT NULL DEFAULT '0',
   `room_id`    INT(11) NOT NULL DEFAULT '0',
   `room_count` INT(11)          DEFAULT '0',
@@ -82,10 +82,10 @@ CREATE TABLE IF NOT EXISTS `martin_auction_room` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_group`
+#-- Table structure for table `xmartin_group`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_group` (
+CREATE TABLE `xmartin_group` (
   `group_id`             INT(11) NOT NULL AUTO_INCREMENT,
   `group_name`           VARCHAR(255)     DEFAULT '',
   `group_info`           TEXT,
@@ -108,11 +108,11 @@ CREATE TABLE IF NOT EXISTS `martin_group` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_group_join`
+#-- Table structure for table `xmartin_group_join`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_group_join` (
-  `join_id`     INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `xmartin_group_join` (
+  `join_id`     INT(11) NOT NULL AUTO_INCREMENT,
   `group_id`    INT(11)          NOT NULL,
   `uid`         INT(11)          NOT NULL,
   `room_number` INT(11)          NOT NULL,
@@ -128,10 +128,10 @@ CREATE TABLE IF NOT EXISTS `martin_group_join` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_group_room`
+#-- Table structure for table `xmartin_group_room`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_group_room` (
+CREATE TABLE `xmartin_group_room` (
   `group_id`   INT(11) NOT NULL DEFAULT '0',
   `room_id`    INT(11) NOT NULL DEFAULT '0',
   `room_count` INT(11)          DEFAULT '0',
@@ -145,10 +145,10 @@ CREATE TABLE IF NOT EXISTS `martin_group_room` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_hotel`
+#-- Table structure for table `xmartin_hotel`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_hotel` (
+CREATE TABLE `xmartin_hotel` (
   `hotel_id`             INT(11) NOT NULL AUTO_INCREMENT,
   `hotel_city`           INT(11) NOT NULL
   COMMENT '酒店所属城市',
@@ -198,10 +198,10 @@ CREATE TABLE IF NOT EXISTS `martin_hotel` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_hotel_city`
+#-- Table structure for table `xmartin_hotel_city`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_hotel_city` (
+CREATE TABLE `xmartin_hotel_city` (
   `city_id`       INT(11)      NOT NULL AUTO_INCREMENT,
   `city_parentid` INT(11)               DEFAULT '0',
   `city_name`     VARCHAR(45)           DEFAULT NULL,
@@ -217,11 +217,11 @@ CREATE TABLE IF NOT EXISTS `martin_hotel_city` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_hotel_promotions`
+#-- Table structure for table `xmartin_hotel_promotions`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_hotel_promotions` (
-  `promotion_id`          INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `xmartin_hotel_promotions` (
+  `promotion_id`          INT(11) NOT NULL AUTO_INCREMENT,
   `hotel_id`              INT(11)                   DEFAULT '0',
   `promotion_start_date`  INT(11)                   DEFAULT '0',
   `promotion_end_date`    INT(11)                   DEFAULT '0',
@@ -238,10 +238,10 @@ CREATE TABLE IF NOT EXISTS `martin_hotel_promotions` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_hotel_service`
+#-- Table structure for table `xmartin_hotel_service`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_hotel_service` (
+CREATE TABLE `xmartin_hotel_service` (
   `service_id`          INT(11) NOT NULL AUTO_INCREMENT,
   `service_type_id`     INT(11)          DEFAULT '0',
   `service_unit`        VARCHAR(45)      DEFAULT NULL,
@@ -259,10 +259,10 @@ CREATE TABLE IF NOT EXISTS `martin_hotel_service` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_hotel_service_relation`
+#-- Table structure for table `xmartin_hotel_service_relation`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_hotel_service_relation` (
+CREATE TABLE `xmartin_hotel_service_relation` (
   `hotel_id`            INT(11) NOT NULL DEFAULT '0',
   `service_id`          INT(11) NOT NULL DEFAULT '0',
   `service_extra_price` DECIMAL(11, 2)   DEFAULT '0.00',
@@ -276,10 +276,10 @@ CREATE TABLE IF NOT EXISTS `martin_hotel_service_relation` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_hotel_service_type`
+#-- Table structure for table `xmartin_hotel_service_type`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_hotel_service_type` (
+CREATE TABLE `xmartin_hotel_service_type` (
   `service_type_id`   INT(11) NOT NULL AUTO_INCREMENT,
   `service_type_name` VARCHAR(255)     DEFAULT NULL,
   PRIMARY KEY (`service_type_id`)
@@ -293,10 +293,10 @@ CREATE TABLE IF NOT EXISTS `martin_hotel_service_type` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_order`
+#-- Table structure for table `xmartin_order`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_order` (
+CREATE TABLE `xmartin_order` (
   `order_id`            INT(11) NOT NULL AUTO_INCREMENT,
   `order_type`          TINYINT(1)       DEFAULT '0'
   COMMENT '预定方式',
@@ -333,10 +333,10 @@ CREATE TABLE IF NOT EXISTS `martin_order` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_order_query_room`
+#-- Table structure for table `xmartin_order_query_room`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_order_query_room` (
+CREATE TABLE `xmartin_order_query_room` (
   `order_id`   INT(11) NOT NULL AUTO_INCREMENT,
   `room_id`    INT(11)          DEFAULT NULL,
   `room_date`  INT(11)          DEFAULT NULL,
@@ -352,10 +352,10 @@ CREATE TABLE IF NOT EXISTS `martin_order_query_room` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_order_room`
+#-- Table structure for table `xmartin_order_room`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_order_room` (
+CREATE TABLE `xmartin_order_room` (
   `order_id`   INT(11) NOT NULL DEFAULT '0',
   `room_id`    INT(11) NOT NULL DEFAULT '0',
   `room_date`  INT(11)          DEFAULT '0',
@@ -371,10 +371,10 @@ CREATE TABLE IF NOT EXISTS `martin_order_room` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_order_service`
+#-- Table structure for table `xmartin_order_service`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_order_service` (
+CREATE TABLE `xmartin_order_service` (
   `order_id`      INT(11) NOT NULL DEFAULT '0',
   `service_id`    INT(11) NOT NULL DEFAULT '0',
   `service_date`  INT(11)          DEFAULT '0',
@@ -390,10 +390,10 @@ CREATE TABLE IF NOT EXISTS `martin_order_service` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_room`
+#-- Table structure for table `xmartin_room`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_room` (
+CREATE TABLE `xmartin_room` (
   `room_id`            INT(11)    NOT NULL AUTO_INCREMENT,
   `hotel_id`           INT(11)             DEFAULT '0',
   `room_count`         INT(11)    NOT NULL DEFAULT '0'
@@ -410,7 +410,7 @@ CREATE TABLE IF NOT EXISTS `martin_room` (
   `room_bed_info`      VARCHAR(255)        DEFAULT NULL,
   `room_status`        TINYINT(1)          DEFAULT '0',
   `room_sented_coupon` DECIMAL(10, 2)      DEFAULT '0.00'
-  COMMENT '_AM_MARTIN_BUY_PRICE',
+  COMMENT '_AM_XMARTIN_BUY_PRICE',
   PRIMARY KEY (`room_id`),
   KEY `hotel_id` (`hotel_id`),
   KEY `room_type_id` (`room_type_id`)
@@ -424,10 +424,10 @@ CREATE TABLE IF NOT EXISTS `martin_room` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_room_price`
+#-- Table structure for table `xmartin_room_price`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_room_price` (
+CREATE TABLE `xmartin_room_price` (
   `room_id`                   INT(11)        DEFAULT '0',
   `room_is_today_special`     TINYINT(1)     DEFAULT '0',
   `room_price`                DECIMAL(10, 2) DEFAULT '0.00',
@@ -445,10 +445,10 @@ CREATE TABLE IF NOT EXISTS `martin_room_price` (
 #-- --------------------------------------------------------
 
 #--
-#-- Table structure for table `martin_room_type`
+#-- Table structure for table `xmartin_room_type`
 #--
 
-CREATE TABLE IF NOT EXISTS `martin_room_type` (
+CREATE TABLE `xmartin_room_type` (
   `room_type_id`   INT(11) NOT NULL AUTO_INCREMENT,
   `room_type_info` VARCHAR(45)      DEFAULT NULL,
   PRIMARY KEY (`room_type_id`)

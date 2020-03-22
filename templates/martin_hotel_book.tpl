@@ -1,7 +1,7 @@
-<style type="text/css">@import "<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/hotel.js"></script>
+<style type="text/css">@import "<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/hotel.js"></script>
 <link rel="stylesheet" href="<{$module_url}>css/hotelsearch.css" type="text/css">
 <script type="text/javascript">
     var this_url = '<{$this_url}>';
@@ -152,7 +152,7 @@
                     <{if $check_arr}>
                         <tr align="center" class="fwt">
                             <td width="33%">日期</td>
-                            <td width="21%"><{$smarty.const._AM_MARTIN_PRICE}></td>
+                            <td width="21%"><{$smarty.const._AM_XMARTIN_PRICE}></td>
                             <td width="23%">数量</td>
                             <td width="23%">小计</td>
                         </tr>
@@ -207,8 +207,8 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="dtable">
                     <tr align="center" class="fwt">
                         <td width="27%">附属服务名称</td>
-                        <td width="19%"><{$smarty.const._AM_MARTIN_SERVICE_UNIT}></td>
-                        <td width="18%"><{$smarty.const._AM_MARTIN_PRICE}></td>
+                        <td width="19%"><{$smarty.const._AM_XMARTIN_SERVICE_UNIT}></td>
+                        <td width="18%"><{$smarty.const._AM_XMARTIN_PRICE}></td>
                         <td width="17%"><p>数量</p></td>
                         <td width="19%">附属服务小计</td>
                     </tr>
@@ -265,12 +265,12 @@
                 <table width="100%" border="0" cellspacing="0" id="user" cellpadding="0" class="dtable">
                     <tr>
                         <td width="18%" align="right"><font
-                                    color="#FF0000">*</font><{$smarty.const._AM_MARTIN_FULL_NAME}>：
+                                    color="#FF0000">*</font><{$smarty.const._AM_XMARTIN_FULL_NAME}>：
                         </td>
                         <td width="32%"><input name="user[name]" id="name" type="text" size="18"
                                                value="<{$user.name}>"></td>
                         <td width="18%" align="right"><font
-                                    color="#FF0000">*</font><{$smarty.const._AM_MARTIN_CERTIFICATION_TYPE}>：
+                                    color="#FF0000">*</font><{$smarty.const._AM_XMARTIN_CERTIFICATION_TYPE}>：
                         </td>
                         <td width="32%"><select name="user[document]"
                                                 id="document"><{foreach from=$order_document_type item=document key=key}>
@@ -287,7 +287,7 @@
                                    value="<{$user.document_value}>"></td>
                     </tr>
                     <tr>
-                        <td align="right"><font color="#FF0000">*</font><{$smarty.const._AM_MARTIN_PHONE}>：</td>
+                        <td align="right"><font color="#FF0000">*</font><{$smarty.const._AM_XMARTIN_PHONE}>：</td>
                         <td><input name="user[phone]" id="phone" type="text" size="18" maxlength="25"
                                    value="<{$user.phone}>"></td>
                         <td colspan="2">如果您是预订港澳酒店：<br>

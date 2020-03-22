@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @member    index
  * @license   http://www.blags.org/
@@ -7,4 +8,4 @@
  * @author    Martin <china.codehome@gmail.com>
  * */
 $xoopsOption['xoops_pagetitle'] = $xoopsUser->name() . ' - 用户中心';
-include MARTIN_ROOT_PATH . 'member/member_order.php';
+include XMARTIN_ROOT_PATH . 'member/member_order.php';

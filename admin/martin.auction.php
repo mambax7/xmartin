@@ -4,47 +4,46 @@ use XoopsModules\Xmartin;
 
 require_once __DIR__ . '/admin_header.php';
 
-/** @var Xmartin\Helper $helper */
-$helper = Xmartin\Helper::getInstance();
-
 /*
  * 处理
  **/
 
 //头部
-include __DIR__ . '/martin.header.php';
-$currentFile   = basename(__FILE__);
-$myModuleAdmin = \Xmf\Module\Admin::getInstance();
-echo $myModuleAdmin->displayNavigation($currentFile);
+require_once __DIR__ . '/martin.header.php';
+
+/** @var Xmartin\Helper $helper */
+$helper      = Xmartin\Helper::getInstance();
+$currentFile = basename(__FILE__);
+$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject->displayNavigation($currentFile);
 
 //parameter 参数
 $action = isset($_POST['action']) ? $_POST['action'] : @$_GET['action'];
 $action = empty($action) ? 'list' : $action;
-$action = trim(strtolower($action));
+$action = trim(mb_strtolower($action));
 $id     = !empty($_POST['id']) ? $_POST['id'] : @$_GET['id'];
 $id     = (int)$id;
 $start  = \Xmf\Request::getInt('start', 0, 'GET');
 //确认删除
-$confirm = \Xmf\Request::getInt('confirm', 0, POST);
+$confirm = \Xmf\Request::getInt('confirm', 0, 'POST');
 //parameter 参数
 
 // martin_adminMenu(8, "订房后台 > 竞价管理");
 
-$auctionHandler      = xoops_getModuleHandler('auction', MARTIN_DIRNAME, true);
-$hotelserviceHandler = xoops_getModuleHandler('hotelservice', MARTIN_DIRNAME, true);
+$auctionHandler      = $helper->getHandler('Auction');
+$hotelserviceHandler = $helper->getHandler('HotelService');
 
-//$HotelServiceObj = $hotelserviceHandler->create();
+//$hotelServiceObj = $hotelserviceHandler->create();
 $auctionObj = $id > 0 ? $auctionHandler->get($id) : $auctionHandler->create();
 
 switch ($action) {
     case 'add':
-        include MARTIN_ROOT_PATH . 'include/form.auction.php';
-        martin_collapsableBar('createtable', 'createtableicon', _AM_MARTIN_ADDING_BID, _AM_MARTIN_ADDING_BID);
+        martin_collapsableBar('createtable', 'createtableicon', _AM_XMARTIN_ADDING_BID, _AM_XMARTIN_ADDING_BID);
         CreateButton();
-        //Create_button(array('addcity'=>array('url'=>'mconfirmartin.hotel.city.php?action=add','value'=>_AM_MARTIN_CITY_NAME)));
-        $form = new form_auction($auctionObj, $auctionHandler->getRoomList($id), $hotelserviceHandler->GetHotelList());
-
+        //Create_button(array('addcity'=>array('url'=>'mconfirmartin.hotel.city.php?action=add','value'=>_AM_XMARTIN_CITY_NAME)));
+        $form = new Xmartin\Form\FormAuction($auctionObj, $auctionHandler->getRoomList($id), $hotelserviceHandler->getHotelList());
         $form->display();
+
         martin_close_collapsable('createtable', 'createtableicon');
         break;
     case 'save':
@@ -77,19 +76,19 @@ switch ($action) {
             $auctionObj->setNew();
         }
         if ($auctionObj->isNew()) {
-            $redirect_msg = _AM_MARTIN_ADDED_SUCCESSFULLY;
+            $redirect_msg = _AM_XMARTIN_ADDED_SUCCESSFULLY;
             $redirect_to  = 'martin.auction.php';
         } else {
-            $redirect_msg = _AM_MARTIN_MODIFIED_SUCCESSFULLY;
+            $redirect_msg = _AM_XMARTIN_MODIFIED_SUCCESSFULLY;
             $redirect_to  = 'martin.auction.php';
         }
 
         if (!is_array($room_ids) || empty($room_ids)) {
-            redirect_header('javascript:history.go(-1);', 2, _AM_MARTIN_FAILED_TO_ADD_ROOM . '<br>' . _AM_MARTIN_NO_ROOM_CHOSEN);
+            redirect_header('javascript:history.go(-1);', 2, _AM_XMARTIN_FAILED_TO_ADD_ROOM . '<br>' . _AM_XMARTIN_NO_ROOM_CHOSEN);
         }
 
         if (!$auction_id = $auctionHandler->insert($auctionObj)) {
-            redirect_header('javascript:history.go(-1);', 2, _AM_MARTIN_OPERATION_FAILED);
+            redirect_header('javascript:history.go(-1);', 2, _AM_XMARTIN_OPERATION_FAILED);
         }
 
         //$auction_id = $id > 0 ? $id : $auctionObj->auction_id();
@@ -97,42 +96,47 @@ switch ($action) {
         //var_dump($auction_id);
         if ($auction_id > 0) {
             if (!$auctionHandler->InsertAuctionRoom($auction_id, $room_ids, $room_counts, $isNew)) {
-                redirect_header('javascript:history.go(-1);', 2, _AM_MARTIN_FAILED_TO_ADD_ROOM);
+                redirect_header('javascript:history.go(-1);', 2, _AM_XMARTIN_FAILED_TO_ADD_ROOM);
             }
         } else {
-            redirect_header('javascript:history.go(-1);', 2, _AM_MARTIN_FAILED_TO_ADD_ROOM);
+            redirect_header('javascript:history.go(-1);', 2, _AM_XMARTIN_FAILED_TO_ADD_ROOM);
         }
 
         redirect_header($redirect_to, 2, $redirect_msg);
         break;
     case 'del':
         if (!$confirm) {
-            xoops_confirm([
-                              'op'      => 'del',
-                              'id'      => $auctionObj->auction_id(),
-                              'confirm' => 1,
-                              'name'    => $auctionObj->auction_name()
-                          ], '?action=del', "删除 '" . $auctionObj->auction_name() . "'. <br> <br> " . _AM_MARTIN_OK_TO_DELETE_THE_BID, _DELETE);
+            xoops_confirm(
+                [
+                    'op'      => 'del',
+                    'id'      => $auctionObj->auction_id(),
+                    'confirm' => 1,
+                    'name'    => $auctionObj->auction_name(),
+                ],
+                '?action=del',
+                "删除 '" . $auctionObj->auction_name() . "'. <br> <br> " . _AM_XMARTIN_OK_TO_DELETE_THE_BID,
+                _DELETE
+            );
         } else {
             if ($auctionHandler->delete($auctionObj)) {
-                $redirect_msg = _AM_MARTIN_OK_TO_DELETE_THE_ORDER;
+                $redirect_msg = _AM_XMARTIN_OK_TO_DELETE_THE_ORDER;
                 $redirect_to  = 'martin.auction.php';
             } else {
-                $redirect_msg = _AM_MARTIN_DELETE_FAILED;
+                $redirect_msg = _AM_XMARTIN_DELETE_FAILED;
                 $redirect_to  = 'javascript:history.go(-1);';
             }
             redirect_header($redirect_to, 2, $redirect_msg);
         }
         break;
     case 'list':
-        martin_collapsableBar('createtable', 'createtableicon', _AM_MARTIN_AUCTION_LIST, _AM_MARTIN_AUCTION_LIST);
+        martin_collapsableBar('createtable', 'createtableicon', _AM_XMARTIN_AUCTION_LIST, _AM_XMARTIN_AUCTION_LIST);
         CreateButton();
-        $Status      = [
-            '<div style="background-color:#FF0000">' . _AM_MARTIN_DRAFT . '</div>',
-            '<div style="background-color:#00FF00">' . _AM_MARTIN_PUBLISHED . '</div>'
+        $Status         = [
+            '<div style="background-color:#FF0000">' . _AM_XMARTIN_DRAFT . '</div>',
+            '<div style="background-color:#00FF00">' . _AM_XMARTIN_PUBLISHED . '</div>',
         ];
-        $AuctionObjs = $auctionHandler->getAuctions($helper->getConfig('perpage'), $start, 0);
-        $Cout        = $auctionHandler->getCount();
+        $AuctionObjects = $auctionHandler->getAuctions($helper->getConfig('perpage'), $start, 0);
+        $Cout           = $auctionHandler->getCount();
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
         $pagenav = new \XoopsPageNav($Cout, $helper->getConfig('perpage'), $start, 'start');
         $pavStr  = '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
@@ -141,22 +145,22 @@ switch ($action) {
         echo $pavStr . "<table width='100%' cellspacing=1 cellpadding=12 border=0 class = outer>";
         echo '<tr>';
         echo "<td class='bg3' align='left'><b>ID</b></td>";
-        echo "<td class='bg3' align='left'><b>" . _AM_MARTIN_TITLE . '</b></td>';
-        echo "<td class='bg3' align='left'><b>" . _AM_MARTIN_AUCTION_START_TIME . '</b></td>';
-        echo "<td class='bg3' align='left'><b>" . _AM_MARTIN_AUCTION_END_TIME . '</b></td>';
-        echo "<td class='bg3' align='left'><b>" . _AM_MARTIN_CHECK_IN . '</b></td>';
-        echo "<td class='bg3' align='left'><b>" . _AM_MARTIN_CHECK_OUT . '</b></td>';
-        echo "<td class='bg3' align='left'><b>" . _AM_MARTIN_STARTING_PRICE . '</b></td>';
-        echo "<td class='bg3' align='left'><b>" . _AM_MARTIN_CHEAP . '</b></td>';
-        echo "<td class='bg3' align='left'><b>" . _AM_MARTIN_BID_INCREMENT . '</b></td>';
-        echo "<td class='bg3' align='left'><b>" . _AM_MARTIN_BUY_PRICE . '</b></td>';
-        echo "<td class='bg3' align='left'><b>" . _AM_MARTIN_CASH . '</b></td>';
-        echo "<td width='60' class='bg3' align='center'><b>" . _AM_MARTIN_ACTIONS . '</b></td>';
+        echo "<td class='bg3' align='left'><b>" . _AM_XMARTIN_TITLE . '</b></td>';
+        echo "<td class='bg3' align='left'><b>" . _AM_XMARTIN_AUCTION_START_TIME . '</b></td>';
+        echo "<td class='bg3' align='left'><b>" . _AM_XMARTIN_AUCTION_END_TIME . '</b></td>';
+        echo "<td class='bg3' align='left'><b>" . _AM_XMARTIN_CHECK_IN . '</b></td>';
+        echo "<td class='bg3' align='left'><b>" . _AM_XMARTIN_CHECK_OUT . '</b></td>';
+        echo "<td class='bg3' align='left'><b>" . _AM_XMARTIN_STARTING_PRICE . '</b></td>';
+        echo "<td class='bg3' align='left'><b>" . _AM_XMARTIN_CHEAP . '</b></td>';
+        echo "<td class='bg3' align='left'><b>" . _AM_XMARTIN_BID_INCREMENT . '</b></td>';
+        echo "<td class='bg3' align='left'><b>" . _AM_XMARTIN_BUY_PRICE . '</b></td>';
+        echo "<td class='bg3' align='left'><b>" . _AM_XMARTIN_CASH . '</b></td>';
+        echo "<td width='60' class='bg3' align='center'><b>" . _AM_XMARTIN_ACTIONS . '</b></td>';
         echo '</tr>';
-        if (count($AuctionObjs) > 0) {
-            foreach ($AuctionObjs as $key => $thiscat) {
-                $modify = "<a href='?action=add&id=" . $thiscat->auction_id() . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/images/icon/edit.gif'></a>";
-                $delete = "<a href='?action=del&id=" . $thiscat->auction_id() . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/images/icon/delete.gif'></a>";
+        if (count($AuctionObjects) > 0) {
+            foreach ($AuctionObjects as $key => $thiscat) {
+                $modify = "<a href='?action=add&id=" . $thiscat->auction_id() . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/images/icon/edit.gif'></a>";
+                $delete = "<a href='?action=del&id=" . $thiscat->auction_id() . "'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/images/icon/delete.gif'></a>";
                 echo "<tr><td class='even' align='left'>" . $thiscat->auction_id() . '</td>';
                 echo "<td class='even' align='left'>" . $thiscat->auction_name() . '</td>';
                 echo "<td class='even' align='left'>" . date('Y-m-d', $thiscat->check_in_date()) . '</td>';
@@ -172,7 +176,7 @@ switch ($action) {
             }
         } else {
             echo '<tr>';
-            echo "<td class='head' align='center' colspan= '12'>" . MARTIN_IS_NUll . '</td>';
+            echo "<td class='head' align='center' colspan= '12'>" . XMARTIN_IS_NUll . '</td>';
             echo '</tr>';
             $categoryid = '0';
         }
@@ -182,15 +186,15 @@ switch ($action) {
         martin_close_collapsable('createtable', 'createtableicon');
         break;
     default:
-        redirect_header(XOOPS_URL, 2, _AM_MARTIN_UNAUTHORIZED_ACCESS);
+        redirect_header(XOOPS_URL, 2, _AM_XMARTIN_UNAUTHORIZED_ACCESS);
         break;
 }
 
 function CreateButton()
 {
     $arr = [
-        'addservicetype'  => ['url' => 'martin.auction.php?action=add', 'value' => _AM_MARTIN_ADDING_BID],
-        'servicetypelist' => ['url' => 'martin.auction.php?action=list', 'value' => _AM_MARTIN_AUCTION_LIST],
+        'addservicetype'  => ['url' => 'martin.auction.php?action=add', 'value' => _AM_XMARTIN_ADDING_BID],
+        'servicetypelist' => ['url' => 'martin.auction.php?action=list', 'value' => _AM_XMARTIN_AUCTION_LIST],
     ];
     Create_button($arr);
 }

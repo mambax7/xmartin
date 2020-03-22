@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tag info
  *
@@ -8,7 +9,7 @@
  * @since          1.00
  * @package        module::tag
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * Get item fileds:
@@ -20,12 +21,11 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  * uname
  * tags
  *
+ * @return bool
  * @var array $items associative array of items: [modid][catid][itemid]
  *
- * @return boolean
- *
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 if (!function_exists($GLOBALS['artdirname'] . '_tag_iteminfo')):
 
@@ -49,7 +49,7 @@ if (!function_exists($GLOBALS['artdirname'] . '_tag_iteminfo')):
                 $items_id[] = (int)$item_id;
             }
         }
-        $itemHandler = xoops_getModuleHandler('hotel', 'martin');
+        $itemHandler = $helper->getHandler('Hotel');
         $items_obj   = $itemHandler->getObjects(new \Criteria('hotel_id', '(' . implode(', ', $items_id) . ')', 'IN'), true);
 
         foreach (array_keys($items) as $cat_id) {
@@ -74,11 +74,10 @@ if (!function_exists($GLOBALS['artdirname'] . '_tag_iteminfo')):
      * Remove orphan tag-item links
      *
      * @param $mid
-     * @return void
      */
     function martin_tag_synchronization($mid)
     {
-        $itemHandler = xoops_getModuleHandler('article', $GLOBALS['artdirname']);
+        $itemHandler = $helper->getHandler('Article');
         $linkHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Link'); //@var \XoopsModules\Tag\Handler $tagHandler
 
         /* clear tag-item links */
@@ -92,7 +91,8 @@ if (!function_exists($GLOBALS['artdirname'] . '_tag_iteminfo')):
                    . "                FROM {$itemHandler->table} "
                    . "                WHERE {$itemHandler->table}.art_time_publish > 0"
                    . '            ) '
-                   . '        )'; else:
+                   . '        )';
+        else:
             $sql = "    DELETE {$linkHandler->table} FROM {$linkHandler->table}"
                    . "    LEFT JOIN {$itemHandler->table} AS aa ON {$linkHandler->table}.tag_itemid = aa.{$itemHandler->keyName} "
                    . '    WHERE '

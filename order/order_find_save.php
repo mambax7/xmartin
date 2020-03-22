@@ -1,8 +1,9 @@
 <?php
-include  dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
+
+require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+require_once XOOPS_ROOT_PATH . '/modules/xmartin/include/common.php';
 if (!defined('MODULE_URL')) {
-    define('MODULE_URL', XOOPS_URL . '/modules/martin/');
+    define('MODULE_URL', XOOPS_URL . '/modules/xmartin/');
 }
 
 global $xoopsUser, $xoopsdModule;
@@ -29,10 +30,10 @@ if ($xoopsUser->total_coupon() < $person_exchange) {
     redirect_header('javascript:history.go(-1);', 2, '您的现金卷不足.');
 }
 
-$cartHandler    = xoops_getModuleHandler('cart', 'martin');
-$roomHandler    = xoops_getModuleHandler('room', 'martin');
-$orderHandler   = xoops_getModuleHandler('order', 'martin');
-$serviceHandler = xoops_getModuleHandler('hotelservice', 'martin');
+$cartHandler    = $helper->getHandler('Cart');
+$roomHandler    = $helper->getHandler('Room');
+$orderHandler   = $helper->getHandler('Order');
+$serviceHandler = $helper->getHandler('HotelService');
 $cartObj        = $cartHandler->create();
 
 $order_total_price   = 0;
@@ -40,9 +41,9 @@ $order_pay_money     = 0;
 $order_sented_coupon = 0;
 $service_total       = 0;
 $hotel_service       = $serviceHandler->getHotelService($hotel_id);
-//$room_price = $roomHandler->GetRoomDatePrie($room_id,$check_in_date,$check_out_date);
+//$room_price = $roomHandler->getRoomDatePrie($room_id,$check_in_date,$check_out_date);
 
-$order_total_price = $orderHandler->GetFindRoomPrice($order_id);
+$order_total_price = $orderHandler->getFindRoomPrice($order_id);
 
 $OrderObj            = $orderHandler->get($order_id);
 $order_sented_coupon = is_object($OrderObj) ? $OrderObj->order_sented_coupon() : 0;

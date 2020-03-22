@@ -3,11 +3,13 @@
 // It then streams the data to the browser as an image
 
 // Work around the Flash Player Cookie Bug
-if (isset($_POST['PHPSESSID'])) {
+if (\Xmf\Request::hasVar('PHPSESSID', 'POST')) {
     session_id($_POST['PHPSESSID']);
 }
 
-session_start();
+if (false === @session_start()) {
+    throw new \RuntimeException('Session could not start.');
+}
 
 $image_id = isset($_GET['id']) ? $_GET['id'] : false;
 
@@ -23,7 +25,7 @@ if (!is_array($_SESSION['file_info']) || !isset($_SESSION['file_info'][$image_id
 }
 
 header('Content-type: image/jpeg');
-header('Content-Length: ' . strlen($_SESSION['file_info'][$image_id]));
+header('Content-Length: ' . mb_strlen($_SESSION['file_info'][$image_id]));
 
 echo $_SESSION['file_info'][$image_id];
 exit(0);

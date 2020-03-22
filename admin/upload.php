@@ -5,11 +5,13 @@
  */
 
 // Get the session Id passed from SWFUpload. We have to do this to work-around the Flash Player Cookie Bug
-if (isset($_POST['PHPSESSID'])) {
+if (\Xmf\Request::hasVar('PHPSESSID', 'POST')) {
     session_id($_POST['PHPSESSID']);
 }
 
-session_start();
+if (false === @session_start()) {
+    throw new \RuntimeException('Session could not start.');
+}
 ini_set('html_errors', '0');
 
 // Check the upload
@@ -22,7 +24,7 @@ if (!isset($_FILES['Filedata']) || !is_uploaded_file($_FILES['Filedata']['tmp_na
 /**
  * 得到图片类型
  **/
-$FileType = strtolower(substr(strrchr($_FILES['Filedata']['name'], '.'), 1));
+$FileType = mb_strtolower(mb_substr(mb_strrchr($_FILES['Filedata']['name'], '.'), 1));
 
 $file_id = md5($_FILES['Filedata']['tmp_name'] + mt_rand() * 100000);
 
@@ -62,7 +64,7 @@ $width  = imagesx($img);
 $height = imagesy($img);
 
 if (!$width || !$height) {
-    echo _AM_MARTIN_ERROR_INVALID_WIDTH_OR_HEIGHT;
+    echo _AM_XMARTIN_ERROR_INVALID_WIDTH_OR_HEIGHT;
     exit(0);
 }
 
@@ -90,12 +92,12 @@ if ($new_width > $target_width) {
 
 $new_img = imagecreatetruecolor(100, 100);
 if (!@imagefilledrectangle($new_img, 0, 0, $target_width - 1, $target_height - 1, 0)) {    // Fill the image black
-    echo _AM_MARTIN_ERROR_COULD_NOT_FILL_NEW_IMAGE;
+    echo _AM_XMARTIN_ERROR_COULD_NOT_FILL_NEW_IMAGE;
     exit(0);
 }
 
 if (!@imagecopyresampled($new_img, $img, ($target_width - $new_width) / 2, ($target_height - $new_height) / 2, 0, 0, $new_width, $new_height, $width, $height)) {
-    echo _AM_MARTIN_ERROR_COULD_NOT_RESIZE_IMAGE;
+    echo _AM_XMARTIN_ERROR_COULD_NOT_RESIZE_IMAGE;
     exit(0);
 }
 

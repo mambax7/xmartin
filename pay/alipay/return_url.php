@@ -1,11 +1,12 @@
 <?php
-include  dirname(dirname(dirname(dirname(__DIR__)))) . '/mainfile.php';
-include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
+
+require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/mainfile.php';
+require_once XOOPS_ROOT_PATH . '/modules/xmartin/include/common.php';
 if (!defined('MODULE_URL')) {
-    define('MODULE_URL', XOOPS_URL . '/modules/martin/');
+    define('MODULE_URL', XOOPS_URL . '/modules/xmartin/');
 }
 if (!defined('ALIPAY_ROOT_PATH')) {
-    define('ALIPAY_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/martin/pay/alipay/');
+    define('ALIPAY_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/xmartin/pay/alipay/');
 }
 require_once ALIPAY_ROOT_PATH . 'alipay_notify.php';
 require_once ALIPAY_ROOT_PATH . 'config/config.php';
@@ -39,12 +40,12 @@ function log_result($word)
 
 $order_id = (int)$out_trade_no;
 global $xoopsUser;
-$cartHandler = xoops_getModuleHandler('cart', 'martin');
-$order       = $cartHandler->GetOrderInfo($order_id);
+$cartHandler = $helper->getHandler('Cart');
+$order       = $cartHandler->getOrderInfo($order_id);
 if (!$order) {
     redirect_header(XOOPS_URL, 1, '非法闯入.');
 }
-if ($cartHandler->CheckOrderClose($order_id)) {
+if ($cartHandler->checkOrderClose($order_id)) {
     redirect_header(XOOPS_URL, 1, '非法闯入.');
 }
 

@@ -2,8 +2,7 @@
 
 use XoopsModules\Xmartin;
 
-include  dirname(dirname(__DIR__)) . '/mainfile.php';
-include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
+require_once __DIR__ . '/header.php';
 
 /** @var Xmartin\Helper $helper */
 $helper = Xmartin\Helper::getInstance();
@@ -16,11 +15,11 @@ if (!$xoopsUser) {
 $auction_id = \Xmf\Request::getInt('auction_id', $id, 'GET');
 $auction_id = \Xmf\Request::getInt('auction_id', $auction_id, 'POST');
 if (!$auction_id) {
-    redirect_header(XOOPS_URL, 3, _AM_MARTIN_UNAUTHORIZED_ACCESS);
+    redirect_header(XOOPS_URL, 3, _AM_XMARTIN_UNAUTHORIZED_ACCESS);
 }
 
-$hotelHandler   = xoops_getModuleHandler('hotel', 'martin');
-$auctionHandler = xoops_getModuleHandler('auction', 'martin');
+$hotelHandler   = $helper->getHandler('Hotel');
+$auctionHandler = $helper->getHandler('Auction');
 $auction_obj    = $auctionHandler->get($auction_id);
 
 //保存数据
@@ -42,7 +41,7 @@ if ('save' === $action) {
         'bid_status'     => 1,
     ];
     if ($auctionHandler->AddUserAuction($AuctionData)) {
-        redirect_header(XOOPS_URL . '/modules/martin/auction.php/auction-' . $auction_id . $helper->getConfig('hotel_static_prefix'), 2, '提交成功.');
+        redirect_header(XOOPS_URL . '/modules/xmartin/auction.php/auction-' . $auction_id . $helper->getConfig('hotel_static_prefix'), 2, '提交成功.');
     } else {
         redirect_header('javascript:history.go(-1);', 2, '提交失败.');
     }
@@ -51,7 +50,7 @@ if ('save' === $action) {
 
 //判断是否存在
 if (!$auction_obj->auction_id()) {
-    redirect_header(XOOPS_URL, 3, _AM_MARTIN_UNAUTHORIZED_ACCESS);
+    redirect_header(XOOPS_URL, 3, _AM_XMARTIN_UNAUTHORIZED_ACCESS);
 }
 //是否结束
 if ($auction_obj->apply_end_date() < time()) {
@@ -63,20 +62,20 @@ foreach ($auction_obj->vars as $key => $var) {
     $auction_data[$key] = $auction_obj->$key();
 }
 
-$rooms     = $auctionHandler->GetAuctionRooms($auction_id);
-$CityAlias = $searchHandler->GetCityAlias();
+$rooms     = $auctionHandler->getAuctionRooms($auction_id);
+$cityAlias = $searchHandler->getCityAlias();
 //var_dump($rooms);
 
 // max user price
-$auction_data['max'] = $auctionHandler->GetMaxAuctionPrice($auction_id);
+$auction_data['max'] = $auctionHandler->getMaxAuctionPrice($auction_id);
 
 //user
 $xoopsUser->cleanVars();
-$user =& $xoopsUser->cleanVars;
+$user = &$xoopsUser->cleanVars;
 
 $AuctionDate = [
-    'min' => (int)($auction_obj->check_in_date() - strtotime(date('Y-m-d'))) / (3600 * 24),
-    'max' => (int)($auction_obj->check_out_date() - strtotime(date('Y-m-d'))) / (3600 * 24),
+    'min' => ($auction_obj->check_in_date() - strtotime(date('Y-m-d'))) / (3600 * 24),
+    'max' => ($auction_obj->check_out_date() - strtotime(date('Y-m-d'))) / (3600 * 24),
 ];
 //var_dump($AuctionDate);
 
@@ -84,30 +83,30 @@ $AuctionStatus = time() < $auction_data['apply_start_date'] ? ['title' => '召�
 $AuctionStatus = (time() <= $auction_data['apply_end_date']
                   && time() >= $auction_data['apply_start_date']) ? [
     'title'  => '进行中',
-    'status' => true
+    'status' => true,
 ] : $AuctionStatus;
 $AuctionStatus = time() >= $auction_data['apply_end_date'] ? [
     'title'  => '已结束',
-    'status' => false
+    'status' => false,
 ] : $AuctionStatus;
 
 $GLOBALS['xoopsOption']['template_main'] = 'martin_auction.tpl';
 
-include XOOPS_ROOT_PATH . '/header.php';
-include XOOPS_ROOT_PATH . '/modules/martin/HotelSearchLeft.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/modules/xmartin/HotelSearchLeft.php';
 
-$xoopsOption['xoops_pagetitle'] = $auction_obj->auction_name() . ' - 竞拍';// - '.$xoopsConfig['sitename'];
+$xoopsOption['xoops_pagetitle'] = $auction_obj->auction_name() . ' - 竞拍'; // - '.$xoopsConfig['sitename'];
 
 $xoopsTpl->assign('xoops_pagetitle', $xoopsOption['xoops_pagetitle']);
-$xoopsTpl->assign('module_url', XOOPS_URL . '/modules/martin/');
+$xoopsTpl->assign('module_url', XOOPS_URL . '/modules/xmartin/');
 $xoopsTpl->assign('auction_id', $auction_id);
 $xoopsTpl->assign('auction', $auction_data);
 $xoopsTpl->assign('auctiondate', $AuctionDate);
 $xoopsTpl->assign('rooms', $rooms);
 $xoopsTpl->assign('AuctionStatus', $AuctionStatus);
 $xoopsTpl->assign('user', $user);
-$xoopsTpl->assign('alias', $CityAlias);
+$xoopsTpl->assign('alias', $cityAlias);
 $xoopsTpl->assign('bids', $auctionHandler->getAuctionBidList($auction_id));
 $xoopsTpl->assign('hotel_static_prefix', $helper->getConfig('hotel_static_prefix'));
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

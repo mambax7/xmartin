@@ -99,7 +99,8 @@ $password = 'pwd';
     /**
      * Class zip
      */
-    class Zip
+
+    class zip
     {
         public $total_files   = 0;
         public $total_folders = 0;
@@ -107,7 +108,7 @@ $password = 'pwd';
         /**
          * @param        $zn
          * @param        $to
-         * @param  array $index
+         * @param array  $index
          * @return int
          */
         public function extract($zn, $to, $index = [-1])
@@ -226,7 +227,7 @@ $password = 'pwd';
             }
             $header['stored_filename'] = $header['filename'];
             $header['status']          = 'ok';
-            if ('/' === substr($header['filename'], -1)) {
+            if ('/' === mb_substr($header['filename'], -1)) {
                 $header['external'] = 0x41FF0010;
             }
 
@@ -291,7 +292,7 @@ $password = 'pwd';
         {
             $header = $this->readFileHeader($zip);
 
-            if ('/' !== substr($to, -1)) {
+            if ('/' !== mb_substr($to, -1)) {
                 $to .= '/';
             }
             if ('./' === $to) {
@@ -315,7 +316,7 @@ $password = 'pwd';
                 }
             }
 
-            if ('/' === strrchr($header['filename'], '/')) {
+            if ('/' === mb_strrchr($header['filename'], '/')) {
                 return;
             }
 
@@ -400,7 +401,7 @@ $password = 'pwd';
     if (!$_POST['todir']) {
         $_POST['todir'] = '.';
     }
-    $z             = new Zip;
+    $z             = new zip();
     $have_zip_file = 0;
     /**
      * @param $tmp_name
@@ -458,7 +459,7 @@ $password = 'pwd';
 
             alert('完成.');
         </script>
-        <?php
+    <?php
 
     elseif ('dodelete' === $_REQUEST['myaction']):
         set_time_limit(0);

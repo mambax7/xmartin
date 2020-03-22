@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @member    review
  * @license   http://www.blags.org/
@@ -6,10 +7,10 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-$hotelHandler  = xoops_getModuleHandler('hotel', 'martin');
-$searchHandler = xoops_getModuleHandler('search', 'martin');
-$memberHandler = xoops_getModuleHandler('member', 'martin');
-$reviewHandler = xoops_getModuleHandler('review', 'martin');
+$hotelHandler  = $helper->getHandler('Hotel');
+$searchHandler = $helper->getHandler('Search');
+$memberHandler = $helper->getHandler('Member');
+$reviewHandler = $helper->getHandler('Review');
 
 //$hotel_id = isset($_GET['hotel_id']) ? (int)$_GET['hotel_id'] : (int)$_POST['hotel_id'];
 $hotel_id = \Xmf\Request::getInt('hotel_id', 0);
@@ -39,16 +40,16 @@ if (is_array($_POST) && !empty($_POST)) {
         'submit_time'     => time(),
     ];
     //var_dump($review_type);exit;
-    if ($reviewHandler->SaveReview($Data)) {
+    if ($reviewHandler->saveReview($Data)) {
         redirect_header(MEMBER_URL . '?lived', 2, '点评成功.');
     }
 }
-//$hotels = $memberHandler->GetHotelList($start);
+//$hotels = $memberHandler->getHotelList($start);
 //var_dump($hotels);
 //$Count = $hotels['count'];
 //unset($hotels['count']);
 //分页
-$xoopsTpl->assign('review', $reviewHandler->GetReview($hotel_id));
+$xoopsTpl->assign('review', $reviewHandler->getReview($hotel_id));
 $xoopsTpl->assign('hotel', $hotel);
 $xoopsTpl->assign('hotel_review_type', getModuleArray('hotel_review_type', 'hotel_review_type', true));
 $xoopsTpl->assign('hotel_trip_purpose', getModuleArray('hotel_trip_purpose', 'hotel_trip_purpose', true));

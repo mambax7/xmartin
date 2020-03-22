@@ -2,78 +2,89 @@
 
 use XoopsModules\Xmartin;
 
-// require_once  dirname(__DIR__) . '/class/Helper.php';
-//require_once  dirname(__DIR__) . '/include/common.php';
-$helper = Xmartin\Helper::getInstance();
+include dirname(__DIR__) . '/preloads/autoloader.php';
+
+/** @var \XoopsModules\Xmartin\Helper $helper */
+$helper = \XoopsModules\Xmartin\Helper::getInstance();
+$helper->loadLanguage('common');
+$helper->loadLanguage('feedback');
 
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
-$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
-
+if (is_object($helper->getModule())) {
+    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+}
 
 $adminmenu[] = [
-    'title' => _MI_MARTIN_HOME,
+    'title' => _MI_XMARTIN_HOME,
     'link'  => 'admin/index.php',
-    'icon'  => $pathIcon32 . '/home.png'
+    'icon'  => $pathIcon32 . '/home.png',
 ];
 
 $adminmenu[] = [
-    'title' => _MI_MARTIN_MENU_02,
+    'title' => _MI_XMARTIN_MENU_02,
     'link'  => 'admin/martin.hotel.php',
-    'icon'  => $pathModIcon32 . '/house_two.png'
+    'icon'  => $pathModIcon32 . '/house_two.png',
 ];
 
 $adminmenu[] = [
-    'title' => _MI_MARTIN_MENU_01,
+    'title' => _MI_XMARTIN_MENU_01,
     'link'  => 'admin/martin.order.php',
-    'icon'  => $pathModIcon32 . '/calendar-blue.png'
+    'icon'  => $pathModIcon32 . '/calendar-blue.png',
 ];
 
 $adminmenu[] = [
-    'title' => _MI_MARTIN_MENU_03,
+    'title' => _MI_XMARTIN_MENU_03,
     'link'  => 'admin/martin.hotel.service.php',
-    'icon'  => $pathModIcon32 . '/account_functions.png'
+    'icon'  => $pathModIcon32 . '/account_functions.png',
 ];
 
 $adminmenu[] = [
-    'title' => _MI_MARTIN_MENU_04,
+    'title' => _MI_XMARTIN_MENU_04,
     'link'  => 'admin/martin.hotel.promotion.php',
-    'icon'  => $pathIcon32 . '/fileshare.png'
+    'icon'  => $pathIcon32 . '/fileshare.png',
 ];
 
 $adminmenu[] = [
-    'title' => _MI_MARTIN_MENU_05,
+    'title' => _MI_XMARTIN_MENU_05,
     'link'  => 'admin/martin.hotel.city.php',
-    'icon'  => $pathModIcon32 . '/google_map_satellite.png'
+    'icon'  => $pathModIcon32 . '/google_map_satellite.png',
 ];
 
 $adminmenu[] = [
-    'title' => _MI_MARTIN_MENU_06,
+    'title' => _MI_XMARTIN_MENU_06,
     'link'  => 'admin/martin.room.php',
-    'icon'  => $pathModIcon32 . '/bed.png'
+    'icon'  => $pathModIcon32 . '/bed.png',
 ];
 
 $adminmenu[] = [
-    'title' => _MI_MARTIN_MENU_07,
+    'title' => _MI_XMARTIN_MENU_07,
     'link'  => 'admin/martin.group.php',
-    'icon'  => $pathIcon32 . '/users.png'
+    'icon'  => $pathIcon32 . '/users.png',
 ];
 
 $adminmenu[] = [
-    'title' => _MI_MARTIN_MENU_08,
+    'title' => _MI_XMARTIN_MENU_08,
     'link'  => 'admin/martin.auction.php',
-    'icon'  => $pathIcon32 . '/cash_stack.png'
+    'icon'  => $pathIcon32 . '/cash_stack.png',
+];
+
+// Blocks Admin
+$adminmenu[] = [
+    'title' => _MI_XMARTIN_BLOCKS,
+    'link'  => 'admin/blocksadmin.php',
+    'icon'  => $pathIcon32 . '/block.png',
 ];
 
 $adminmenu[] = [
-    'title' => _MI_MARTIN_ABOUT,
+    'title' => _MI_XMARTIN_ABOUT,
     'link'  => 'admin/about.php',
-    'icon'  => $pathIcon32 . '/about.png'
+    'icon'  => $pathIcon32 . '/about.png',
 ];
 
 /*
 global $adminObject;
 
-$adminmenu = array();
+$adminmenu = [];
 
 $adminmenu[] = array("link" => "admin/index.php", "title" => "Home");
 
@@ -110,7 +121,7 @@ if (isset($xoopsModule)) {
 
     $i++;
     $headermenu[$i]['title'] = "Payment Configuration";
-    $headermenu[$i]['link']  = XOOPS_URL . "/modules/martin/admin/martin.pay.php";
+    $headermenu[$i]['link']  = XOOPS_URL . "/modules/xmartin/admin/martin.pay.php";
 }
 
 

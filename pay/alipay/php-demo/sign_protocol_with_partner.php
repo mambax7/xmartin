@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ��* ���� ��������ҳ��
  * ��* ����  ֧�����ⲿ����ӿڿ���
@@ -17,7 +18,6 @@ $parameter = [
     //�����̻���
     '_input_charset' => $_input_charset,
     //�ַ�����Ĭ��ΪGBK
-
 ];
 $alipay    = new alipay_service($parameter, $security_code, $sign_type);
 var_dump($parameter);

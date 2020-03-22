@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tag management for XOOPS
  *
@@ -8,9 +9,8 @@
  * @since          1.00
  * @package        module::tag
  */
-
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-defined('TAG_INI') || include __DIR__ . '/vars.php';
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('TAG_INI') || require_once __DIR__ . '/vars.php';
 
 //function xoops_module_install_martin(\XoopsModule $module)
 //{

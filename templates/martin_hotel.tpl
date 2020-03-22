@@ -8,16 +8,16 @@
 <{*<script type="text/javascript" src="/js/jquery.fancybox/jquery.fancybox-1.2.1.pack.js"></script>*}>
 
 <script type="text/javascript" src="' . XOOPS_URL . '/browse.php?Frameworks/jquery/jquery.js"></script>
-<link rel="stylesheet" type="text/css" href="<{$module_url}>javascript/jquery/fancybox/jquery.fancybox.css"
+<link rel="stylesheet" type="text/css" href="<{$module_url}>assets/javascript/jquery/fancybox/jquery.fancybox.css"
       media="screen">
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/fancybox/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/fancybox/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/fancybox/jquery.fancybox.pack.js"></script>
 
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<{$googleApi}>" type="text/javascript"></script>
-<style type="text/css">@import "<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/hotel.js"></script>
+<style type="text/css">@import "<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/hotel.js"></script>
 <script type="text/javascript">
     var lat = <{$hotel.hotel_google.0}> ;
     var lng = <{$hotel.hotel_google.1}> ;
@@ -136,7 +136,7 @@
                             src="http://ditu.google.cn/staticmap?center=<{$hotel.hotel_google.0}>,<{$hotel.hotel_google.1}>&zoom=14&size=200x189&hl=zh-cn&maptype=mobile&markers=<{$hotel.hotel_google.0}>,<{$hotel.hotel_google.1}>,reds&key=<{$googleApi}>&sensor=false"
                             width="200" height="189" title="<{$hotel.hotel_name}>（<{$hotel.hotel_enname}>）"></div>
                 <div align="right"
-                     style="background:url(/modules/martin/images/pop_map_btn.gif) no-repeat scroll right center transparent; cursor: pointer;margin-top: 5px;"
+                     style="background:url(/modules/xmartin/images/pop_map_btn.gif) no-repeat scroll right center transparent; cursor: pointer;margin-top: 5px;"
                      title="查看大地图" id="big">放大&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
             </div>
         </div>
@@ -188,7 +188,7 @@
                             <td colspan="3"><{$hotel.hotel_open_time|date_format:"%Y"}>年开业</td>
                         </tr>
                         <tr>
-                            <td><{$smarty.const._AM_MARTIN_THE_NUMBER_OF_ROOMS}>：</td>
+                            <td><{$smarty.const._AM_XMARTIN_THE_NUMBER_OF_ROOMS}>：</td>
                             <td colspan="3"><{$hotel.hotel_room_count}></td>
                         </tr>
                         <tr>
@@ -235,8 +235,8 @@
                                     <div class="abso" style="display:none;">
                                         <table width="500" border="0" cellspacing="0" cellpadding="0">
                                             <tr>
-                                                <td><{$smarty.const._AM_MARTIN_HOTEL_FLOOR}>：<{$room.room_floor}></td>
-                                                <td><{$smarty.const._AM_MARTIN_HOTEL_AREA}>：<{$room.room_area}>㎡</td>
+                                                <td><{$smarty.const._AM_XMARTIN_HOTEL_FLOOR}>：<{$room.room_floor}></td>
+                                                <td><{$smarty.const._AM_XMARTIN_HOTEL_AREA}>：<{$room.room_area}>㎡</td>
                                                 <td>房型：<{$room.room_type_info}></td>
                                             </tr>
                                             <{if $room.room_bed_info}>
@@ -301,8 +301,8 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="dtable">
                     <tr align="center" class="fwt">
                         <td width="21%">增值服务项目</td>
-                        <td width="9%"><{$smarty.const._AM_MARTIN_SERVICE_UNIT}></td>
-                        <td width="14%"><{$smarty.const._AM_MARTIN_PRICE}></td>
+                        <td width="9%"><{$smarty.const._AM_XMARTIN_SERVICE_UNIT}></td>
+                        <td width="14%"><{$smarty.const._AM_XMARTIN_PRICE}></td>
                         <td width="12%"><p>说明</p></td>
                         <td width="12%">订购数量</td>
                     </tr>
@@ -349,7 +349,7 @@
         value="<{$smarty.get.check_out_date}>">
 <div style='border: medium none;background-color: rgb(102, 102, 102); position:absolute;visibility:visible; z-index:1;opacity: 0.6; left:0;top: 0;width:100%; height: 1682px; z-index:15;display:none;'
      class='mapbig'>
-</div><img id="mapClose" class="mapbig" title="<{$smarty.const._AM_MARTIN_CLOSE_MAP}>"
+</div><img id="mapClose" class="mapbig" title="<{$smarty.const._AM_XMARTIN_CLOSE_MAP}>"
            src="<{$xoops_url}>/js/jquery.fancybox/fancy_closebox.png"
            style="top: 55px; z-index: 101; position: absolute;cursor: pointer;display:none;">
 <div id='mapbig' class="mapbig"

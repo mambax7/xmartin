@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ��* ���� ��������ҳ��
  * ��* ����  ֧�����ⲿ����ӿڿ���
@@ -29,7 +30,6 @@ $parameter = [
     // Ʊ��+�շ�+����   ��ʽ����
     'return_type'    => 'html',
     //��Ʒ�����վ��˾
-
 ];
 $alipay    = new alipay_service($parameter, $security_code, $sign_type);
 print_r($parameter);

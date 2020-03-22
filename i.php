@@ -1,4 +1,5 @@
 <?php
+
 /**
  * martin image show
  * @copyright 1997-2010 The Lap Group
@@ -7,9 +8,9 @@
  * */
 $id = isset($_GET['id']) ? trim($_GET['id']) : null;
 
-$FileType = strtolower(substr(strrchr($id, '.'), 1));
+$FileType = mb_strtolower(mb_substr(mb_strrchr($id, '.'), 1));
 
-$full = './images/hotelicon/' . $id;
+$full = './assets/images/hotelicon/' . $id;
 $full = file_exists($full) ? $full : './images/hotel/' . $id;
 
 if (null === $id) {
@@ -50,12 +51,12 @@ $height = imagesy($img);
 
 $new_img = imagecreatetruecolor($width, $height);
 if (!@imagefilledrectangle($new_img, 0, 0, $target_width - 1, $target_height - 1, 0)) {    // Fill the image black
-    echo _AM_MARTIN_ERROR_COULD_NOT_FILL_NEW_IMAGE;
+    echo _AM_XMARTIN_ERROR_COULD_NOT_FILL_NEW_IMAGE;
     exit(0);
 }
 
 if (!@imagecopyresampled($new_img, $img, 0, 0, 0, 0, $width, $height, $width, $height)) {
-    echo _AM_MARTIN_ERROR_COULD_NOT_RESIZE_IMAGE;
+    echo _AM_XMARTIN_ERROR_COULD_NOT_RESIZE_IMAGE;
     exit(0);
 }
 
@@ -79,6 +80,6 @@ $imagevariable = ob_get_contents();
 ob_end_clean();
 
 header('Content-type: image/jpeg');
-header('Content-Length: ' . strlen($imagevariable));
+header('Content-Length: ' . mb_strlen($imagevariable));
 echo $imagevariable;
 exit(0);

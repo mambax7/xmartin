@@ -6,13 +6,14 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
+
 //构造对象
 
 use XoopsModules\Xmartin;
 
-$searchHandler = xoops_getModuleHandler('search', 'martin');
-$orderHandler  = xoops_getModuleHandler('order', 'martin');
-$memberHandler = xoops_getModuleHandler('member', 'martin');
+$searchHandler = $helper->getHandler('Search');
+$orderHandler  = $helper->getHandler('Order');
+$memberHandler = $helper->getHandler('Member');
 //array
 $OrderType      = getModuleArray('order_type', 'order_type', true);
 $OrderMode      = getModuleArray('order_mode', 'order_mode', true);
@@ -35,13 +36,13 @@ if ('order' !== $action) {
 /** @var Xmartin\Helper $helper */
 $helper = Xmartin\Helper::getInstance();
 
-$Count     = $orderHandler->getCount();
-$OrderObjs = $Count > 0 ? $orderHandler->getOrders([], $helper->getConfig('front_perpage'), $start, 0) : null;
+$Count        = $orderHandler->getCount();
+$OrderObjects = $Count > 0 ? $orderHandler->getOrders([], $helper->getConfig('front_perpage'), $start, 0) : null;
 
-$order_ids = array_keys($OrderObjs);
+$order_ids = array_keys($OrderObjects);
 
 $hotels     = $memberHandler->getOrderHotels($order_ids);
-$hotelAlias = $searchHandler->GetCityAlias();
+$hotelAlias = $searchHandler->getCityAlias();
 
 //分页
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
@@ -50,8 +51,8 @@ $pagenav = new \XoopsPageNav($Count, $helper->getConfig('front_perpage'), $start
 //var_dump($OrderType);
 //处理
 $orders = [];
-if (is_array($OrderObjs)) {
-    foreach ($OrderObjs as $key => $order) {
+if (is_array($OrderObjects)) {
+    foreach ($OrderObjects as $key => $order) {
         $orderArr = [];
         foreach ($order->vars as $k => $v) {
             $orderArr[$k] = $v['value'];
@@ -67,7 +68,7 @@ if (is_array($OrderObjs)) {
         unset($orderArr);
     }
 }
-unset($OrderObjs);
+unset($OrderObjects);
 //var_dump($orders);
 
 $xoopsTpl->assign('orders', $orders);

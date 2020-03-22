@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @alipay
  * @license   http://www.blags.org/
@@ -6,10 +7,10 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-require_once MARTIN_ROOT_PATH . "pay/$order_pay/alipay_service.php";
-$config_file = MARTIN_ROOT_PATH . "pay/$order_pay/config/config.php";
+require_once XMARTIN_ROOT_PATH . "pay/$order_pay/alipay_service.php";
+$config_file = XMARTIN_ROOT_PATH . "pay/$order_pay/config/config.php";
 if (file_exists($config_file)) {
-    include $config_file;
+    require_once $config_file;
 }
 
 $config = ${$order_pay};

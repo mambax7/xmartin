@@ -1,9 +1,9 @@
 <!--面包线-->
 <link rel="stylesheet" href="<{$module_url}>css/hotel.css" type="text/css">
-<style type="text/css">@import "<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/hotel.js"></script>
+<style type="text/css">@import "<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/hotel.js"></script>
 <script type="text/javascript">
     var Online_Url = "<{$module_config.online_url}>";
     jQuery.noConflict();

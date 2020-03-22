@@ -1,10 +1,10 @@
-<style type="text/css">@import "<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
+<style type="text/css">@import "<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
 <!--<script type="text/javascript" src="<{$module_url}>/javascript/jquery/msgbox/jquery.msgbox.min.js"></script>
 <script type="text/javascript" src="<{$module_url}>/javascript/jquery/msgbox/msgbox.css"></script>-->
 
-<script type="text/javascript" src="<{$module_url}>javascript/hotel.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/hotel.js"></script>
 <link rel="stylesheet" href="<{$module_url}>css/hotelsearch.css" type="text/css">
 <script type="text/javascript">
     jQuery.noConflict();
@@ -85,7 +85,7 @@
                 <{foreach item=room from=$rooms}>
                     <{assign var=roomcount value=$room.room_count+$roomcount}>
                     <tr align="center" style="border: none;">
-                        <td width="20%" align="right"><{$smarty.const._AM_MARTIN_HOTEL_NAME}>：</td>
+                        <td width="20%" align="right"><{$smarty.const._AM_XMARTIN_HOTEL_NAME}>：</td>
                         <td width="32%" align="left"><a
                                     href="<{$xoops_url}>/hotel-<{$room.hotel_alias}><{$hotel_static_prefix}>"><{$room.hotel_name}></a>
                         </td>
@@ -106,7 +106,7 @@
                     <td width="32%" align="left"><{$auction.apply_end_date|date_format:"%Y年%m月%d日"}></td>
                 </tr>
                 <tr align="center" style="border: none;">
-                    <td width="20%" align="right"><{$smarty.const._AM_MARTIN_STARTING_PRICE}>：</td>
+                    <td width="20%" align="right"><{$smarty.const._AM_XMARTIN_STARTING_PRICE}>：</td>
                     <td width="32%" align="left"><span class="red"><{$auction.auction_low_price}></span> 元</td>
                     <td width="20%" align="right">加价辐度至少为：</td>
                     <td width="32%" align="left"><span class="red"><{$auction.auction_add_price}></span> 元</td>
@@ -134,12 +134,12 @@
                 </div>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="dtable">
                     <tr>
-                        <td width="13%" align="right">_AM_MARTIN_CHECK_IN：</td>
+                        <td width="13%" align="right">_AM_XMARTIN_CHECK_IN：</td>
                         <td width="37%" align="left">
                             <input type="text" value="<{$auction.check_in_date|date_format:"%Y-%m-%d"}>"
                                    class="roomCheck" id="Check_in_date" name="Check_in_date" readonly="true">
                         </td>
-                        <td width="13%" align="right">_AM_MARTIN_CHECK_OUT：</td>
+                        <td width="13%" align="right">_AM_XMARTIN_CHECK_OUT：</td>
                         <td width="37%" align="left">
                             <input type="text" value="<{$auction.check_out_date|date_format:"%Y-%m-%d"}>"
                                    class="roomCheck" id="Check_out_date" name="Check_out_date" readonly="true">

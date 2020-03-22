@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xmartin\Common;
+<?php
+
+namespace XoopsModules\Xmartin\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -18,7 +20,7 @@
  * @package     xmartin
  *
  * Example:
- * $breadcrumb = new PedigreeBreadcrumb();
+ * $breadcrumb = new Breadcrumb();
  * $breadcrumb->addLink( 'bread 1', 'index1.php' );
  * $breadcrumb->addLink( 'bread 2', '' );
  * $breadcrumb->addLink( 'bread 3', 'index3.php' );
@@ -31,15 +33,12 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
  */
 class Breadcrumb
 {
-    public $dirname;
+    public  $dirname;
     private $bread = [];
 
-    /**
-     *
-     */
     public function __construct()
     {
-        $this->dirname = basename(dirname(__DIR__));
+        $this->dirname = basename(dirname(dirname(__DIR__)));
     }
 
     /**
@@ -52,13 +51,12 @@ class Breadcrumb
     {
         $this->bread[] = [
             'link'  => $link,
-            'title' => $title
+            'title' => $title,
         ];
     }
 
     /**
      * Render Pedigree BreadCrumb
-     *
      */
     public function render()
     {

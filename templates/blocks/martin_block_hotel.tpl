@@ -1,10 +1,10 @@
 <div class="hotel hotel_height">
-    <style type="text/css">@import "<{$block.module_url}>javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
+    <style type="text/css">@import "<{$block.module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
     <script type="text/javascript"
-            src="<{$block.module_url}>javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
+            src="<{$block.module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
     <script type="text/javascript"
-            src="<{$block.module_url}>javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
-    <script type="text/javascript" src="<{$block.module_url}>javascript/hotel.js"></script>
+            src="<{$block.module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
+    <script type="text/javascript" src="<{$block.module_url}>assets/javascript/hotel.js"></script>
     <script type="text/javascript">
         jQuery.noConflict();
         jQuery(document).ready(function ($) {
@@ -32,13 +32,13 @@
                                     name="CheckDate[]" value="<{$smarty.get.CheckDate.0}>"></li>
                     <li>退房日期：<input type="text" class="inputbox checkdate requied" title="退房日期" id="checkdate2"
                                     name="CheckDate[]" value="<{$smarty.get.CheckDate.1}>"></li>
-                    <li><{$smarty.const._AM_MARTIN_PRICE_RANGE}>：<input type="text" name="price[]" size="3"
+                    <li><{$smarty.const._AM_XMARTIN_PRICE_RANGE}>：<input type="text" name="price[]" size="3"
                                                                         value="<{$smarty.get.price.0}>">-<input
                                 type="text" name="price[]" size="3"
                                 value="<{$smarty.get.price.1}>"></li>
                     <li>酒店位置：<input type="text" class="inputbox" name="HotelAddress"
                                     value="<{$smarty.get.HotelAddress}>"></li>
-                    <li style="width:100%;"><{$smarty.const._AM_MARTIN_HOTEL_NAME}>：<input type="text"
+                    <li style="width:100%;"><{$smarty.const._AM_XMARTIN_HOTEL_NAME}>：<input type="text"
                                                                                            style="width:160px;"
                                                                                            class="inputbox"
                                                                                            name="HotelName"

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @check     if login
  * @method:
@@ -7,7 +8,7 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-include  dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 //验证密码
 $password = '123465';
 
@@ -107,7 +108,7 @@ $isAdmin = $xoopsUser->isAdmin();
                 }
             }
         </script>
-        <?php
+    <?php
 
     elseif ('dozip' === $_REQUEST['myaction']):
 
@@ -130,8 +131,9 @@ $isAdmin = $xoopsUser->isAdmin();
             返回文件的修改时间格式.
             只为本类内部函数调用.
             */
+
             /**
-             * @param  int $unixtime
+             * @param int $unixtime
              * @return int
              */
             public function unix2DosTime($unixtime = 0)
@@ -154,8 +156,9 @@ $isAdmin = $xoopsUser->isAdmin();
             初始化文件,建立文件目录,
             并返回文件的写入权限.
             */
+
             /**
-             * @param  string $path
+             * @param string $path
              * @return bool
              */
             public function startfile($path = 'shenbin.zip')
@@ -171,7 +174,8 @@ $isAdmin = $xoopsUser->isAdmin();
                     @mkdir($path);
                 } while (@prev($mypathdir));
 
-                if ($this->fp = @fopen($this->gzfilename, 'w')) {
+                $this->fp = @fopen($this->gzfilename, 'w');
+                if ($this->fp) {
                     return true;
                 }
 
@@ -181,6 +185,7 @@ $isAdmin = $xoopsUser->isAdmin();
             /*
             添加一个文件到 zip 压缩包中.
             */
+
             /**
              * @param $data
              * @param $name
@@ -189,19 +194,19 @@ $isAdmin = $xoopsUser->isAdmin();
             {
                 $name = str_replace('\\', '/', $name);
 
-                if ('/' === strrchr($name, '/')) {
+                if ('/' === mb_strrchr($name, '/')) {
                     return $this->adddir($name);
                 }
 
                 $dtime    = dechex($this->unix2DosTime());
                 $hexdtime = '\x' . $dtime[6] . $dtime[7] . '\x' . $dtime[4] . $dtime[5] . '\x' . $dtime[2] . $dtime[3] . '\x' . $dtime[0] . $dtime[1];
-                eval('$hexdtime = "' . $hexdtime . '";');
+                eval('$hexdtime = \'' . $hexdtime . '\';');
 
-                $unc_len = strlen($data);
+                $unc_len = mb_strlen($data);
                 $crc     = crc32($data);
                 $zdata   = gzcompress($data);
-                $c_len   = strlen($zdata);
-                $zdata   = substr(substr($zdata, 0, -4), 2);
+                $c_len   = mb_strlen($zdata);
+                $zdata   = mb_substr(mb_substr($zdata, 0, -4), 2);
 
                 //新添文件内容格式化:
                 $datastr = "\x50\x4b\x03\x04";
@@ -212,7 +217,7 @@ $isAdmin = $xoopsUser->isAdmin();
                 $datastr .= pack('V', $crc);             // crc32
                 $datastr .= pack('V', $c_len);           // compressed filesize
                 $datastr .= pack('V', $unc_len);         // uncompressed filesize
-                $datastr .= pack('v', strlen($name));    // length of filename
+                $datastr .= pack('v', mb_strlen($name));    // length of filename
                 $datastr .= pack('v', 0);                // extra field length
                 $datastr .= $name;
                 $datastr .= $zdata;
@@ -221,7 +226,7 @@ $isAdmin = $xoopsUser->isAdmin();
                 $datastr .= pack('V', $unc_len);             // uncompressed filesize
 
                 fwrite($this->fp, $datastr);    //写入新的文件内容
-                $my_datastr_len = strlen($datastr);
+                $my_datastr_len = mb_strlen($datastr);
                 unset($datastr);
 
                 //新添文件目录信息
@@ -234,7 +239,7 @@ $isAdmin = $xoopsUser->isAdmin();
                 $dirstr .= pack('V', $crc);            // crc32
                 $dirstr .= pack('V', $c_len);            // compressed filesize
                 $dirstr .= pack('V', $unc_len);        // uncompressed filesize
-                $dirstr .= pack('v', strlen($name));    // length of filename
+                $dirstr .= pack('v', mb_strlen($name));    // length of filename
                 $dirstr .= pack('v', 0);                // extra field length
                 $dirstr .= pack('v', 0);                // file comment length
                 $dirstr .= pack('v', 0);                // disk number start
@@ -246,7 +251,7 @@ $isAdmin = $xoopsUser->isAdmin();
                 $this->dirstr .= $dirstr;    //目录信息
 
                 $this->file_count++;
-                $this->dirstr_len  += strlen($dirstr);
+                $this->dirstr_len  += mb_strlen($dirstr);
                 $this->datastr_len += $my_datastr_len;
             }
 
@@ -255,25 +260,25 @@ $isAdmin = $xoopsUser->isAdmin();
              */
             public function adddir($name)
             {
-                $name    = str_replace("\\", '/', $name);
+                $name    = str_replace('\\', '/', $name);
                 $datastr = "\x50\x4b\x03\x04\x0a\x00\x00\x00\x00\x00\x00\x00\x00\x00";
 
-                $datastr .= pack('V', 0) . pack('V', 0) . pack('V', 0) . pack('v', strlen($name));
+                $datastr .= pack('V', 0) . pack('V', 0) . pack('V', 0) . pack('v', mb_strlen($name));
                 $datastr .= pack('v', 0) . $name . pack('V', 0) . pack('V', 0) . pack('V', 0);
 
                 fwrite($this->fp, $datastr);    //写入新的文件内容
-                $my_datastr_len = strlen($datastr);
+                $my_datastr_len = mb_strlen($datastr);
                 unset($datastr);
 
                 $dirstr = "\x50\x4b\x01\x02\x00\x00\x0a\x00\x00\x00\x00\x00\x00\x00\x00\x00";
-                $dirstr .= pack('V', 0) . pack('V', 0) . pack('V', 0) . pack('v', strlen($name));
+                $dirstr .= pack('V', 0) . pack('V', 0) . pack('V', 0) . pack('v', mb_strlen($name));
                 $dirstr .= pack('v', 0) . pack('v', 0) . pack('v', 0) . pack('v', 0);
                 $dirstr .= pack('V', 16) . pack('V', $this->datastr_len) . $name;
 
                 $this->dirstr .= $dirstr;    //目录信息
 
                 $this->file_count++;
-                $this->dirstr_len  += strlen($dirstr);
+                $this->dirstr_len  += mb_strlen($dirstr);
                 $this->datastr_len += $my_datastr_len;
             }
 
@@ -292,11 +297,11 @@ $isAdmin = $xoopsUser->isAdmin();
         } else {
             $_REQUEST[zipname] = trim($_REQUEST[zipname]);
         }
-        if ('.zip' === !strrchr(strtolower($_REQUEST[zipname]), '.')) {
+        if ('.zip' === !mb_strrchr(mb_strtolower($_REQUEST[zipname]), '.')) {
             $_REQUEST[zipname] .= '.zip';
         }
         $_REQUEST[todir] = str_replace('\\', '/', trim($_REQUEST[todir]));
-        if ('/' === !strrchr(strtolower($_REQUEST[todir]), '/')) {
+        if ('/' === !mb_strrchr(mb_strtolower($_REQUEST[todir]), '/')) {
             $_REQUEST[todir] .= '/';
         }
         if ('/' === $_REQUEST[todir]) {
@@ -304,7 +309,7 @@ $isAdmin = $xoopsUser->isAdmin();
         }
 
         /**
-         * @param  string $dir
+         * @param string $dir
          * @return int
          */
         function listfiles($dir = '.')
@@ -351,7 +356,7 @@ $isAdmin = $xoopsUser->isAdmin();
         function num_bitunit($num)
         {
             $bitunit = [' B', ' KB', ' MB', ' GB'];
-            for ($key = 0; $key < count($bitunit); $key++) {
+            for ($key = 0, $keyMax = count($bitunit); $key < $keyMax; $key++) {
                 if ($num >= (2 ** (10 * $key)) - 1) { //1023B 会显示为 1KB
                     $num_bitunit_str = (ceil($num / (2 ** (10 * $key)) * 100) / 100) . " $bitunit[$key]";
                 }
@@ -361,7 +366,7 @@ $isAdmin = $xoopsUser->isAdmin();
         }
 
         if (is_array($_REQUEST[dfile])) {
-            $faisunZIP = new PHPzip;
+            $faisunZIP = new PHPzip();
             if ($faisunZIP->startfile("$_REQUEST[todir]$_REQUEST[zipname]")) {
                 echo '正在添加压缩文件...<br><br>';
                 $filenum = 0;

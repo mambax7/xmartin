@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @用户资料
  * @license   http://www.blags.org/
@@ -6,7 +7,6 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-
 $UserNationnality  = getModuleArray('user_nationality', 'user_nationality', true);
 $OrderDocumentType = getModuleArray('order_document_type', 'order_document_type', true);
 
@@ -17,7 +17,7 @@ if ($_POST['uid'] > 0) {
     $_POST['telephone'] = implode('-', $_POST['telephone']);
     $memberHandler      = xoops_getHandler('member');
     $edituser           = $memberHandler->getUser($xoopsUser->uid());
-   if (\Xmf\Request::hasVar('passwd', 'POST')) {
+    if (\Xmf\Request::hasVar('passwd', 'POST')) {
         if ($_POST['passwd_check'] != $_POST['passwd']) {
             redirect_header(MEMBER_URL . '?info', 1, '密码输入不一致.');
         } else {
@@ -34,7 +34,7 @@ if ($_POST['uid'] > 0) {
     if (!$memberHandler->insertUser($edituser)) {
         $msg = _US_PROFUPDATED;
     } else {
-        $msg = _AM_MARTIN_SAVING_SUCCESSFUL;
+        $msg = _AM_XMARTIN_SAVING_SUCCESSFUL;
     }
     redirect_header(MEMBER_URL . '?info', 1, $msg);
 }

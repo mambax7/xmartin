@@ -1,7 +1,7 @@
-<style type="text/css">@import "<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/hotel.js"></script>
+<style type="text/css">@import "<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/hotel.js"></script>
 <link rel="stylesheet" href="<{$module_url}>css/hotelsearch.css" type="text/css">
 <script type="text/javascript">
     jQuery.noConflict();
@@ -32,7 +32,7 @@
                 <{foreach item=room from=$rooms}>
                     <{assign var=roomcount value=$room.room_count+$roomcount}>
                     <tr align="center" style="border: none;">
-                        <td width="20%" align="right"><{$smarty.const._AM_MARTIN_HOTEL_NAME}>：</td>
+                        <td width="20%" align="right"><{$smarty.const._AM_XMARTIN_HOTEL_NAME}>：</td>
                         <td width="32%" align="left"><a
                                     href="<{$xoops_url}>/hotel-<{$room.hotel_alias}><{$hotel_static_prefix}>"><{$room.hotel_name}></a>
                         </td>

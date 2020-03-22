@@ -1,16 +1,17 @@
 <?php
+
 $img_id = $_GET['id'];
 
-$hotel_icon = './images/hotelicon/' . $img_id;
+$hotel_icon = './assets/images/hotelicon/' . $img_id;
 
-$hotel_icon = file_exists($hotel_icon) ? $hotel_icon : './images/hotel/' . $img_id;
+$hotel_icon = file_exists($hotel_icon) ? $hotel_icon : './images/images/hotel/' . $img_id;
 
 if (!file_exists($hotel_icon)) {
     throw new Exception($hotel_icon . ' Not Found.');
     exit(0);
 }
 
-$FileType = strtolower(substr(strrchr($hotel_icon, '.'), 1));
+$FileType = mb_strtolower(mb_substr(mb_strrchr($hotel_icon, '.'), 1));
 
 $img_t = isset($_GET['t']) ? trim($_GET['t']) : null;
 
@@ -61,13 +62,13 @@ if ($new_width > $target_width) {
 $new_img = imagecreatetruecolor($target_width, $target_height);
 if (!@imagefilledrectangle($new_img, 0, 0, $target_width - 1, $target_height - 1, 0)) {
     // Fill the image black
-    echo _AM_MARTIN_ERROR_COULD_NOT_FILL_NEW_IMAGE;
+    echo _AM_XMARTIN_ERROR_COULD_NOT_FILL_NEW_IMAGE;
     exit(0);
 }
 
 //if (!@imagecopyresampled($new_img, $img, ($target_width-$new_width)/2, ($target_height-$new_height)/2, 0, 0, $target_width, $target_height, $width, $height)) {
 if (!@imagecopyresampled($new_img, $img, 0, 0, 0, 0, $target_width, $target_height, $width, $height)) {
-    echo _AM_MARTIN_ERROR_COULD_NOT_RESIZE_IMAGE;
+    echo _AM_XMARTIN_ERROR_COULD_NOT_RESIZE_IMAGE;
     exit(0);
 }
 
@@ -93,7 +94,7 @@ ob_end_clean();
 //var_dump($imagevariable);exit;
 
 header('Content-type: image/jpeg');
-header('Content-Length: ' . strlen($imagevariable));
+header('Content-Length: ' . mb_strlen($imagevariable));
 
 echo $imagevariable;
 exit(0);

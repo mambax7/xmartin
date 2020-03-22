@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/admin_header.php';
 /*
  * 处理
@@ -32,8 +33,8 @@ echo "<div style='padding: 8px;'>";
 echo '</div>';
 echo '</fieldset><br><br>';
 
-$pay_path = MARTIN_ROOT_PATH . 'pay/';
-$img_path = MARTIN_ROOT_PATH . 'images/hotel/';
+$pay_path = XMARTIN_ROOT_PATH . 'pay/';
+$img_path = XMARTIN_ROOT_PATH . 'images/hotel/';
 echo "<fieldset><legend style='font-weight: bold; color: #900;'>{$xoopsModule->name()} 配置</legend>";
 echo "<div style='padding: 8px;'>";
 echo '<label>' . '<strong>PHP Version:</strong>' . ':</label><text>' . PHP_VERSION . '</text><br>';

@@ -11,7 +11,7 @@
 
 use XoopsModules\Xmartin;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * @用于头部
@@ -35,22 +35,23 @@ if (!function_exists('martin_adminMenu')) {
         /** @var Xmartin\Helper $helper */
         $helper = Xmartin\Helper::getInstance();
 
-
         /** @var Xmartin\Helper $helper */
         $helper = Xmartin\Helper::getInstance();
         $helper->loadLanguage('admin');
         $helper->loadLanguage('modinfo');
 
-        include MARTIN_ROOT_PATH . 'admin/menu.php';
+        include XMARTIN_ROOT_PATH . 'admin/menu.php';
 
         $tpl = new \XoopsTpl();
-        $tpl->assign([
-                         'headermenu'      => $headermenu,
-                         'adminmenu'       => $adminObject,
-                         'current'         => $currentoption,
-                         'breadcrumb'      => $breadcrumb,
-                         'headermenucount' => count($headermenu)
-                     ]);
+        $tpl->assign(
+            [
+                'headermenu'      => $headermenu,
+                'adminmenu'       => $adminObject,
+                'current'         => $currentoption,
+                'breadcrumb'      => $breadcrumb,
+                'headermenucount' => count($headermenu),
+            ]
+        );
         $tpl->display('db:martin_admin_menu.tpl');
         echo "<br>\n";
     }
@@ -78,7 +79,7 @@ if (!function_exists('martin_collapsableBar')) {
         //        echo '<script type="text/javascript" src="' . XOOPS_URL . '/themes/default/jquery-1.3.2.min.js"></script>';
         echo '<script type="text/javascript" src="' . XOOPS_URL . '/browse.php?Frameworks/jquery/jquery.js"></script>';
         echo "<h3 style=\"color: #2F5376; font-weight: bold; font-size: 14px; margin: 6px 0 0 0; \"><a href='javascript:;' class='tabclose'>";
-        echo "<img id='$iconname' src=" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/images/icon/close12.gif class='tab_img'>&nbsp;" . $tabletitle . '</a></h3>';
+        echo "<img id='$iconname' src=" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/images/icon/close12.gif class='tab_img'>&nbsp;" . $tabletitle . '</a></h3>';
         echo "<div id='$tablename' class='open'>";
         if ('' != $tabledsc) {
             echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . $tabledsc . '</span>';
@@ -131,11 +132,11 @@ if (!function_exists('martin_close_collapsable')) {
                 var div_class = $("#" + div).attr('class');
                 if (div_class == 'open') {
                     $("#" + div).hide();
-                    $(".tab_img").attr('src', '../images/icon/open12.gif');
+                    $(".tab_img").attr('src', '../assets/images/icon/open12.gif');
                     $("#" + div).attr('class', 'close');
                 } else if (div_class == 'close') {
                     $("#" + div).show();
-                    $(".tab_img").attr('src', '../images/icon/close12.gif');
+                    $(".tab_img").attr('src', '../assets/images/icon/close12.gif');
                     $("#" + div).attr('class', 'open');
                 }
 
@@ -143,7 +144,7 @@ if (!function_exists('martin_close_collapsable')) {
 
             $(".existimage").click(function () {
                 var filename = this.id;
-                if (!confirm("确定删除吗?")) return false;
+                if (!confirm("confirm to delete?")) return false;
                 $.post('martin.hotel.php', {action: 'deleteimg', img: filename});
                 $(this).parent("div").remove();
             });
@@ -205,35 +206,39 @@ EndHTML;
 }
 
 /**
- * @method: 得到酒店星级
+ * @method: Get hotel stars/ranks
  * @license   http://www.blags.org/
  * @created   :2010年05月24日 19时55分
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  **/
-if (!function_exists('GetRanks')) {
+if (!function_exists('getRanks')) {
     /**
      * @param $xoopsModuleConfig
      * @return mixed
      */
     function getRanks($xoopsModuleConfig) //TODO
     {
-        $HotelRanks = $helper->getConfig('hotelrank');
-        $HotelRanks = array_filter(explode(chr(13), $HotelRanks));
-        if (is_array($HotelRanks)) {
-            foreach ($HotelRanks as $hotelrank) {
-                $Rank                                        = array_filter(explode('-', $hotelrank));
-                $Ranks[(int)str_replace("\n", '', $Rank[0])] = trim(str_replace("\n", '', $Rank[1]));
-                unset($Rank);
+        /** @var \XoopsModules\Xmartin\Helper $helper */
+        $helper = \XoopsModules\Xmartin\Helper::getInstance();
+
+        $hotelRanks = $helper->getConfig('hotelrank');
+        $hotelRanks = array_filter(explode(chr(13), $hotelRanks));
+        if (is_array($hotelRanks)) {
+            foreach ($hotelRanks as $hotelrank) {
+                $rank                                        = array_filter(explode('-', $hotelrank));
+                $ranks[(int)str_replace("\r", '', $rank[0])] = trim(str_replace("\r", '', $rank[1]));
+                unset($rank);
             }
         }
 
-        return $Ranks;
+        //        return $ranks;
+        return $hotelRanks;
     }
 }
 
 /**
- * @method delete path files
+ * @method delete files in path
  * @license   http://www.blags.org/
  * @created   :2010年05月27日 22时04分
  * @copyright 1997-2010 The Martin Group
@@ -276,17 +281,17 @@ if (!function_exists('deldir')) {
 if (!function_exists('getModuleArray')) {
     /**
      * @param               $module_key
-     * @param  null         $keyName
-     * @param  bool         $is_get_arr
-     * @param  null         $selected
-     * @param  null         $ModuleConfig
+     * @param null          $keyName
+     * @param bool          $is_get_arr
+     * @param null          $selected
+     * @param null          $ModuleConfig
      * @return array|string
      */
     function getModuleArray($module_key, $keyName = null, $is_get_arr = false, $selected = null, $ModuleConfig = null)
     {
         global $xoopsModuleConfig;
         if (empty($xoopsModuleConfig)) {
-            $xoopsModuleConfig =& $ModuleConfig;
+            $xoopsModuleConfig = &$ModuleConfig;
         }
         //var_dump($xoopsModuleConfig);
         $keyName = null === $keyName ? $module_key : $keyName;
@@ -332,7 +337,7 @@ if (!function_exists('WriteHtmlSelect')) {
     /**
      * @param         $ModuleArr
      * @param         $keyName
-     * @param  null   $selected
+     * @param null    $selected
      * @return string
      */
     function WriteHtmlSelect($ModuleArr, $keyName, $selected = null)
@@ -364,7 +369,7 @@ if (!function_exists('WriteHtmlSelect')) {
  * */
 if (!function_exists('MouthLastDay')) {
     /**
-     * @param  null $mouth
+     * @param null $mouth
      * @return array|bool|int|string
      */
     function MouthLastDay($mouth = null)

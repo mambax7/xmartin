@@ -53,13 +53,13 @@ class alipay_notify
         foreach ($sort_post as $key => $val) {
             $arg .= $key . '=' . $val . '&';
         }
-        $prestr       = substr($arg, 0, count($arg) - 2);  //去掉最后一个&号
+        $prestr       = mb_substr($arg, 0, count($arg) - 2);  //去掉最后一个&号
         $this->mysign = $this->sign($prestr . $this->security_code);
         if (preg_match('/true$/i', $veryfy_result) && $this->mysign == $_POST['sign']) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function return_verify()
@@ -78,16 +78,16 @@ class alipay_notify
                 $arg .= $key . '=' . $val . '&';
             }
         }
-        $prestr       = substr($arg, 0, count($arg) - 2);  //去掉最后一个&号
+        $prestr       = mb_substr($arg, 0, count($arg) - 2);  //去掉最后一个&号
         $this->mysign = $this->sign($prestr . $this->security_code);
 
         log_result('return_url_log=' . $_GET['sign'] . '-------------------' . $this->mysign . '&' . $this->charset_decode(implode(',', $_GET), $this->_input_charset));
         //**********************************上面写日志
         if (preg_match('/true$/i', $veryfy_result) && $this->mysign == $_GET['sign']) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function get_verify($url, $time_out = '60')
@@ -106,29 +106,28 @@ class alipay_notify
         $fp = @fsockopen($transports . $urlarr['host'], $urlarr['port'], $errno, $errstr, $time_out);
         if (!$fp) {
             die("ERROR: $errno - $errstr<br>\n");
-        } else {
-            fwrite($fp, 'POST ' . $urlarr['path'] . " HTTP/1.1\r\n");
-            fwrite($fp, 'Host: ' . $urlarr['host'] . "\r\n");
-            fwrite($fp, "Content-type: application/x-www-form-urlencoded\r\n");
-            fwrite($fp, 'Content-length: ' . strlen($urlarr['query']) . "\r\n");
-            fwrite($fp, "Connection: close\r\n\r\n");
-            fwrite($fp, $urlarr['query'] . "\r\n\r\n");
-            while (!feof($fp)) {
-                $info[] = @fgets($fp, 1024);
-            }
-
-            fclose($fp);
-            $info = implode(',', $info);
-            //            while (list($key, $val) = each($_POST)) {
-            foreach ($_POST as $key => $val) {
-                $arg .= $key . '=' . $val . '&';
-            }
-
-            log_result('return_url_log=' . $url . $this->charset_decode($info, $this->_input_charset));
-            log_result('return_url_log=' . $this->charset_decode($arg, $this->_input_charset));
-
-            return $info;
         }
+        fwrite($fp, 'POST ' . $urlarr['path'] . " HTTP/1.1\r\n");
+        fwrite($fp, 'Host: ' . $urlarr['host'] . "\r\n");
+        fwrite($fp, "Content-type: application/x-www-form-urlencoded\r\n");
+        fwrite($fp, 'Content-length: ' . mb_strlen($urlarr['query']) . "\r\n");
+        fwrite($fp, "Connection: close\r\n\r\n");
+        fwrite($fp, $urlarr['query'] . "\r\n\r\n");
+        while (!feof($fp)) {
+            $info[] = @fgets($fp, 1024);
+        }
+
+        fclose($fp);
+        $info = implode(',', $info);
+        //            while (list($key, $val) = each($_POST)) {
+        foreach ($_POST as $key => $val) {
+            $arg .= $key . '=' . $val . '&';
+        }
+
+        log_result('return_url_log=' . $url . $this->charset_decode($info, $this->_input_charset));
+        log_result('return_url_log=' . $this->charset_decode($arg, $this->_input_charset));
+
+        return $info;
     }
 
     public function arg_sort($array)
@@ -161,9 +160,8 @@ class alipay_notify
         foreach ($parameter as $key => $val) {
             if ('sign' === $key || 'sign_type' === $key || '' == $val) {
                 continue;
-            } else {
-                $para[$key] = $parameter[$key];
             }
+            $para[$key] = $parameter[$key];
         }
 
         return $para;

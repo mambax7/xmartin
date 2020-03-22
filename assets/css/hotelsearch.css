@@ -72,7 +72,7 @@ div#content {
 
 ul#footerbar {
     text-align: center;
-    background-image: url(hbar.gif);
+    background-image: url(../images/front/hbar.gif);
 }
 
 /* 头部*/
@@ -161,8 +161,8 @@ input, select, textarea, .inputbox {
     width: 160px;
     position: absolute;
     border: #DDDDDD 1px solid;
-    background: url(/images/gjl/bg_login.gif) repeat-x top;
-    right: 0px;
+    background: url(../images/front/bg_login.gif) repeat-x top;
+    right: 0;
     text-align: left;
     padding: 10px 15px 10px 15px;
 }
@@ -183,7 +183,7 @@ input, select, textarea, .inputbox {
     padding-left: 10px;
     height: 20px;
     line-height: 20px;
-    background: url(/images/gjl/bullet.gif) left no-repeat;
+    background: url(../images/front/bullet.gif) left no-repeat;
 }
 
 .login li a: {
@@ -194,13 +194,13 @@ input, select, textarea, .inputbox {
 
 .login li a: {
     color: #666666;
-    background: url(/images/gjl/bullet.gif) left no-repeat;
+    background: url(../images/front/bullet.gif) left no-repeat;
     border-bottom: #666666 1px dotted;
 }
 
 .login li a:hover {
     background: none;
-    background: url(/images/gjl/bullet.gif) left no-repeat;
+    background: url(../images/front/bullet.gif) left no-repeat;
     color: #666666;
 }
 
@@ -215,15 +215,15 @@ input, select, textarea, .inputbox {
 }
 
 .username {
-    background: url(/images/gjl/icon-user.gif) 2px 3px no-repeat;
+    background: url(../images/front/icon-user.gif) 2px 3px no-repeat;
 }
 
 .password {
-    background: url(/images/gjl/icon-key.gif) 2px 3px no-repeat;
+    background: url(../images/front/icon-key.gif) 2px 3px no-repeat;
 }
 
 .login .button {
-    background: url("/images/gjl/but-bg.gif") repeat-x scroll center bottom #FFFFFF;
+    background: url("../images/front/but-bg.gif") repeat-x scroll center bottom #FFFFFF;
     border: 1px solid #DDDDDD;
     color: #666666;
     cursor: pointer;
@@ -242,7 +242,7 @@ input, select, textarea, .inputbox {
 }
 
 .header_search .inputbox {
-    background: url(/images/gjl/icon-search.gif) no-repeat scroll 8px center #FFFFFF;
+    background: url(../images/front/icon-search.gif) no-repeat scroll 8px center #FFFFFF;
     font-weight: bold;
     color: #666666;
     padding-left: 24px;
@@ -253,7 +253,7 @@ input, select, textarea, .inputbox {
 }
 
 .Button, .button {
-    background: url("/images/gjl/but-bg.gif") repeat-x scroll center bottom #FFFFFF;
+    background: url("../images/front/but-bg.gif") repeat-x scroll center bottom #FFFFFF;
     border: #DDDDDD 1px solid;
     color: #666666;
     cursor: pointer;
@@ -290,7 +290,7 @@ input, select, textarea, .inputbox {
     height: 30px;
     line-height: 30px;
     border-top: #DDDDDD 1px solid;
-    background: url(/images/gjl/mainnav-bg.gif) repeat-x bottom;
+    background: url(../images/front/mainnav-bg.gif) repeat-x bottom;
     color: #FFFFFF;
     position: relative;
     z-index: 1;
@@ -327,11 +327,11 @@ input, select, textarea, .inputbox {
 
 .menu ul li:hover a {
     color: #000000;
-    background: url(/images/gjl/mainnav-hover.gif) repeat-x bottom;
+    background: url(../images/front/mainnav-hover.gif) repeat-x bottom;
 }
 
 .menu ul li:hover .index {
-    background: url(/images/gjl/mainnav-active.gif) repeat-x top;
+    background: url(../images/front/mainnav-active.gif) repeat-x top;
 }
 
 .menu .index {
@@ -339,12 +339,12 @@ input, select, textarea, .inputbox {
     height: 30px;
     line-height: 30px;
     text-decoration: none;
-    background: url(/images/gjl/mainnav-active.gif) repeat-x top;
+    background: url(../images/front/mainnav-active.gif) repeat-x top;
     font-weight: bold;
 }
 
 .menu ul li:hover .honghong {
-    background: url(/images/gjl/red/mainnav-active.gif) repeat-x top;
+    background: url(../images/front/red/mainnav-active.gif) repeat-x top;
 }
 
 .menu .honghong {
@@ -352,11 +352,11 @@ input, select, textarea, .inputbox {
     height: 30px;
     line-height: 30px;
     text-decoration: none;
-    background: url(/images/gjl/red/mainnav-active.gif) repeat-x top;
+    background: url(../images/front/red/mainnav-active.gif) repeat-x top;
 }
 
 .menu ul li:hover .macao {
-    background: url(/images/gjl/pink/mainnav-active.gif) repeat-x top;
+    background: url(../images/front/pink/mainnav-active.gif) repeat-x top;
 }
 
 .menu .macao {
@@ -364,7 +364,7 @@ input, select, textarea, .inputbox {
     height: 30px;
     line-height: 30px;
     text-decoration: none;
-    background: url(/images/gjl/pink/mainnav-active.gif) repeat-x top;
+    background: url(../images/front/pink/mainnav-active.gif) repeat-x top;
 }
 
 .menu .index span, .menu .honghong span, .menu .macao span {
@@ -430,7 +430,7 @@ input, select, textarea, .inputbox {
 /* ie6下面显示色块*/
 .menu .indexlink {
     font-weight: bold;
-    background: url(/images/gjl/mainnav-active.gif) repeat-x top;
+    background: url(../images/front/mainnav-active.gif) repeat-x top;
     color: #FFFFFF;
     display: block;
     height: 30px;
@@ -439,7 +439,7 @@ input, select, textarea, .inputbox {
 
 .menu .hongkonglink {
     font-weight: bold;
-    background: url(/images/gjl/red/mainnav-active.gif) repeat-x top;
+    background: url(../images/front/red/mainnav-active.gif) repeat-x top;
     color: #FFFFFF;
     display: block;
     height: 30px;
@@ -448,7 +448,7 @@ input, select, textarea, .inputbox {
 
 .menu .macaolink {
     font-weight: bold;
-    background: url(/images/gjl/pink/mainnav-active.gif) repeat-x top;
+    background: url(../images/front/pink/mainnav-active.gif) repeat-x top;
     color: #FFFFFF;
     display: block;
     height: 30px;
@@ -592,7 +592,7 @@ input, select, textarea, .inputbox {
 
 .leftblock .hotellist .hoteltitle img {
     float: right;
-    margin: 6px 0px 0 6px;
+    margin: 6px 0 0 6px;
 }
 
 .leftblock .hotellist .hoteltitle span {
@@ -686,7 +686,7 @@ input, select, textarea, .inputbox {
     line-height: 24px;
     height: 24px;
     text-decoration: none;
-    background: url(/modules/martin/images/hotel_bg.gif) center no-repeat;
+    background: url(/modules/xmartin/assets/images/hotel_bg.gif) center no-repeat;
     color: #000000;
 }
 
@@ -1072,7 +1072,7 @@ input, select, textarea, .inputbox {
     text-decoration: none;
     color: #000000;
     width: 80px;
-    background: url("/modules/martin/images/idc-universal.png") no-repeat scroll -1px -2px transparent;
+    background: url("/modules/xmartin/assets/images/idc-universal.png") no-repeat scroll -1px -2px transparent;
 }
 
 .quicksearch .searchbutton a:hover {
@@ -1080,7 +1080,7 @@ input, select, textarea, .inputbox {
     line-height: 26px;
     color: #464646;
     text-decoration: none;
-    background: url("/modules/martin//idc-universal.png") no-repeat scroll -1px -34px transparent;
+    background: url("/modules/xmartin/assets/images/front/idc-universal.png") no-repeat scroll -1px -34px transparent;
 }
 
 .specials {
@@ -1144,13 +1144,13 @@ input, select, textarea, .inputbox {
 
 #con {
     FONT-SIZE: 12px;
-    margin: 0px auto;
+    margin: 0 auto;
     width: 390px;
 }
 
 #tags {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     width: 390px;
     height: 24px;
     background: #f7f7f7;
@@ -1170,16 +1170,16 @@ input, select, textarea, .inputbox {
     text-align: center;
     background: #F7f7f7;
     float: left;
-    padding-bottom: 0px;
+    padding-bottom: 0;
     color: #999;
     line-height: 24px;
-    padding-top: 0px;
+    padding-top: 0;
     height: 24px;
     text-decoration: none;
 }
 
 #tags li.emptyTag {
-    background: none transparent scroll repeat 0% 0%;
+    background: none transparent scroll repeat 0 0;
     width: 4px;
 }
 
@@ -1306,7 +1306,7 @@ input, select, textarea, .inputbox {
     float: right;
     width: 70px;
     padding: 0;
-    background: url(/images/gjl/arrow-3.png) 20px 14px no-repeat #9C162E;
+    background: url(../images/front/arrow-3.png) 20px 14px no-repeat #9C162E;
 }
 
 .footmain .top a {
@@ -1315,7 +1315,7 @@ input, select, textarea, .inputbox {
 }
 
 .footmain .top a:hover {
-    background: url(/images/gjl/arrow-3.png) 20px 14px no-repeat #7D7D7D;
+    background: url(../images/front/arrow-3.png) 20px 14px no-repeat #7D7D7D;
     text-decoration: none;
 }
 

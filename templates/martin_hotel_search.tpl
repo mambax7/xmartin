@@ -1,8 +1,8 @@
-<style type="text/css">@import "<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
+<style type="text/css">@import "<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<{$googleApi}>" type="text/javascript"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/hotel.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/hotel.js"></script>
 <link rel="stylesheet" href="<{$module_url}>css/hotelsearch.css" type="text/css">
 <script type="text/javascript">
     var window_width = screen.width;
@@ -75,10 +75,10 @@
 <div class="blocknh">
     <!--新闻-->
     <div class="leftblock">
-        <div class="l_title">选择（<{$select_title}>）<{$smarty.const._AM_MARTIN_PROMO_HOTELS}></div>
+        <div class="l_title">选择（<{$select_title}>）<{$smarty.const._AM_XMARTIN_PROMO_HOTELS}></div>
         <div class="hotellist">
             <div class="hoteltitle">
-                <div class="left"><{$smarty.const._AM_MARTIN_HOTEL_LIST}></div>
+                <div class="left"><{$smarty.const._AM_XMARTIN_HOTEL_LIST}></div>
                 <div class="right">
                     <{if $next_url}><a href="<{$next_url}>"><img src="<{$module_url}>images/next.gif" border="0">
                         </a><{/if}>
@@ -94,10 +94,10 @@
                 <ul>
                     <li class="titleleft"><{$up_down}>排序方式:</li>
                     <li><{$up_down}><a
-                                href="<{$this_url}>&amp;Order=room_price&amp;By=<{$this_by}>"><{$smarty.const._AM_MARTIN_PRICE}> <{if $order eq "room_price"}><{$order_str}><{/if}></a>
+                                href="<{$this_url}>&amp;Order=room_price&amp;By=<{$this_by}>"><{$smarty.const._AM_XMARTIN_PRICE}> <{if $order eq "room_price"}><{$order_str}><{/if}></a>
                     </li>
                     <li><{$up_down}><a
-                                href="<{$this_url}>&amp;Order=hotel_star&amp;By=<{$this_by}>"><{$smarty.const._AM_MARTIN_HOTEL_STARS}> <{if $order eq "hotel_star"}><{$order_str}><{/if}></a>
+                                href="<{$this_url}>&amp;Order=hotel_star&amp;By=<{$this_by}>"><{$smarty.const._AM_XMARTIN_HOTEL_STARS}> <{if $order eq "hotel_star"}><{$order_str}><{/if}></a>
                     </li>
                     <li><{$up_down}><a
                                 href="<{$this_url}>&amp;Order=room_is_today_special&amp;By=<{$this_by}>">今日特价<{if $order eq "room_is_today_special"}><{$order_str}><{/if}></a>
@@ -159,9 +159,9 @@
                                             <div class="abso" style="display:none;">
                                                 <table width="500" border="0" cellspacing="0" cellpadding="0">
                                                     <tr>
-                                                        <td><{$smarty.const._AM_MARTIN_HOTEL_FLOOR}>
+                                                        <td><{$smarty.const._AM_XMARTIN_HOTEL_FLOOR}>
                                                             ：<{$room.room_floor}></td>
-                                                        <td><{$smarty.const._AM_MARTIN_HOTEL_AREA}>：<{$room.room_area}>
+                                                        <td><{$smarty.const._AM_XMARTIN_HOTEL_AREA}>：<{$room.room_area}>
                                                             ㎡
                                                         </td>
                                                         <td>房型：<{$room.room_type_info}></td>
@@ -217,7 +217,7 @@
 
         <div class="hoteltitle"></div>
         <div style="background:#F0F7EB; padding:15px;">
-            <{$smarty.const._AM_MARTIN_INFOLINE1}>
+            <{$smarty.const._AM_XMARTIN_INFOLINE1}>
         </div>
     </div>
     <input type="hidden" id="check_in_date" value="<{$check_in_date}>"><input type="hidden" id="check_out_date"
@@ -231,7 +231,7 @@
 <input type="hidden" id="lat" value=""><input type="hidden" id="lng" value="">
 <div style='border: medium none;background-color: rgb(102, 102, 102); position:absolute;visibility:visible; z-index:1;opacity: 0.6; left:0;top: 0;width:100%; height: 1682px; z-index:15;display:none;'
      class='mapbig'>
-</div><img id="mapClose" class="mapbig" title="<{$smarty.const._AM_MARTIN_CLOSE_MAP}>"
+</div><img id="mapClose" class="mapbig" title="<{$smarty.const._AM_XMARTIN_CLOSE_MAP}>"
            src="<{$xoops_url}>/js/jquery.fancybox/fancy_closebox.png"
            style="top: 55px; z-index: 101; position: absolute;cursor: pointer;display:none;">
 <div id='mapbig' class="mapbig"

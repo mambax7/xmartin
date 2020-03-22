@@ -18,7 +18,7 @@ $memberHandler = $helper->getHandler('Member');
 
 $xoopsOption['xoops_pagetitle'] = '我的收藏 - 用户中心';
 
-$hotels = $memberHandler->GetHotelList($start);
+$hotels = $memberHandler->getHotelList($start);
 //var_dump($hotels);
 $Count = $hotels['count'];
 unset($hotels['count']);

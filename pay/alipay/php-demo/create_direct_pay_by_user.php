@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ��* ���� ��������ҳ��
  * ��* ����  ֧�����ⲿ����ӿڿ���
@@ -41,7 +42,6 @@ $parameter = [
     'defaultbank'        => 'CMB',
     'royalty_type'       => '10',
     'royalty_parameters' => 'yao2857@yahoo.com.cn^0.01^��Ʊ����',
-
 ];
 $alipay    = new alipay_service($parameter, $security_code, $sign_type);
 print_r($parameter);

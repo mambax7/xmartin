@@ -1086,7 +1086,7 @@ input, select, textarea, .inputbox {
     text-decoration: none;
     color: #000000;
     width: 80px;
-    background: url("/modules/martin/images/idc-universal.png") no-repeat scroll -1px -2px transparent;
+    background: url("/modules/xmartin/images/idc-universal.png") no-repeat scroll -1px -2px transparent;
 }
 
 .quicksearch .searchbutton a:hover {
@@ -1094,7 +1094,7 @@ input, select, textarea, .inputbox {
     line-height: 26px;
     color: #464646;
     text-decoration: none;
-    background: url("/modules/martin/images/idc-universal.png") no-repeat scroll -1px -34px transparent;
+    background: url("/modules/xmartin/images/idc-universal.png") no-repeat scroll -1px -34px transparent;
 }
 
 .specials {

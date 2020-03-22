@@ -1,22 +1,22 @@
 <?php
-include  dirname(dirname(__DIR__)) . '/mainfile.php';
-include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
+
+require_once __DIR__ . '/header.php';
+
 if (!defined('MODULE_URL')) {
-    define('MODULE_URL', XOOPS_URL . '/modules/martin/');
+    define('MODULE_URL', XOOPS_URL . '/modules/xmartin/');
 }
 
-$hotelHandler     = xoops_getModuleHandler('hotel', 'martin');
-$roomHandler      = xoops_getModuleHandler('room', 'martin');
-$serviceHandler   = xoops_getModuleHandler('hotelservice', 'martin');
-$promotionHandler = xoops_getModuleHandler('hotelpromotion', 'martin');
+$hotelHandler     = $helper->getHandler('Hotel');
+$roomHandler      = $helper->getHandler('Room');
+$serviceHandler   = $helper->getHandler('HotelService');
+$promotionHandler = $helper->getHandler('Promotion');
 
-$action = isset($_GET['action']) ? trim(strtolower($_GET['action'])) : null;
-$action = isset($_POST['action']) ? trim(strtolower($_POST['action'])) : $action;
+$action = isset($_GET['action']) ? trim(mb_strtolower($_GET['action'])) : null;
+$action = isset($_POST['action']) ? trim(mb_strtolower($_POST['action'])) : $action;
 
 /**
  * ajax
  * @access    public
- * @return void
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * @created   time :2010-07-03 15:30:35

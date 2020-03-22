@@ -1,5 +1,5 @@
 <div id="help-template" class="outer">
-    <{include file=$smarty.const._MI_MARTIN_HELP_HEADER}>
+    <{include file=$smarty.const._MI_XMARTIN_HELP_HEADER}>
 
     <h4 class="odd">DESCRIPTION</h4>
 
@@ -12,7 +12,7 @@
         extract the module folder into the ../modules directory. Install the
         module through Admin -> System Module -> Modules.<br> <br>
         Detailed instructions on installing modules are available in the
-        <a href="https://www.gitbook.com/book/xoops/xoops-operations-guide/" target="_blank">XOOPS Operations Manual</a>
+        <a href="https://xoops.gitbook.io/xoops-operations-guide/" target="_blank">XOOPS Operations Manual</a>
     </p>
 
 
@@ -20,7 +20,7 @@
 
     This module and its operations are very simple.<br> <br>
     Detailed instructions on configuring the access rights for user groups are available in the
-    <a href="https://www.gitbook.com/book/xoops/xoops-operations-guide/" target="_blank">XOOPS Operations Manual</a><br>
+    <a href="https://xoops.gitbook.io/xoops-operations-guide/" target="_blank">XOOPS Operations Manual</a><br>
     <br>
 
     <h4 class="odd">TUTORIAL</h4>

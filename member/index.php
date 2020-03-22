@@ -10,8 +10,8 @@
 
 use XoopsModules\Xmartin;
 
-include  dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+require_once XOOPS_ROOT_PATH . '/modules/xmartin/include/common.php';
 
 /** @var Xmartin\Helper $helper */
 $helper = Xmartin\Helper::getInstance();
@@ -20,7 +20,7 @@ if (!defined('NEWS_URL')) {
     define('NEWS_URL', XOOPS_URL . '/modules/news/');
 }
 if (!defined('MODULE_URL')) {
-    define('MODULE_URL', XOOPS_URL . '/modules/martin/');
+    define('MODULE_URL', XOOPS_URL . '/modules/xmartin/');
 }
 if (!defined('MEMBER_URL')) {
     define('MEMBER_URL', MODULE_URL . 'member/');
@@ -37,14 +37,14 @@ if ($uid) {
     $xoopsUser = $memberHandler->getUser($uid);
 }
 
-global $xoopsUser,  $xoopsModule;
+global $xoopsUser, $xoopsModule;
 if (!$xoopsUser) {
     redirect_header(XOOPS_URL . '/user.php?xoops_redirect=/' . $_SERVER['REQUEST_URI'], 1, '您还没有登录.');
 }
 
 $grouppermHandler = xoops_getHandler('groupperm');
-$groups       = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-$isAdmin      = $grouppermHandler->checkRight('system_admin', XOOPS_SYSTEM_USER, $groups);
+$groups           = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+$isAdmin          = $grouppermHandler->checkRight('system_admin', XOOPS_SYSTEM_USER, $groups);
 // isadmin is true if user has 'edit users' admin rights
 
 //var_dump($xoopsUser);
@@ -57,16 +57,16 @@ $query_string = str_replace('&uid=' . $_GET['uid'], '', $query_string);
 
 $start    = \Xmf\Request::getInt('start', 0, 'GET');
 $order_id = \Xmf\Request::getInt('order_id', 0, 'GET');
-$action   = isset($_GET['action']) ? strtolower(trim($_GET['action'])) : '';
-$action   = empty($action) ? strtolower(trim($query_string)) : $action;
+$action   = isset($_GET['action']) ? mb_strtolower(trim($_GET['action'])) : '';
+$action   = empty($action) ? mb_strtolower(trim($query_string)) : $action;
 $action   = empty($action) ? 'index' : $action;
 
-$action_file                             = MARTIN_ROOT_PATH . 'member/member_' . $action . '.php';
+$action_file                             = XMARTIN_ROOT_PATH . 'member/member_' . $action . '.php';
 $GLOBALS['xoopsOption']['template_main'] = "martin_member_$action.tpl";
 
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 if (file_exists($action_file)) {
-    include $action_file;
+    require_once $action_file;
 }
 
 $xoopsTpl->assign('xoops_pagetitle', str_replace('用户中心', '会员面板', $xoopsOption['xoops_pagetitle']) . ' - ' . $xoopsConfig['sitename'] . ' - ' . $xoopsConfig['slogan']);
@@ -77,4 +77,4 @@ $xoopsTpl->assign('member_url', MEMBER_URL);
 $xoopsTpl->assign('action', $action);
 $xoopsTpl->assign('isAdmin', $isAdmin);
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

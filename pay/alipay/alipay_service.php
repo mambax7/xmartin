@@ -39,7 +39,7 @@ class alipay_service
         foreach ($sort_array as $key => $val) {
             $arg .= $key . '=' . $this->charset_encode($val, $this->parameter['_input_charset']) . '&';
         }
-        $prestr       = substr($arg, 0, count($arg) - 2);  //去掉最后一个问号
+        $prestr       = mb_substr($arg, 0, count($arg) - 2);  //去掉最后一个问号
         $this->mysign = $this->sign($prestr . $this->security_code);
     }
 
@@ -102,9 +102,8 @@ class alipay_service
         foreach ($parameter as $key => $val) {
             if ('sign' === $key || 'sign_type' === $key || '' == $val) {
                 continue;
-            } else {
-                $para[$key] = $parameter[$key];
             }
+            $para[$key] = $parameter[$key];
         }
 
         return $para;

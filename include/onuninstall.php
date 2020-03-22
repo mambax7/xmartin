@@ -10,14 +10,12 @@
 
 use XoopsModules\Xmartin;
 
-
 /**
  * Prepares system prior to attempting to uninstall module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to uninstall, false if not
  */
-
 function xoops_module_pre_uninstall_xmartin(\XoopsModule $module)
 {
     // Do some synchronization
@@ -25,25 +23,25 @@ function xoops_module_pre_uninstall_xmartin(\XoopsModule $module)
 }
 
 /**
- *
  * Performs tasks required during uninstallation of the module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if uninstallation successful, false if not
  */
 function xoops_module_uninstall_xmartin(\XoopsModule $module)
 {
-//    return true;
+    //    return true;
 
-    $moduleDirName = basename(dirname(__DIR__));
-     $helper      =Xmartin\Helper::getInstance();
+    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+    /** @var Xmartin\Helper $helper */
+    $helper = Xmartin\Helper::getInstance();
 
     /** @var \XoopsModules\Xmartin\Utility $utility */
     $utility = new \XoopsModules\Xmartin\Utility();
 
     $success = true;
     $helper->loadLanguage('admin');
-
 
     //------------------------------------------------------------------
     // Remove uploads folder (and all subfolders) if they exist

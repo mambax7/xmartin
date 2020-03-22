@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/alipay_notify.php';
 require_once __DIR__ . '/alipay_config.php';
 $alipay        = new alipay_notify($partner, $security_code, $sign_type, $_input_charset, $transport);

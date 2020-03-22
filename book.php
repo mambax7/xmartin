@@ -2,10 +2,10 @@
 
 use XoopsModules\Xmartin;
 
-include  dirname(dirname(__DIR__)) . '/mainfile.php';
-include XOOPS_ROOT_PATH . '/modules/martin/include/common.php';
+require_once __DIR__ . '/header.php';
+
 if (!defined('MODULE_URL')) {
-    define('MODULE_URL', XOOPS_URL . '/modules/martin/');
+    define('MODULE_URL', XOOPS_URL . '/modules/xmartin/');
 }
 /** @var Xmartin\Helper $helper */
 $helper = Xmartin\Helper::getInstance();
@@ -13,10 +13,10 @@ $helper = Xmartin\Helper::getInstance();
 //测试阶段
 //redirect_header('http://chat.53kf.com/company.php?arg=gjlmo&style=1',1,'客户接入中....');
 
-$hotelHandler     = xoops_getModuleHandler('hotel', 'martin');
-$roomHandler      = xoops_getModuleHandler('room', 'martin');
-$serviceHandler   = xoops_getModuleHandler('hotelservice', 'martin');
-$promotionHandler = xoops_getModuleHandler('hotelpromotion', 'martin');
+$hotelHandler     = $helper->getHandler('Hotel');
+$roomHandler      = $helper->getHandler('Room');
+$serviceHandler   = $helper->getHandler('HotelService');
+$promotionHandler = $helper->getHandler('Promotion');
 //paramerters
 $hotel_id       = \Xmf\Request::getInt('hotel_id', 0, 'GET');
 $room_id        = \Xmf\Request::getInt('room_id', 0, 'GET');
@@ -37,7 +37,7 @@ foreach ($hotel_obj->vars as $key => $var) {
 
 $check_date_count = (int)(($check_out_date - $check_in_date) / (3600 * 24));
 $check_arr        = getCheckDateArr($check_in_date, $check_out_date);
-$room_price       = $roomHandler->GetRoomDatePrie($room_id, $check_in_date, $check_out_date);
+$room_price       = $roomHandler->getRoomDatePrie($room_id, $check_in_date, $check_out_date);
 $this_url         = MODULE_URL . 'book.php?' . $_SERVER['QUERY_STRING'];
 $this_url         = str_replace('&check_in_date=' . $check_in_date, '', $this_url);
 $this_url         = str_replace('&check_in_date=' . date('Y-m-d', $check_in_date), '', $this_url);
@@ -49,7 +49,7 @@ if (!$xoopsUser) {
 }
 
 $xoopsUser->cleanVars();
-$user =& $xoopsUser->cleanVars;
+$user = &$xoopsUser->cleanVars;
 //var_dump($user);
 
 //得到酒店相关信息
@@ -61,10 +61,10 @@ $hotel_data['promotion'] = $promotionHandler->getHotelPromotion($hotel_id);
 $GLOBALS['xoopsOption']['template_main'] = $isFind ? 'martin_hotel_find_book.tpl' : 'martin_hotel_book.tpl';
 $select_title                            = '您选择了 ' . $hotel_data['hotel_name'];
 
-include XOOPS_ROOT_PATH . '/header.php';
-include XOOPS_ROOT_PATH . '/modules/martin/HotelSearchLeft.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/modules/xmartin/HotelSearchLeft.php';
 
-$xoopsOption['xoops_pagetitle'] = $select_title . ' - 酒店预定';// - '.$xoopsConfig['sitename'];
+$xoopsOption['xoops_pagetitle'] = $select_title . ' - 酒店预定'; // - '.$xoopsConfig['sitename'];
 $xoopsTpl->assign('check_date_count', $check_date_count);
 $xoopsTpl->assign('xoops_pagetitle', $xoopsOption['xoops_pagetitle']);
 $xoopsTpl->assign('hotel_static_prefix', $helper->getConfig('hotel_static_prefix'));
@@ -84,10 +84,12 @@ $xoopsTpl->assign('check_in_date', $check_in_date);
 $xoopsTpl->assign('check_out_date', $check_out_date);
 $xoopsTpl->assign('person_exchange_price', $xoopsUser->total_coupon());
 
-session_start();
+if (false === @session_start()) {
+    throw new \RuntimeException('Session could not start.');
+}
 //防止重复提交
 $Form_Validate             = md5(mt_rand(1000, 10000));
 $_SESSION['Form_Validate'] = $Form_Validate;
 $xoopsTpl->assign('Form_Validate', $Form_Validate);
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

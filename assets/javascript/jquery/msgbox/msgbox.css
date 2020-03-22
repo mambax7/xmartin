@@ -1,5 +1,5 @@
 .jquery-msgbox {
-    background: url(/modules/martin/javascript/jquery/msgbox/img/background.png) repeat-x left bottom;
+    background: url(/modules/xmartin/javascript/jquery/msgbox/img/background.png) repeat-x left bottom;
     padding-bottom: 55px;
 }
 
@@ -40,21 +40,21 @@
 }
 
 .jquery-msgbox-alert {
-    background: url(/modules/martin/javascript/jquery/msgbox/img/alert.png) no-repeat 20px 20px;
+    background: url(/modules/xmartin/javascript/jquery/msgbox/img/alert.png) no-repeat 20px 20px;
 }
 
 .jquery-msgbox-info {
-    background: url(/modules/martin/javascript/jquery/msgbox/img/info.png) no-repeat 20px 20px;
+    background: url(/modules/xmartin/javascript/jquery/msgbox/img/info.png) no-repeat 20px 20px;
 }
 
 .jquery-msgbox-error {
-    background: url(/modules/martin/javascript/jquery/msgbox/img/error.png) no-repeat 20px 20px;
+    background: url(/modules/xmartin/javascript/jquery/msgbox/img/error.png) no-repeat 20px 20px;
 }
 
 .jquery-msgbox-prompt {
-    background: url(/modules/martin/javascript/jquery/msgbox/img/question.png) no-repeat 20px 20px;
+    background: url(/modules/xmartin/javascript/jquery/msgbox/img/question.png) no-repeat 20px 20px;
 }
 
 .jquery-msgbox-confirm {
-    background: url(/modules/martin/javascript/jquery/msgbox/img/confirm.png) no-repeat 20px 20px;
+    background: url(/modules/xmartin/javascript/jquery/msgbox/img/confirm.png) no-repeat 20px 20px;
 }

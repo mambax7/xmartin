@@ -7,10 +7,10 @@
 <script type="text/javascript" src="/js/jquery.fancybox/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="/js/jquery.fancybox/jquery.fancybox-1.2.1.pack.js"></script>
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<{$googleApi}>" type="text/javascript"></script>
-<style type="text/css">@import "<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
-<script type="text/javascript" src="<{$module_url}>javascript/hotel.js"></script>
+<style type="text/css">@import "<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.css";</style>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/jquery/jquery-datepick/jquery.datepick-zh-CN.js"></script>
+<script type="text/javascript" src="<{$module_url}>assets/javascript/hotel.js"></script>
 <script type="text/javascript">
     var lat = <{$hotel.hotel_google.0}> ;
     var lng = <{$hotel.hotel_google.1}> ;
@@ -113,7 +113,7 @@
             <div class="intro_right">
                 <div id="gmap"></div>
                 <div align="right"
-                     style="background:url(/modules/martin/images/pop_map_btn.gif) no-repeat scroll right center transparent; cursor: pointer;margin-top: 5px;"
+                     style="background:url(/modules/xmartin/images/pop_map_btn.gif) no-repeat scroll right center transparent; cursor: pointer;margin-top: 5px;"
                      title="查看大地图" id="big">放大&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
             </div>
         </div>
@@ -173,7 +173,7 @@
                             <td colspan="3"><{$hotel.hotel_telephone}></td>
                         </tr>
                         <tr>
-                            <td align="right"><{$smarty.const._AM_MARTIN_THE_NUMBER_OF_ROOMS}>:</td>
+                            <td align="right"><{$smarty.const._AM_XMARTIN_THE_NUMBER_OF_ROOMS}>:</td>
                             <td colspan="3"><{$hotel.hotel_room_count}></td>
                         </tr>
                     </table>
@@ -232,8 +232,8 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="dtable">
                     <tr align="center" class="fwt">
                         <td width="21%">增值服务项目</td>
-                        <td width="9%"><{$smarty.const._AM_MARTIN_SERVICE_UNIT}></td>
-                        <td width="14%"><{$smarty.const._AM_MARTIN_PRICE}></td>
+                        <td width="9%"><{$smarty.const._AM_XMARTIN_SERVICE_UNIT}></td>
+                        <td width="14%"><{$smarty.const._AM_XMARTIN_PRICE}></td>
                         <td width="12%"><p>说明</p></td>
                         <td width="12%">订购数量</td>
                     </tr>

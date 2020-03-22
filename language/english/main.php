@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @语言包
  * @license   http://www.blags.org/
@@ -6,9 +7,8 @@
  * @copyright 1997-2010 The Martin Group
  * @author    Martin <china.codehome@gmail.com>
  * */
-
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-//define('MARTIN_MODULES_DESCRIPTION', 'Loading Module');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+//define('XMARTIN_MODULES_DESCRIPTION', 'Loading Module');
 //
-//define('MARTIN_GOOGLE_API_TITLE', 'Google Api');
-//define('MARTIN_GOOGLE_API_DESCRIPTION', 'Use Google API Key');
+//define('XMARTIN_GOOGLE_API_TITLE', 'Google Api');
+//define('XMARTIN_GOOGLE_API_DESCRIPTION', 'Use Google API Key');

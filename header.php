@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Article management
  *
@@ -8,9 +9,9 @@
  * @since          1.00
  * @package        module::article
  */
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
-require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
-
+require_once XOOPS_ROOT_PATH . '/modules/xmartin/include/common.php';
 /*
 if(!empty($GLOBALS["xoopsModuleConfig"]['theme_set'])){
     $GLOBALS["xoopsModuleConfig"]['theme_set'] = $GLOBALS["xoopsModuleConfig"]['theme_set'];

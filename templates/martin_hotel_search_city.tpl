@@ -16,7 +16,7 @@
         <{assign var=i value=$i+1}>
         <td><a href="javascript:void(0);"
                onclick="InsertCity('<{$row.city_id}>','<{$row.city_name}>')"><{$row.city_name}></a></td>
-        <{if $i is div by 8}></tr>
+        <{if $i % 8 == 0}></tr>
     <tr><{/if}>
         <{/if}>
         <{/foreach}>
@@ -33,7 +33,7 @@
         <{assign var=i value=$i+1}>
         <td><a href="javascript:void(0);"
                onclick="InsertCity('<{$row.city_id}>','<{$row.city_name}>')"><{$row.city_name}></a></td>
-        <{if $i is div by 8}></tr>
+        <{if $i % 8 == 0}></tr>
     <tr><{/if}>
         <{/if}>
         <{/foreach}>

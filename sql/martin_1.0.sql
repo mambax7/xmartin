@@ -1,4 +1,4 @@
-CREATE TABLE `martin_auction` (
+CREATE TABLE `xmartin_auction` (
   `auction_id`             INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `check_in_date`          INT(11)                   DEFAULT 0,
   `check_out_date`         INT(11)                   DEFAULT 0,
@@ -15,17 +15,17 @@ CREATE TABLE `martin_auction` (
   ENGINE = MyISAM;
 
 --
--- 导出表中的数据 `martin_auction`
+-- 导出表中的数据 `xmartin_auction`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_auction_room`
+-- 表的结构 `xmartin_auction_room`
 --
 
-CREATE TABLE `martin_auction_room` (
+CREATE TABLE `xmartin_auction_room` (
   `auction_id` INT(11) UNSIGNED NOT NULL DEFAULT '0',
   `room_id`    INT(11) UNSIGNED NOT NULL DEFAULT '0',
   `room_count` INT(11)                   DEFAULT 0,
@@ -34,17 +34,17 @@ CREATE TABLE `martin_auction_room` (
   ENGINE = MyISAM;
 
 --
--- 导出表中的数据 `martin_auction_room`
+-- 导出表中的数据 `xmartin_auction_room`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_group`
+-- 表的结构 `xmartin_group`
 --
 
-CREATE TABLE `martin_group` (
+CREATE TABLE `xmartin_group` (
   `group_id`             INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `check_in_date`        INT(11)                   DEFAULT 0,
   `check_out_date`       INT(11)                   DEFAULT 0,
@@ -62,17 +62,17 @@ CREATE TABLE `martin_group` (
   AUTO_INCREMENT = 1;
 
 --
--- 导出表中的数据 `martin_group`
+-- 导出表中的数据 `xmartin_group`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_group_room`
+-- 表的结构 `xmartin_group_room`
 --
 
-CREATE TABLE `martin_group_room` (
+CREATE TABLE `xmartin_group_room` (
   `group_id`   INT(11) NOT NULL DEFAULT 0,
   `room_id`    INT(11) NOT NULL DEFAULT 0,
   `room_count` INT(11)          DEFAULT 0,
@@ -81,17 +81,17 @@ CREATE TABLE `martin_group_room` (
   ENGINE = MyISAM;
 
 --
--- 导出表中的数据 `martin_group_room`
+-- 导出表中的数据 `xmartin_group_room`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_hotel`
+-- 表的结构 `xmartin_hotel`
 --
 
-CREATE TABLE `martin_hotel` (
+CREATE TABLE `xmartin_hotel` (
   `hotel_id`             INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `hotel_city_id`        INT(11)                   DEFAULT 0,
   `hotel_rank`           INT(11)                   DEFAULT 0,
@@ -120,17 +120,17 @@ CREATE TABLE `martin_hotel` (
   AUTO_INCREMENT = 1;
 
 --
--- 导出表中的数据 `martin_hotel`
+-- 导出表中的数据 `xmartin_hotel`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_hotel_city`
+-- 表的结构 `xmartin_hotel_city`
 --
 
-CREATE TABLE `martin_hotel_city` (
+CREATE TABLE `xmartin_hotel_city` (
   `city_id`       INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `city_parentid` INT(11)                   DEFAULT 0,
   `city_name`     VARCHAR(45)               DEFAULT NULL,
@@ -141,17 +141,17 @@ CREATE TABLE `martin_hotel_city` (
   AUTO_INCREMENT = 1;
 
 --
--- 导出表中的数据 `martin_hotel_city`
+-- 导出表中的数据 `xmartin_hotel_city`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_hotel_promotions`
+-- 表的结构 `xmartin_hotel_promotions`
 --
 
-CREATE TABLE `martin_hotel_promotions` (
+CREATE TABLE `xmartin_hotel_promotions` (
   `hotel_id`              INT(11)      DEFAULT 0,
   `promotion_start_date`  INT(11)      DEFAULT 0,
   `promotion_end_date`    INT(11)      DEFAULT 0,
@@ -162,17 +162,17 @@ CREATE TABLE `martin_hotel_promotions` (
   ENGINE = MyISAM;
 
 --
--- 导出表中的数据 `martin_hotel_promotions`
+-- 导出表中的数据 `xmartin_hotel_promotions`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_hotel_service`
+-- 表的结构 `xmartin_hotel_service`
 --
 
-CREATE TABLE `martin_hotel_service` (
+CREATE TABLE `xmartin_hotel_service` (
   `service_id`          INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `service_type_id`     INT(11)                   DEFAULT 0,
   `service_unit`        INT(5)                    DEFAULT 0,
@@ -185,17 +185,17 @@ CREATE TABLE `martin_hotel_service` (
   AUTO_INCREMENT = 1;
 
 --
--- 导出表中的数据 `martin_hotel_service`
+-- 导出表中的数据 `xmartin_hotel_service`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_hotel_service_relation`
+-- 表的结构 `xmartin_hotel_service_relation`
 --
 
-CREATE TABLE `martin_hotel_service_relation` (
+CREATE TABLE `xmartin_hotel_service_relation` (
   `hotel_id`            INT(11) NOT NULL DEFAULT 0,
   `service_id`          INT(11) NOT NULL DEFAULT 0,
   `service_extra_price` INT(11)          DEFAULT 0,
@@ -204,17 +204,17 @@ CREATE TABLE `martin_hotel_service_relation` (
   ENGINE = MyISAM;
 
 --
--- 导出表中的数据 `martin_hotel_service_relation`
+-- 导出表中的数据 `xmartin_hotel_service_relation`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_hotel_service_type`
+-- 表的结构 `xmartin_hotel_service_type`
 --
 
-CREATE TABLE `martin_hotel_service_type` (
+CREATE TABLE `xmartin_hotel_service_type` (
   `service_type_id`   INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `service_type_name` VARCHAR(255)              DEFAULT NULL,
   PRIMARY KEY (`service_type_id`)
@@ -223,17 +223,17 @@ CREATE TABLE `martin_hotel_service_type` (
   AUTO_INCREMENT = 1;
 
 --
--- 导出表中的数据 `martin_hotel_service_type`
+-- 导出表中的数据 `xmartin_hotel_service_type`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_order`
+-- 表的结构 `xmartin_order`
 --
 
-CREATE TABLE `martin_order` (
+CREATE TABLE `xmartin_order` (
   `order_id`            INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `order_type`          TINYINT(1)                DEFAULT 0,
   `order_mode`          TINYINT(1)                DEFAULT 0,
@@ -256,17 +256,17 @@ CREATE TABLE `martin_order` (
   AUTO_INCREMENT = 1;
 
 --
--- 导出表中的数据 `martin_order`
+-- 导出表中的数据 `xmartin_order`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_order_room`
+-- 表的结构 `xmartin_order_room`
 --
 
-CREATE TABLE `martin_order_room` (
+CREATE TABLE `xmartin_order_room` (
   `order_id`   INT(11) NOT NULL DEFAULT 0,
   `room_id`    INT(11) NOT NULL DEFAULT 0,
   `room_date`  INT(11)          DEFAULT 0,
@@ -276,17 +276,17 @@ CREATE TABLE `martin_order_room` (
   ENGINE = MyISAM;
 
 --
--- 导出表中的数据 `martin_order_room`
+-- 导出表中的数据 `xmartin_order_room`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_room`
+-- 表的结构 `xmartin_room`
 --
 
-CREATE TABLE `martin_room` (
+CREATE TABLE `xmartin_room` (
   `room_id`            INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `hotel_id`           INT(11)                   DEFAULT 0,
   `room_type_id`       INT(11)                   DEFAULT 0,
@@ -306,17 +306,17 @@ CREATE TABLE `martin_room` (
   AUTO_INCREMENT = 1;
 
 --
--- 导出表中的数据 `martin_room`
+-- 导出表中的数据 `xmartin_room`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_room_price`
+-- 表的结构 `xmartin_room_price`
 --
 
-CREATE TABLE `martin_room_price` (
+CREATE TABLE `xmartin_room_price` (
   `room_id`                   INT(11)        DEFAULT 0,
   `room_is_today_special`     TINYINT(1)     DEFAULT 0,
   `room_price`                DECIMAL(10, 2) DEFAULT 0,
@@ -328,17 +328,17 @@ CREATE TABLE `martin_room_price` (
   ENGINE = MyISAM;
 
 --
--- 导出表中的数据 `martin_room_price`
+-- 导出表中的数据 `xmartin_room_price`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `martin_room_type`
+-- 表的结构 `xmartin_room_type`
 --
 
-CREATE TABLE `martin_room_type` (
+CREATE TABLE `xmartin_room_type` (
   `type_id`        INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `room_type_info` VARCHAR(45)               DEFAULT NULL,
   PRIMARY KEY (`type_id`)
@@ -347,5 +347,5 @@ CREATE TABLE `martin_room_type` (
   AUTO_INCREMENT = 1;
 
 --
--- 导出表中的数据 `martin_room_type`
+-- 导出表中的数据 `xmartin_room_type`
 --

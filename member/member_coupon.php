@@ -12,13 +12,13 @@ use XoopsModules\Xmartin;
 /** @var Xmartin\Helper $helper */
 $helper = Xmartin\Helper::getInstance();
 
-$hotelHandler  = xoops_getModuleHandler('hotel', 'martin');
-$searchHandler = xoops_getModuleHandler('search', 'martin');
-$memberHandler = xoops_getModuleHandler('member', 'martin');
+$hotelHandler  = $helper->getHandler('Hotel');
+$searchHandler = $helper->getHandler('Search');
+$memberHandler = $helper->getHandler('Member');
 
 $xoopsOption['xoops_pagetitle'] = '我的现金卷 - 用户中心';
 
-$coupons      = $memberHandler->GetCouponList($start);
+$coupons      = $memberHandler->getCouponList($start);
 $coupon_types = getModuleArray('coupon_types', 'coupon_types', true);
 //var_dump($hotels);
 $Count = $coupons['count'];

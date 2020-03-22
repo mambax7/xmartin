@@ -13,7 +13,7 @@
                                 name="CheckDate[]" value="<{$smarty.get.CheckDate.0}>"></li>
                 <li>退房日期：<input type="text" class="inputbox checkdate requied" title="退房日期" id="checkdate2"
                                 name="CheckDate[]" value="<{$smarty.get.CheckDate.1}>"></li>
-                <li><{$smarty.const._AM_MARTIN_PRICE_RANGE}>：<input type="text" name="price[]" size="3"
+                <li><{$smarty.const._AM_XMARTIN_PRICE_RANGE}>：<input type="text" name="price[]" size="3"
                                                                     value="<{$smarty.get.price.0}>">-<input type="text"
                                                                                                              name="price[]"
                                                                                                              size="3"
@@ -21,7 +21,7 @@
                 </li>
                 <li>酒店位置：<input type="text" class="inputbox" name="HotelAddress" value="<{$smarty.get.HotelAddress}>">
                 </li>
-                <li style="width:100%;"><{$smarty.const._AM_MARTIN_HOTEL_NAME}>：<input type="text" style="width:160px;"
+                <li style="width:100%;"><{$smarty.const._AM_XMARTIN_HOTEL_NAME}>：<input type="text" style="width:160px;"
                                                                                        class="inputbox" name="HotelName"
                                                                                        value="<{$smarty.get.HotelName}>">
                 </li>
@@ -91,7 +91,7 @@
 </div>
 <{if !$isNewsModule}>
     <div class="specials">
-        <h2><{$smarty.const._AM_MARTIN_HOTEL_STARS}></h2>
+        <h2><{$smarty.const._AM_XMARTIN_HOTEL_STARS}></h2>
         <div class="detailed">
             <ul>
                 <{foreach from=$hotelrank key=key item=rank}>
@@ -116,7 +116,7 @@
     <h2>图标说明</h2>
     <div class="detailed">
         <ul>
-            <p><img src="<{$module_url}>images/star.gif" border="0"><{$smarty.const._AM_MARTIN_HOTEL_STARS}></p>
+            <p><img src="<{$module_url}>images/star.gif" border="0"><{$smarty.const._AM_XMARTIN_HOTEL_STARS}></p>
             <p><img src="<{$module_url}>images/diamond.gif" border="0">今日特价：如果价格旁出现此图标，表示本日此房源有特价优惠，请关注今日特价栏目通告或咨询网上客服人员；
             </p>
             <p><img src="<{$module_url}>images/gift.gif" border="0">礼品赠送：如果酒店名称旁出现此图标，表示预订该酒店会有特别礼物赠送，请关注酒店的赠送信息或或咨询网上客服人员；
